@@ -1,0 +1,108 @@
+.pricing-container {
+    margin-top: 80px;
+}
+
+.toggle-container {
+    display: flex;
+    border-radius: 5px;
+    max-width: 500px;
+    margin: 0 auto;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pricing-columns {
+    display: flex;
+    width: 100%;
+    margin-top: 40px;
+    gap: 20px;
+}
+
+.pricing-column {
+    border: 1px solid $cta-color;
+    border-radius: 20px;
+    width: 25%;
+    height: auto;
+    overflow: hidden;
+    padding-bottom: 70px;
+    position: relative;
+
+    .pricing-column-header {
+        background-color: $cta-color;
+        h3 {
+            margin-top: 0px;
+            border-radius: 20px;
+            color: #fff;
+            padding: 15px;
+        }
+        span {
+            position: absolute;
+            top:17px;
+            right: 15px;
+            color: #fff;
+            font-weight: 700;
+        }
+    }
+
+    .pricing-column-list {
+        padding: 0px 25px;
+
+        ul {
+            padding-left: 0;
+            list-style-type: none;
+            li {
+                color: $body-color;
+                font-size: 16px;
+                line-height: 1.7em;
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+
+                svg {
+                    margin-right: 15px;
+                    color: $cta-color;
+                }
+            }
+        }
+    }
+
+    .pricing-column-footer {
+       position: absolute;
+       bottom:0;
+       left:0;
+       right:0;
+       text-align: center;
+       padding:15px;
+       background-color: $cta-color;
+       color: #fff;
+       font-size: 18px;
+    }
+    .pricing-column-footer:hover {
+        background-color: $body-color;
+        cursor: pointer;
+        color: #fff;
+    }
+}
+
+@media only screen and (max-width: 920px) {
+    .pricing-container {
+        margin-top:40px;
+    }
+    .pricing-columns {
+        display: block;
+        margin-top: 20px;
+    }
+    .pricing-column {
+        width: 100%;
+        margin-bottom: 40px;
+    }
+    .toggle-container {
+        display: block;
+        box-sizing: border-box;
+        .toggle {
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+    }
+}

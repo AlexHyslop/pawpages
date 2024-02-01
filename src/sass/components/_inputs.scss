@@ -1,0 +1,40 @@
+.input-container {
+    input:focus {
+        outline: none;
+    }
+    .green-border {
+        border-color: green;
+    }
+    label {
+        position: relative;
+        display: inline-block;
+    }
+    .input-body {
+        position: relative;
+        input {
+            padding-right: 40px;
+        }
+    }
+    
+    .input-check {
+        position: absolute;
+        right: 15px;
+        top:15px;
+    }
+    .input-error {
+        color: red;
+        display: inline-block;
+        font-weight: 700;
+    }
+    .password-show {
+        position: absolute;
+        right:15px;
+        top:17px;
+    }
+}
+
+.password-error {
+    color: red;
+    width: 100%;
+    text-align: center;
+}

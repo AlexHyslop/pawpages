@@ -1,0 +1,40 @@
+// main.scss
+@import 'abstracts/variables';
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
+
+@import 'base/reset';
+@import 'base/typography';
+@import 'base/base';
+
+@import 'components/buttons';
+@import 'components/carousel';
+@import 'components/dropdown';
+@import 'components/chat-bot';
+@import 'components/inputs';
+@import 'components/faq';
+@import 'components/explainer';
+@import 'components/paymentForm';
+
+@import 'layout/footer';
+@import 'layout/grid';
+@import 'layout/header';
+@import 'layout/app-header';
+@import 'layout/navigation';
+@import 'layout/sidebar';
+
+@import 'pages/about';
+@import 'pages/contact';
+@import 'pages/pricing';
+@import 'pages/home';
+@import 'pages/login';
+@import 'pages/dashboard';
+@import 'pages/upload-data';
+
+@import 'theme/admin.scss';
+@import 'theme/theme.scss';
+
+// ... (import other relevant files)
+
+@import 'theme/theme';
+@import 'theme/admin';

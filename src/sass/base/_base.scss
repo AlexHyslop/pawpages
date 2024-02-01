@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    padding: 0;
+  }
+
+.App {
+    min-height: 100vh;
+    padding:15px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+p {
+    color: $body-color;
+    line-height: 1.5em;
+    font-size: 20px;
+    display: inline-block;
+}
+
+.link {
+    text-decoration: none;
+    color: $cta-color;
+}
+
+.title {
+    font-family: 'Figtree';
+    color: $primary-color;
+    line-height: 1.2em;
+    display: inline-block;
+    font-size: 58px;
+    font-weight: 400;
+    margin-bottom: 5px;
+    margin-top: 0px;
+    font-weight: 500;
+}
+
+.subtitle {
+    font-family: 'Figtree';
+    color: $primary-color;
+    line-height: 1.5em;
+    display: inline-block;
+    font-size: 38px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    margin-top: 0px;
+}
+
+@media only screen and (max-width: 920px) {
+    .subtitle {
+        font-size: 25px;
+        line-height: 1.5em;
+    }
+}
+
+.text-center {
+    text-align: center;
+}
+
+.w-full {
+    width:100%;
+}
+
+@media only screen and (max-width: 1024px) {
+    .title {
+        font-size:40px;
+        margin-top: 15px;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .title {
+        font-size: 35px;
+    }
+}
+
+.placeholder {
+    width: 100%;
+    border:1px solid $cta-color;
+    height:400px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}

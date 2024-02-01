@@ -1,0 +1,36 @@
+.faq-item {
+    width: 100%;
+    border-bottom: 1px solid $cta-color;
+    padding-bottom: 20px;
+    font-size: 18px;
+    &:first-of-type {
+        margin-top:50px;
+    }
+    &:not(:first-of-type) {
+        padding-top: 20px;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+    .faq-question {
+        svg {
+            float: right;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+    .faq-answer {
+        padding-top:15px;
+        font-size:16px;
+        color: $primary-color;
+    }
+}
+
+@media only screen and (max-width: 920px) {
+    .faq-item {
+        &:first-of-type {
+            margin-top:20px;
+        }
+    }
+}

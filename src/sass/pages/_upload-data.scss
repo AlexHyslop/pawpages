@@ -1,0 +1,50 @@
+.upload-data-container {
+    margin-top: 30px;
+    display: flex;
+    gap:50px;
+}
+.data-sidebar-container {
+    width: 180px;
+    height:500px;
+    padding:10px;
+    ul {
+        list-style: none;
+        padding-left: 0;
+        display: flex;
+        flex-direction: column;
+        gap:15px;
+        .active {
+            background-color: #fff;
+        }
+        a:hover {
+            background-color: #fff;
+        }
+        a {
+            color: $body-color;
+            padding:10px;
+        }
+        svg {
+            margin-right: 10px;
+            color: $cta-color;
+        }
+    }
+}
+
+.file-upload-container {
+    padding-top:10px;
+    width:100%;
+    .file-upload-header {
+        border:1px solid $cta-color;
+        width: 100%;
+        padding: 5px 20px 5px 20px;
+        box-sizing: border-box;
+    }
+    .file-upload-body{
+        border:1px solid $cta-color;
+        border-top:0px;
+        min-height: 500px;
+        width: 100%;
+        padding: 5px 20px 5px 20px;
+        box-sizing: border-box;
+    }
+}

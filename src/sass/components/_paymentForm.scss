@@ -1,0 +1,31 @@
+/* PaymentForm.css */
+
+.payment-form {
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .card-element {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width:100%;
+    display: inline-block;
+  }
+  
+  .pay-button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .pay-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
