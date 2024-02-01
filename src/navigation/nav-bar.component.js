@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../assets/images/chiffchaff.svg';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
-import Button from '../components/common/button.component';
+import Button from '../components/shared/button.component';
 
 
 const navItems = [

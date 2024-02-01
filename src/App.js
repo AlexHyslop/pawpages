@@ -2,15 +2,11 @@ import './App.scss';
 import NavBar from './navigation/nav-bar.component';
 import { Box } from '@mui/system';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Homepage from './components/homepage.component';
-import Login from './components/login.component';
-import Account from './components/account.component';  
-import Footer from './navigation/footer.component'; 
-import NotFound from './components/404.component'; 
+import Account from './components/account/account.component';
+import Dashboard from './components/dashboard.component.js';
 import { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from "firebase/auth"; 
-import { Dashboard } from '@mui/icons-material';
-
+ 
 function LoadingScreen() {
   document.body.style.backgroundColor = '#E9F5F1'
   return (
@@ -58,12 +54,12 @@ function App() {
           <Route path="" element={<Dashboard />} />
 
           {/* authed routes */}
-          <Route path="/account" element={authed ? <Account /> : <Login />} /> 
+          {/* <Route path="/account" element={authed ? <Account /> : <Login />} />  */}
            {/* 404 page */}
-           <Route path="/*" element={<NotFound />} />
+           {/* <Route path="/*" element={<NotFound />} /> */}
         </Routes>
       </Box>
-      <Footer />
+      {/* <Footer /> */}
     </Box>
   );
 }
