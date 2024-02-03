@@ -10,22 +10,44 @@ export default function QuoteBox(props) {
   const dispatch = useDispatch(); 
   const [amountSelected, setAmountSelected] = React.useState(0);  
   
- 
-  const handleGetQuotes = () => {
-    dispatch(quoteAction.updateQuote({
-       currentQuote : { 
-       }
-     }));   
+  const handleAddBoxToQuote = () => {
+    var deepCopyQuote = JSON.parse(JSON.stringify(currentQuote)); 
+    if(props.type == "smallBox"){
+        deepCopyQuote.smallBoxes += 1; 
+    } else if(props.type == "largeBox"){
+        deepCopyQuote.largeBoxes += 1;
+    }
+    deepCopyQuote.totalBoxes += 1;
+     dispatch(quoteAction.updateQuote(deepCopyQuote));
+  };
 
-   }; 
+  const handleAddRemoveToQuote = () => {
+    var deepCopyQuote = JSON.parse(JSON.stringify(currentQuote)); 
+    if(props.type == "smallBox"){
+        deepCopyQuote.smallBoxes -= 1; 
+    } else if(props.type == "largeBox"){
+        deepCopyQuote.largeBoxes -= 1;
+    }
+    deepCopyQuote.totalBoxes -= 1;
+     dispatch(quoteAction.updateQuote(deepCopyQuote));
+  };
+  
 
+   
   return (
     <div>
-        <box> {props.type} </box>
+        <box> {props.displayName} </box>
         <box> {props.weight} </box>
-        <button disabled={amountSelected == 0} onClick={() => {setAmountSelected(amountSelected-1)}}> removeIcon </button>
+        <button disabled={amountSelected == 0}
+         onClick={() => {
+            setAmountSelected(amountSelected-1);
+            handleAddRemoveToQuote();
+        }}> removeIcon </button>
         <button> {amountSelected} </button>
-        <button onClick={() => {setAmountSelected(amountSelected+1)}}> addIcon </button>
+        <button disabled={currentQuote?.totalBoxes >= 5} onClick={() => {
+            setAmountSelected(amountSelected+1);
+            handleAddBoxToQuote()}
+        }> addIcon </button>
         <box> {props.price} </box> 
     </div>
   );

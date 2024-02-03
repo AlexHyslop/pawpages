@@ -12,18 +12,14 @@ export default function QuotePackageSelector(props) {
   
  
   const handleGetQuotes = () => {
-    dispatch(quoteAction.updateQuote({
-       currentQuote : { 
-       }
-     }));   
+    dispatch(quoteAction.updateQuote(currentQuote));   
 
    }; 
 
   return (
     <div>
-      <QuoteBox type="Small Box" weight='15kg' price='£30' icon='smallboxIcon' />  
-      <QuoteBox type="Medium Box" weight='20kg' price='£40' icon='mediumboxIcon' />  
-      <QuoteBox type="Large Box" weight='30kg' price='£50' icon='largeboxIcon' />  
+      <QuoteBox displayName="Small Box" type="smallBox" weight='20kg' price='£30' icon='smallboxIcon' />  
+      <QuoteBox displayName="Large box" type="largeBox" weight='30kg' price='£50' icon='largeboxIcon' />  
     </div>
   );
 }   

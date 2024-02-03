@@ -12,17 +12,18 @@ export default function LandingPage(props) {
   const [destinationCountry, setDestinationCountry] = React.useState(countries[0]);
   const navigate = useNavigate();
   const dispatch = useDispatch(); 
-  
+
   useEffect(() => {  
     if (redirect) navigate(redirect);
   }, []);
 
   const handleGetQuotes = () => {
-    dispatch(quoteAction.updateQuote({
-       currentQuote : {
+    dispatch(quoteAction.updateQuote( {
         collectionCountry : collectionCountry,
-        destinationCountry : destinationCountry
-       }
+        destinationCountry : destinationCountry,
+        totalBoxes : 0,
+        smallBoxes : 0,
+        largeBoxes : 0
      }));   
 
      navigate("/quote")
