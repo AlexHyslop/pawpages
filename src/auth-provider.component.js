@@ -15,18 +15,21 @@ function AuthProvider(props) {
     const [user, setUser] = React.useState(null);
     const dispatch = useDispatch();
     const auth = getAuth();
+    const [authStateChangedInProgress, setAuthStateChangedInProgress] = React.useState(false);
 
-    onAuthStateChanged(auth, (user) => {
-      console.log('called authstate changed:', user);
-        if (user) {
+    useEffect(() => {
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+          if (!authStateChangedInProgress && user) {
+            setAuthStateChangedInProgress(true);  
             const userEmail = user.email;
             console.log('User email:', userEmail);
             USER_SERVICE.getUserDocByEmail(userEmail, onGetUserDoc);
             updateUserConfig(user);
-        } else {
-            console.log('No user is signed in.');
-        }
-    });
+          } 
+      });
+
+      return () => unsubscribe();
+  }, [auth, authStateChangedInProgress]);
 
     function updateUserConfig(user) {
         console.log('refresh config dashboard:', user);
@@ -38,7 +41,7 @@ function AuthProvider(props) {
     const onCheckUserDocExists = (response, user) => {
         if (response) {
           if (response.size == 0) {
-            USER_SERVICE.createUserDoc(user, onCreateUser);
+           // USER_SERVICE.createUserDoc(user, onCreateUser);
           } else {
             response.forEach((doc) => {
               var docData = doc.data();
@@ -58,10 +61,12 @@ function AuthProvider(props) {
 
       
     const onGetUserDoc = (response) => {
+      if(response && response.docs){
         var docData = response.docs[0].data(); 
         console.log("userDoc dispatc dashboard, ", docData);
         ITEM_SERVICE.getItemsByUserId(docData.id, onGetItems); 
         dispatch(userAction.updateUser({doc:docData}));   
+      }
     }
 
 

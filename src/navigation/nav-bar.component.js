@@ -14,8 +14,8 @@ const navItems = [
   { name: 'FAQs', path: '/faq' },
 ];
 
-const loginLink = { name: 'Login', path: '/login' }; // Update to an object instead of an array
-const freeTrailLink = { name: 'Free Trial', path: '/register' }; // Update to an object instead of an array
+const loginLink = { name: 'Login', path: '/login' }; 
+const freeTrailLink = { name: 'Free Trial', path: '/register' }; 
 
 
 export default function NavBar(props) {

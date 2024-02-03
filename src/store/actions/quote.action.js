@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions'; 
 
 export default{
-    updateOrganisation: createAction('UPDATE_ORGANISATION'),
+    updateQuote: createAction('UPDATE_QUOTE'),
  };

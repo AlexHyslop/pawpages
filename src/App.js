@@ -1,12 +1,13 @@
 import './App.scss';
 import NavBar from './navigation/nav-bar.component';
+import Footer from './navigation/footer.component.js';
 import { Box } from '@mui/system';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import Account from './components/account/account.component';
-import Dashboard from './components/dashboard.component.js';
+import LandingPage from './components/landing-page.component.js';
 import { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from "firebase/auth"; 
- 
+import QuoteDashboard from './components/quotes/quote-dashboard.component.js';
 function LoadingScreen() {
   document.body.style.backgroundColor = '#E9F5F1'
   return (
@@ -45,22 +46,27 @@ function App() {
   }
 
   return (
-    <Box>
-      <NavBar /> 
-      <Box component="main">
+    <>
+     
+      <div className="app-container">
+       <NavBar /> 
+        <div className="app-dashboard">
         <Routes>
           {/* no auth routes */}
-          <Route path="/" element={<Dashboard />} />
-          <Route path="" element={<Dashboard />} />
-
+          <Route path="/" element={<LandingPage />} />
+          <Route path="" element={<LandingPage />} />
+          <Route path="/quote" element={<QuoteDashboard />} />
           {/* authed routes */}
           {/* <Route path="/account" element={authed ? <Account /> : <Login />} />  */}
-           {/* 404 page */}
-           {/* <Route path="/*" element={<NotFound />} /> */}
+          {/* 404 page */}
+          {/* <Route path="/*" element={<NotFound />} /> */}
         </Routes>
-      </Box>
-      {/* <Footer /> */}
-    </Box>
+        <Outlet></Outlet>
+      </div>
+      <Footer/>
+      </div>
+    </>
+   
   );
 }
 

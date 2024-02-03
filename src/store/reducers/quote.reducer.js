@@ -1,9 +1,9 @@
 import { handleActions } from 'redux-actions';
-import actions from '../actions/organisation.action';
+import actions from '../actions/quote.action';
 
 export default handleActions(
     {
-        [actions.updateOrganisation]: (state, action) => {  
+        [actions.updateQuote]: (state, action) => {  
           return {...state, ...action.payload};
         }
     },
