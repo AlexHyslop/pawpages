@@ -19,9 +19,27 @@ export default function QuoteDisplay(props) {
    }; 
 
   return (
-    <div>
-      
+    <div> 
+        <div>
+            <h5> Order Details </h5>
+            <p> From: {currentQuote?.collectionCountry} to {currentQuote?.destinationCountry} </p>
+            <p> SubTotal:  {(currentQuote?.smallBoxes * 20) + (currentQuote?.largeBoxes * 30)}</p>
+            <p> Total Items: {currentQuote?.totalBoxes} </p>
+            {currentQuote?.smallBoxes > 0 ? <p> Small Boxes: {currentQuote?.smallBoxes} </p> : null}
+            {currentQuote?.largeBoxes > 0 ? <p> Small Boxes: {currentQuote?.largeBoxes} </p> : null}
+        </div>
+        <div style={{maxWidth : '30%'}}>
+            <p> 
+             Please note that we do not accept backpacks or duffel bags.
+              For every item which exceeds the weight or size restrictions 
+              you will be charged extra in 
+              accordance with our terms and conditions.
+             </p>
+        </div>
+
     </div>
+
+    
   );
 }  
   

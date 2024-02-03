@@ -56,6 +56,9 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="" element={<LandingPage />} />
           <Route path="/quote" element={<QuoteDashboard />} />
+          <Route path="/booking" element={<QuoteDashboard />} />
+
+          
           {/* authed routes */}
           {/* <Route path="/account" element={authed ? <Account /> : <Login />} />  */}
           {/* 404 page */}
