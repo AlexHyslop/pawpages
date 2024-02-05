@@ -1,6 +1,14 @@
+header {
+  padding:0px;
+}
+.header-container {
+  max-width: 1200px;
+    margin: 0 auto;
+    padding-top:5px;
+    padding-bottom: 5px;
+}
 .main-header {
-    display: flex;
-    justify-content: start;
+    display: inline-block;
     align-items: center;
     padding: 10px 25px;
     color: #fff;
@@ -11,28 +19,47 @@
     right:0;
     width: 100vw;
     box-sizing: border-box;
+
+    .nav-items ul .active a {
+      color: $primary-color;
+    }
+
+    .nav-items ul li a {
+      color: black;
+        margin-right: 20px;
+        text-decoration: none;
+        font-size: 18px;
+    }
+
+    &.scrolled {
+      background-color: $primary-color;
+      .nav-items ul li a {
+        color: #fff;
+        margin-right: 20px;
+        text-decoration: none;
+        font-size: 18px;
+      }
+      &:has(.hero-menu) {
+        transition-duration: 0.7s;
+        opacity: 0.7;
+        background-color: $primary-color;
+      }
+    }
   
     .logo-container {
+      display: inline-block;
       img {
         height:67px;
       }
     }
 
     .nav-items {
+      float: right;
       display: inline-block;
       margin-left: auto;
+      margin-top:10px;
       .nav-list {
         margin-right: 10px;
-        .active a {
-          color: $primary-color;
-        }
-      }
-      
-      ul li a {
-        color: $primary-color;
-        margin-right: 20px;
-        text-decoration: none;
-        font-size: 18px;
       }
       ul li, ul {
         display: inline-block;
@@ -45,7 +72,10 @@
       }
     }
     .burger-menu {
+      float: right;
       display: none;
+      position: relative;
+      margin-top:18px;
     }
     .hero-menu {
       ul li a {
@@ -77,7 +107,7 @@
 }
 
 .vbp-header-menu-button__svg line {
-  stroke: #192a6b;
+  stroke: $primary-color;
   stroke-dasharray: 100%;
   stroke-dashoffset: 0%;
   transition: transform 0.3s, stroke-dashoffset .4s;
@@ -128,6 +158,15 @@ body.menu-open .vbp-header-menu-button__svg .top {
   -ms-transform: rotate(45deg);
   -o-transform: rotate(45deg);
   stroke-linecap: round;
+  color: black;
+}
+
+.scrolled .vbp-header-menu-button__svg line {
+  stroke: #fff;
+}
+
+body.menu-open .vbp-header-menu-button__svg line {
+stroke: $primary-color;
 }
 
 body.menu-open .vbp-header-menu-button__svg .middle {
