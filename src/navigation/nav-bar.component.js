@@ -80,13 +80,19 @@ export default function NavBar(props) {
       });
   };
 
+  const MenuClass = {
+    '/': {
+      className: 'hero-menu',
+    }
+  };
+
   return (
-    <header className="main-header container">
+    <header className={`main-header container`}>
       <div className="logo-container">
-        Logo Here    
+        Logo Here
       </div>
 
-      <div className={'nav-items'}>
+      <div className={`nav-items ${MenuClass[location.pathname]?.className || ''}`}>
         <ul className='nav-list'>
           {navItems.map((item, index) => (
             <li

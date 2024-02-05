@@ -5,14 +5,18 @@
     padding: 10px 25px;
     color: #fff;
     z-index: 100;
-    position: relative;
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    width: 100vw;
+    box-sizing: border-box;
   
     .logo-container {
       img {
         height:67px;
       }
     }
-    
 
     .nav-items {
       display: inline-block;
@@ -20,12 +24,12 @@
       .nav-list {
         margin-right: 10px;
         .active a {
-          color: $secondary-color;
+          color: $primary-color;
         }
       }
       
       ul li a {
-        color: $secondary-color;
+        color: $primary-color;
         margin-right: 20px;
         text-decoration: none;
         font-size: 18px;
@@ -42,6 +46,14 @@
     }
     .burger-menu {
       display: none;
+    }
+    .hero-menu {
+      ul li a {
+        color: $secondary-color;
+      }
+      .nav-list .active a {
+        color: $secondary-color;
+      }
     }
     @media only screen and (max-width: 1024px) {
       .nav-items {
