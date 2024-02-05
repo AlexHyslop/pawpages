@@ -5,6 +5,7 @@
     border-radius: 10px;
     gap: 20px;
     flex-direction: row;
+    justify-content: center;
 
     .quote-col {
         width:40%;
@@ -23,14 +24,25 @@
     }
     .quote-col-end {
         width:20%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        text-align: center;
+        padding-top:15px;
     }
 
-    button {
-       justify-content: right;
-       display: flex;
-       flex-direction: column;
+    select {
+        padding:10px 15px;
+    }
+}
+
+@media only screen and (max-width: 920px) {
+    .quotes-container {
+        flex-direction: column;
+        margin:15px;
+    }
+    .quote-col {
+        width: 100% !important;
+        text-align: center;
+    }
+    .quote-col-end {
+        width: 100% !important;
     }
 }
