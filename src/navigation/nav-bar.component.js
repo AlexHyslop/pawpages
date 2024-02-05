@@ -83,11 +83,9 @@ export default function NavBar(props) {
   return (
     <header className="main-header container">
       <div className="logo-container">
-        <Link to={"/"}>
-          <img src={Logo} alt='logo'></img>
-        </Link>      
+        Logo Here    
       </div>
-      
+
       <div className={'nav-items'}>
         <ul className='nav-list'>
           {navItems.map((item, index) => (

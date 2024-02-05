@@ -80,9 +80,7 @@ export default function NavBar(props) {
   return (
     <header className="app-main-header">
       <div className="logo-container">
-        <Link to={"/"}>
-          <img src={Logo} alt='logo'></img>
-        </Link>      
+        Logo Here   
       </div>
       <div className={'nav-items'}>
         <div className='nav-login'>

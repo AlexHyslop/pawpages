@@ -8,6 +8,8 @@ body {
     padding:15px;
     padding-top: 0;
     padding-bottom: 0;
+    overflow: hidden;
+    margin-top: -74px;
 }
 
 p {
@@ -80,4 +82,8 @@ p {
     display: flex;
     justify-items: center;
     align-items: center;
+}
+
+.relative {
+    position: relative;
 }

@@ -11,7 +11,7 @@ import QuoteDashboard from './components/quotes/quote-dashboard.component.js';
 import '../src/sass/main.scss';
 
 function LoadingScreen() {
-  document.body.style.backgroundColor = '#E9F5F1'
+
   return (
     <Box>
       <NavBar />
@@ -51,8 +51,7 @@ function App() {
     <div>
      <NavBar /> 
      <div className='App' component="main">
-       
-        <div className="app-dashboard">
+      
         <Routes>
           {/* no auth routes */}
           <Route path="/" element={<LandingPage />} />
@@ -69,7 +68,6 @@ function App() {
         <Outlet></Outlet>
       </div>
       
-      </div>
       <Footer/>
     </div>
    

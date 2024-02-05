@@ -4,6 +4,8 @@
     align-items: center;
     padding: 10px 25px;
     color: #fff;
+    z-index: 100;
+    position: relative;
   
     .logo-container {
       img {
@@ -23,7 +25,7 @@
       }
       
       ul li a {
-        color: $primary-color;
+        color: $secondary-color;
         margin-right: 20px;
         text-decoration: none;
         font-size: 18px;

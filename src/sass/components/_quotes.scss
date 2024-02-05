@@ -1,0 +1,36 @@
+.quotes-container {
+    display: flex;
+    background-color: #fff;
+    padding:25px;
+    border-radius: 10px;
+    gap: 20px;
+    flex-direction: row;
+
+    .quote-col {
+        width:40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        h2 {
+            font-size:20px;
+            margin:0;
+            margin-bottom: 10px;
+        }
+        label {
+            width: 100%;
+            display: block;
+        }
+    }
+    .quote-col-end {
+        width:20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    button {
+       justify-content: right;
+       display: flex;
+       flex-direction: column;
+    }
+}
