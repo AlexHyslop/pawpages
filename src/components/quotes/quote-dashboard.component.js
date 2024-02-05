@@ -21,7 +21,7 @@ export default function QuoteDashboard(props) {
    }; 
 
   return (
-    <div style={{display: 'flex', flexDirection:'row'}}>
+    <div className="container" style={{display: 'flex', flexDirection:'row'}}>
       <QuotePackageSelector /> 
       <QuoteDisplay />
     </div>

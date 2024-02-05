@@ -8,6 +8,8 @@ import LandingPage from './components/landing-page.component.js';
 import { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from "firebase/auth"; 
 import QuoteDashboard from './components/quotes/quote-dashboard.component.js';
+import '../src/sass/main.scss';
+
 function LoadingScreen() {
   document.body.style.backgroundColor = '#E9F5F1'
   return (
@@ -46,10 +48,10 @@ function App() {
   }
 
   return (
-    <>
-     
-      <div className="app-container">
-       <NavBar /> 
+    <div>
+     <NavBar /> 
+     <div className='App' component="main">
+       
         <div className="app-dashboard">
         <Routes>
           {/* no auth routes */}
@@ -66,9 +68,10 @@ function App() {
         </Routes>
         <Outlet></Outlet>
       </div>
-      <Footer/>
+      
       </div>
-    </>
+      <Footer/>
+    </div>
    
   );
 }

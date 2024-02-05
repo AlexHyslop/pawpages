@@ -31,7 +31,7 @@ export default function LandingPage(props) {
   }; 
 
   return (
-    <div>
+    <div className="container">
       <label>
         Collection Country:
         <select value={collectionCountry} onChange={e => setCollectionCountry(e.target.value)}>

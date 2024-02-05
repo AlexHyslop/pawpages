@@ -87,6 +87,7 @@ export default function NavBar(props) {
           <img src={Logo} alt='logo'></img>
         </Link>      
       </div>
+      
       <div className={'nav-items'}>
         <ul className='nav-list'>
           {navItems.map((item, index) => (

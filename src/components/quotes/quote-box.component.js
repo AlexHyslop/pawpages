@@ -35,7 +35,7 @@ export default function QuoteBox(props) {
 
    
   return (
-    <div>
+    <div className="container">
         <box> {props.displayName} </box>
         <box> {props.weight} </box>
         <button disabled={amountSelected == 0}
