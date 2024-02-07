@@ -2,10 +2,9 @@ import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../assets/images/chiffchaff.svg';
+import Logo from '../assets/images/relex-logo-clear.png';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import Button from '../components/shared/button.component';
-
 
 const navItems = [
   { name: 'Home', path: '/' },
@@ -22,6 +21,23 @@ export default function NavBar(props) {
   const navigate = useNavigate();
   const location = useLocation();
   const [user, setUser] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  const headerClass = `main-header ${scrolled ? 'scrolled' : ''}`;
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolledDown = window.scrollY > 100;
+      setScrolled(scrolledDown);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
 
   useEffect(() => {
@@ -87,62 +103,65 @@ export default function NavBar(props) {
   };
 
   return (
-    <header className={`main-header container`}>
-      <div className="logo-container">
-        Logo Here
-      </div>
+    <header className={headerClass}>
+      <div className='header-container'>
+        <div className="logo-container">
+        <Link to={"/"}>
+          <img src={Logo} alt='logo'></img>
+        </Link>           </div>
 
-      <div className={`nav-items ${MenuClass[location.pathname]?.className || ''}`}>
-        <ul className='nav-list'>
-          {navItems.map((item, index) => (
-            <li
-              key={index}
-              onClick={(e) => handleButtonClick(e, item.path)}
-              className={location.pathname === item.path ? 'active' : ''}
-            >
-              <Link to={item.path}>{item.name}</Link>
-            </li>
-          ))}
-        </ul>
-        <div className='nav-login'>
-          {user ? (
-            <Button onClick={handleLogout} className='button'>Logout</Button>
-          ) : (
-            <>
-              <Button to="/login" className='button'>Login</Button>
-              <Button to="/register" className='cta'>Free Trial</Button>
-              {/* <Button onClick={handleLogout} className='button'>Logout</Button> */}
-            </>
-          )}
-        </div>
-      </div>
-      <div className='burger-menu'>
-      <svg className="vbp-header-menu-button__svg">
-        <line x1="0" y1="50%" x2="100%" y2="50%" className="top" shapeRendering="crispEdges" />
-        <line x1="0" y1="50%" x2="100%" y2="50%" className="middle" shapeRendering="crispEdges" />
-        <line x1="0" y1="50%" x2="100%" y2="50%" className="bottom" shapeRendering="crispEdges" />
-      </svg>
-      </div>
-      <div className='menu-overlay'>
-        <ul className='mob-nav-list'>
+        <div className={`nav-items ${MenuClass[location.pathname]?.className || ''}`}>
+          <ul className='nav-list'>
             {navItems.map((item, index) => (
               <li
                 key={index}
                 onClick={(e) => handleButtonClick(e, item.path)}
                 className={location.pathname === item.path ? 'active' : ''}
               >
-                <Link className='mob-item' to={item.path}>{item.name}</Link>
+                <Link to={item.path}>{item.name}</Link>
               </li>
             ))}
-            <li onClick={(e) => handleButtonClick(e, loginLink.path)}>
-              <Link to='/login' className='button'>{loginLink.name}</Link>
-            </li>
-            <li onClick={(e) => handleButtonClick(e, freeTrailLink.path)}>
-              <Link to="/register" className='cta-button'>
-                {freeTrailLink.name}
-              </Link>
-            </li>
           </ul>
+          <div className='nav-login'>
+            {user ? (
+              <Button onClick={handleLogout} className='button'>Logout</Button>
+            ) : (
+              <>
+                <Button to="/login" className='button'>Login</Button>
+                <Button to="/register" className='cta'>Free Trial</Button>
+                {/* <Button onClick={handleLogout} className='button'>Logout</Button> */}
+              </>
+            )}
+          </div>
+        </div>
+        <div className='burger-menu'>
+        <svg className="vbp-header-menu-button__svg">
+          <line x1="0" y1="50%" x2="100%" y2="50%" className="top" shapeRendering="crispEdges" />
+          <line x1="0" y1="50%" x2="100%" y2="50%" className="middle" shapeRendering="crispEdges" />
+          <line x1="0" y1="50%" x2="100%" y2="50%" className="bottom" shapeRendering="crispEdges" />
+        </svg>
+        </div>
+        <div className='menu-overlay'>
+          <ul className='mob-nav-list'>
+              {navItems.map((item, index) => (
+                <li
+                  key={index}
+                  onClick={(e) => handleButtonClick(e, item.path)}
+                  className={location.pathname === item.path ? 'active' : ''}
+                >
+                  <Link className='mob-item' to={item.path}>{item.name}</Link>
+                </li>
+              ))}
+              <li onClick={(e) => handleButtonClick(e, loginLink.path)}>
+                <Link to='/login' className='button'>{loginLink.name}</Link>
+              </li>
+              <li onClick={(e) => handleButtonClick(e, freeTrailLink.path)}>
+                <Link to="/register" className='cta-button'>
+                  {freeTrailLink.name}
+                </Link>
+              </li>
+            </ul>
+        </div>
       </div>
     </header>
   );

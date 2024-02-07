@@ -58,7 +58,7 @@ export default function LandingPage(props) {
       <div className="container relative">
         <div className="hero-text">
         <h1>Your Luggage Delivery Service</h1>
-        <p>Sherpr ship luggage and boxes to over 200 global destinations. Get an instant quote today.</p>
+        <p>RelexCo ship luggage and boxes to over 200 global destinations. Get an instant quote today.</p>
         </div>
      <div className="quotes-container">
       <div className="quote-col">
