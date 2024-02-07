@@ -4,7 +4,6 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import quoteAction from "../../store/actions/quote.action";
 import QuoteBox from "./quote-box.component";
-import { Button } from "@mui/material";
 
 export default function QuotePackageSelector(props) {
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);
@@ -13,15 +12,16 @@ export default function QuotePackageSelector(props) {
   
  
   const handleGetQuotes = () => {
-    dispatch(quoteAction.updateQuote(currentQuote));   
+    dispatch(quoteAction.updateCurrentQuote(currentQuote));   
 
    }; 
 
   return (
     <div style={{display: 'flex', flexDirection:'column'}}>
-      <QuoteBox displayName="Small Box" type="smallBox" weight='20kg' price='£20' icon='smallboxIcon' />  
-      <QuoteBox displayName="Large box" type="largeBox" weight='30kg' price='£30' icon='largeboxIcon' />  
-      <Button onClick={() => {navigate("/booking")}}> Continue </Button>
+      <QuoteBox displayName="Small Box" type="smallBox" weight='20kg'icon='smallboxIcon' 
+        maxHeight="46cm" maxWidth="46cm" maxLength="46cm" />  
+      <QuoteBox displayName="Large box" type="largeBox" weight='30kg'icon='largeboxIcon' 
+       maxHeight="60cm" maxWidth="50cm" maxLength="50cm" />  
     </div>
   );
 }   

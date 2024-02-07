@@ -4,10 +4,12 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import quoteAction from "../store/actions/quote.action";
 import HeroImg from '../assets/images/home-hero-image.jpeg';
- 
+import QuotePackageSelector from "./quotes/quote-package-selector.component";
+
 export default function LandingPage(props) {
   const userDoc = useSelector((state) => state.user.doc);
   const redirect = useSelector((state) => state.routeFromLogin);
+  const currentQuote = useSelector((state) => state?.quote?.currentQuote);
   const countries = ["United Kingdom", "Ireland", "Australia", "New Zealand", "USA", "Canada", "France", "Germany", "Spain", "Belgium"]; 
   const [collectionCountry, setCollectionCountry] = React.useState(countries[0]);
   const [destinationCountry, setDestinationCountry] = React.useState(countries[0]);
@@ -15,19 +17,32 @@ export default function LandingPage(props) {
   const dispatch = useDispatch(); 
 
   useEffect(() => {  
-    if (redirect) navigate(redirect);
-  }, []);
+    var createQuote = false; 
+    if(!currentQuote){
+      createQuote = true; 
+    }else {
+      if(currentQuote.totalBoxes == 0){
+        createQuote = true; 
+      }
+    }
 
-  const handleGetQuotes = () => {
-    dispatch(quoteAction.updateQuote( {
+    if(createQuote){
+      dispatch(quoteAction.updateCurrentQuote( {
         collectionCountry : collectionCountry,
         destinationCountry : destinationCountry,
         totalBoxes : 0,
         smallBoxes : 0,
         largeBoxes : 0
      }));   
+    }
+    if (redirect) navigate(redirect);
+    
+  }, []);
 
-     navigate("/quote")
+  const handleGetQuotes = () => {
+    
+
+    navigate("/booking")
     console.log(`Collection Country: ${collectionCountry}, Destination Country: ${destinationCountry}`);
   }; 
 
@@ -61,14 +76,18 @@ export default function LandingPage(props) {
           </label>
           <select value={destinationCountry} onChange={e => setDestinationCountry(e.target.value)}>
             {countries.map((country, index) => <option key={index} value={country}>{country}</option>)}
-          </select>
-        
+          </select> 
       </div>
+
+      <QuotePackageSelector /> 
+
+
       <div className="quote-col-end">
-        <button className="button" onClick={handleGetQuotes}>Get Quotes</button>
+        <button disabled={!currentQuote || currentQuote.totalBoxes == 0} className="button" onClick={handleGetQuotes}>Get Quotes</button>
       </div>
      </div>
     
+
       </div>
       
     </div>

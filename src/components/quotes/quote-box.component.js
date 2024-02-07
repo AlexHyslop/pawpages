@@ -18,7 +18,7 @@ export default function QuoteBox(props) {
         deepCopyQuote.largeBoxes += 1;
     }
     deepCopyQuote.totalBoxes += 1;
-     dispatch(quoteAction.updateQuote(deepCopyQuote));
+     dispatch(quoteAction.updateCurrentQuote(deepCopyQuote));
   };
 
   const handleAddRemoveToQuote = () => {
@@ -29,7 +29,7 @@ export default function QuoteBox(props) {
         deepCopyQuote.largeBoxes -= 1;
     }
     deepCopyQuote.totalBoxes -= 1;
-     dispatch(quoteAction.updateQuote(deepCopyQuote));
+     dispatch(quoteAction.updateCurrentQuote(deepCopyQuote));
   };
   
 
@@ -38,6 +38,7 @@ export default function QuoteBox(props) {
     <div className="container">
         <box> {props.displayName} </box>
         <box> {props.weight} </box>
+        <box> {props.maxHeight +" " + props.maxWidth + " "+ props.maxLength } </box>
         <button disabled={amountSelected == 0}
          onClick={() => {
             setAmountSelected(amountSelected-1);
@@ -48,7 +49,7 @@ export default function QuoteBox(props) {
             setAmountSelected(amountSelected+1);
             handleAddBoxToQuote()}
         }> addIcon </button>
-        <box> {props.price} </box> 
+        
     </div>
   );
 }  

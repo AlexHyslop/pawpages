@@ -3,8 +3,8 @@ import actions from '../actions/booking.action';
 
 export default handleActions(
   {
-      [actions.updateQuote]: (state, action) => {  
-        return {...state, currentQuote: action.payload};
+      [actions.updateBooking]: (state, action) => {  
+        return {...state, ...action.payload};
       }
   },
   {}

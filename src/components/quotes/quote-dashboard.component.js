@@ -13,7 +13,7 @@ export default function QuoteDashboard(props) {
   
  
   const handleGetQuotes = () => {
-    dispatch(quoteAction.updateQuote({
+    dispatch(quoteAction.updateCurrentQuote({
        currentQuote : {
        }
      }));   
@@ -21,8 +21,7 @@ export default function QuoteDashboard(props) {
    }; 
 
   return (
-    <div className="container" style={{display: 'flex', flexDirection:'row'}}>
-      <QuotePackageSelector /> 
+    <div className="container" style={{display: 'flex', flexDirection:'row'}}>d
       <QuoteDisplay />
     </div>
   );

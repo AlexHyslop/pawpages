@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import quoteAction from '../../store/actions/quote.action';
 
-export default function Collection(props) {
-    const [formState, setFormState] = useState({
+export default function BookingAddress(props) {
+  const dispatch = useDispatch(); 
+  const currentQuote = useSelector((state) => state?.quote?.currentQuote);
+
+  const [formState, setFormState] = useState({
     name: '',
     street: '',
     city: '',
     state: '',
+    country: '',
     postalCode: ''
   });
 
@@ -18,11 +24,21 @@ export default function Collection(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(formState);
+    var quote = JSON.parse(JSON.stringify(currentQuote));
+    if(props.type == "collection"){
+      quote.collectionAddress = formState; 
+    }
+    if(props.type == "delivery"){
+      quote.deliveryAddress = formState; 
+    }
+    dispatch(quoteAction.updateCurrentQuote( quote ));   
+    props.incrementStage();  
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div> 
+      <h5> {props.type == "collection" ? "Collection Address" : "Delivery Address" }</h5>
+    <form style={{display: 'flex', flexDirection:'column'}} onSubmit={handleSubmit}>
       <label>
         Name:
         <input type="text" name="name" onChange={handleChange} />
@@ -40,11 +56,16 @@ export default function Collection(props) {
         <input type="text" name="state" onChange={handleChange} />
       </label>
       <label>
+        Country:
+        <input type="text" name="country" onChange={handleChange} />
+      </label>
+      <label>
         Postal Code:
         <input type="text" name="postalCode" onChange={handleChange} />
       </label>
       <input type="submit" value="Submit" />
     </form>
+    </div>
   );
 }
 

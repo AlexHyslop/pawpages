@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from "firebase/auth"; 
 import QuoteDashboard from './components/quotes/quote-dashboard.component.js';
 import '../src/sass/main.scss';
+import BookingDashboard from './components/booking/booking-dashboard.component.js';
 
 function LoadingScreen() {
 
@@ -57,7 +58,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="" element={<LandingPage />} />
           <Route path="/quote" element={<QuoteDashboard />} />
-          <Route path="/booking" element={<QuoteDashboard />} />
+          <Route path="/booking" element={<BookingDashboard />} />
 
           
           {/* authed routes */}

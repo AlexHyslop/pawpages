@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Outlet } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import quoteAction from "../../store/actions/quote.action";
+import { current } from "@reduxjs/toolkit";
  
 export default function QuoteDisplay(props) {
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);
@@ -11,7 +12,7 @@ export default function QuoteDisplay(props) {
   
  
   const handleGetQuotes = () => {
-    dispatch(quoteAction.updateQuote({
+    dispatch(quoteAction.updateCurrentQuote({
        currentQuote : {
        }
      }));   
@@ -20,7 +21,8 @@ export default function QuoteDisplay(props) {
 
   return (
     <div> 
-        <div>
+        <div style={{display:'flex', flexDirection:'column'}}> 
+
             <h5> Order Details </h5>
             <p> From: {currentQuote?.collectionCountry} to {currentQuote?.destinationCountry} </p>
             <p> SubTotal:  {(currentQuote?.smallBoxes * 20) + (currentQuote?.largeBoxes * 30)}</p>
@@ -28,6 +30,15 @@ export default function QuoteDisplay(props) {
             {currentQuote?.smallBoxes > 0 ? <p> Small Boxes: {currentQuote?.smallBoxes} </p> : null}
             {currentQuote?.largeBoxes > 0 ? <p> Small Boxes: {currentQuote?.largeBoxes} </p> : null}
         </div>
+
+        <div>
+           Collection Address: {currentQuote?.collectionAddress?.postalCode + ","+  currentQuote?.collectionAddress?.city }
+        </div>
+
+        <div>
+          Delivery Address:{currentQuote?.deliveryAddress?.postalCode + ","+ currentQuote?.deliveryAddress?.city}
+        </div>
+
         <div style={{maxWidth : '30%'}}>
             <p> 
              Please note that we do not accept backpacks or duffel bags.
@@ -36,6 +47,8 @@ export default function QuoteDisplay(props) {
               accordance with our terms and conditions.
              </p>
         </div>
+
+       
 
     </div>
 
