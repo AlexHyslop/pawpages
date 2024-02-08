@@ -5,15 +5,14 @@ import { getAuth, setPersistence } from "firebase/auth";
 import { getFunctions } from "firebase/functions";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDfl6nB06H-_sciuSSM_E8HQQJONdjvOVU",
-  authDomain: "chiffchaff-750cb.firebaseapp.com",
-  projectId: "chiffchaff-750cb",
-  storageBucket: "chiffchaff-750cb.appspot.com",
-  messagingSenderId: "204201021526",
-  appId: "1:204201021526:web:ab249be0b68eafc3d7ebf7",
-  measurementId: "G-XS21G7M8GR"
+  apiKey: "AIzaSyASBXlCFMpvixGpxLMRtn8d9C7dYy4Z6KM",
+  authDomain: "relexco-446af.firebaseapp.com",
+  projectId: "relexco-446af",
+  storageBucket: "relexco-446af.appspot.com",
+  messagingSenderId: "958214222713",
+  appId: "1:958214222713:web:368f35afb3ee9555b235a8",
+  measurementId: "G-X6HF9S6GC0"
 };
-
 
 const app = initializeApp(firebaseConfig); 
 export const auth = getAuth(app);
@@ -27,3 +26,5 @@ setPersistence(auth)
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 export const functions = getFunctions(app); 
+
+ 
