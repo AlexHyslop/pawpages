@@ -24,7 +24,7 @@ export default function QuoteDisplay(props) {
         <div style={{display:'flex', flexDirection:'column'}}> 
 
             <h5> Order Details </h5>
-            <p> From: {currentQuote?.collectionCountry} to {currentQuote?.destinationCountry} </p>
+            <p> From: {currentQuote?.collectionCountr?.Title} to {currentQuote?.destinationCountry?.Title} </p>
             <p> SubTotal:  {(currentQuote?.smallBoxes * 20) + (currentQuote?.largeBoxes * 30)}</p>
             <p> Total Items: {currentQuote?.totalBoxes} </p>
             {currentQuote?.smallBoxes > 0 ? <p> Small Boxes: {currentQuote?.smallBoxes} </p> : null}
