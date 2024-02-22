@@ -46,17 +46,17 @@ export default function LandingPage(props) {
 
   }, []); 
   
-  const onGetCountries = (response) => {
-    console.log("onGetCountriesResp", response)
+  const onGetMinimalQuote = (response) => {
+    console.log("onGetMinimalQuote", response)
   }
 
   const handleGetQuotes = () => {
 
-    //call tge minimal quote
-     //  console.log("Calling getCountries")
+   
+    console.log("currentQuote handleGetQuoate", currentQuote)
     var packages = [];
     if(currentQuote.smallBoxes){
-      for(var i=0; i < currentQuote.smallBoxes.Length-1; i++){ 
+      for(var i=0; i < currentQuote.smallBoxes; i++){ 
         packages.push({
             "Weight": 20.0,
             "Length": 46.0,
@@ -68,7 +68,7 @@ export default function LandingPage(props) {
     }
 
     if(currentQuote.largeBoxes){
-      for(var i=0; i < currentQuote.largeBoxes.Length-1; i++){
+      for(var i=0; i < currentQuote.largeBoxes; i++){
         packages.push({
           "Weight": 30.0,
           "Length": 50.0,
@@ -77,34 +77,36 @@ export default function LandingPage(props) {
           }
         );
       }
-    }
+    } 
+
+    console.log("Collection country", collectionCountry);
+    console.log("Destination country", destinationCountry);
     
-    TGE_ENDPOINTS.getCountries({
-      Credentials:{ APIKey: 'Ry2oBZo6e7', Password: '8sbNkYi9&A'},
+    TGE_ENDPOINTS.getMinimalQuote({
+      Credentials:{ APIKey: '9rkYJ0Qq6s', Password: 'Z6jxC&dyV2'},
       "Shipment": {
         "Consignment": {
-          "ItemType": null,
+          "ItemType": "Parcel",
           "Packages": packages
         },
         "CollectionAddress": {
-          "City": null,
-          "Postcode": null,
+          // "City": null,
+          // "Postcode": null,
           "Country": {
-            "CountryID": collectionCountry.CountryId,
+            "CountryID": collectionCountry.CountryID,
             "CountryCode": collectionCountry.CountryCode
           }
         },
         "DeliveryAddress": {
-          "City": null,
-          "Postcode": null,
+          // "City": null,
+          // "Postcode": null,
           "Country": {
-            "CountryID": destinationCountry.CountryId,
+            "CountryID": destinationCountry.CountryID,
             "CountryCode": destinationCountry.CountryCode
           }
         }
-      } 
-
-    }, onGetCountries);
+      }  
+    }, onGetMinimalQuote);
 
     navigate("/booking")
     console.log(`Collection Country: ${collectionCountry.Title}, Destination Country: ${destinationCountry.Title}`);

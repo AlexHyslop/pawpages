@@ -7,7 +7,7 @@ export const TGE_ENDPOINTS = {
         .catch(error => error);
     },
     getMinimalQuote: function getMinimalQuote(input, callback){   
-        API_SERVICE.post('/quote/v2/GenerateGetQuoteMinimal', input)
+        API_SERVICE.post('/quote/v2/getQuoteMinimal', input)
         .then(callback)
         .catch(error => error);
     }
