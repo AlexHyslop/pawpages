@@ -81,8 +81,7 @@ export default function LandingPage(props) {
 
     console.log("Collection country", collectionCountry);
     console.log("Destination country", destinationCountry);
-    
-    TGE_ENDPOINTS.getMinimalQuote({
+    var getMinimalQuote = {
       Credentials:{ APIKey: '9rkYJ0Qq6s', Password: 'Z6jxC&dyV2'},
       "Shipment": {
         "Consignment": {
@@ -106,7 +105,11 @@ export default function LandingPage(props) {
           }
         }
       }  
-    }, onGetMinimalQuote);
+    };
+
+    dispatch(quoteAction.updateMinimalQuote( getMinimalQuote ));
+
+    TGE_ENDPOINTS.getMinimalQuote(getMinimalQuote, onGetMinimalQuote);
 
     navigate("/booking")
     console.log(`Collection Country: ${collectionCountry.Title}, Destination Country: ${destinationCountry.Title}`);

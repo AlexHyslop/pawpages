@@ -3,9 +3,12 @@ import actions from '../actions/quote.action';
 
 export default handleActions(
   {
-      [actions.updateCurrentQuote]: (state, action) => {  
-        return {...state, currentQuote: action.payload};
-      }
+    [actions.updateCurrentQuote]: (state, action) => {  
+      return {...state, currentQuote: action.payload};
+    },
+    [actions.updateMinimalQuote]: (state, action) => {  
+      return {...state, minimalQuote: action.payload};
+    }
   },
   {}
 );
