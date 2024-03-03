@@ -8,6 +8,11 @@ export default function BookingAddress(props) {
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);
   const [manualInput, setManualInput] = useState(false);
 
+  const countryRestrictionOptions = {
+    types: ['address'],
+    componentRestrictions: { country: props.limitedCountries } 
+  };
+  
   const [formState, setFormState] = useState({
     name: '',
     street: '',
@@ -59,38 +64,54 @@ export default function BookingAddress(props) {
       country,
       postalCode
     });
+
+    var currAddr = {
+    street: `${streetNumber} ${streetName}`,
+    city,
+    state,
+    country,
+    postalCode
+  }
+
+    autoSubmit(currAddr);
   };
   
-  
+  const autoSubmit = (currAddr) => {
+    if(currAddr){ 
+      console.log("auto submit redux addresses", formState)
+      var quote = JSON.parse(JSON.stringify(currentQuote));
+      if(props.type === "collection"){
+        quote.collectionAddress = currAddr; 
+      }
+      if(props.type === "delivery"){
+        quote.deliveryAddress = currAddr; 
+      }
+      dispatch(quoteAction.updateCurrentQuote(quote));    
+    }
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    var quote = JSON.parse(JSON.stringify(currentQuote));
-    if(props.type === "collection"){
-      quote.collectionAddress = formState; 
-    }
-    if(props.type === "delivery"){
-      quote.deliveryAddress = formState; 
-    }
-    dispatch(quoteAction.updateCurrentQuote(quote));   
-    props.incrementStage();  
+    autoSubmit();
+    // props.incrementStage();  
   };
 
    return ( <div>  <h5> {props.type === "collection" ? "Collection Address" : "Delivery Address" }</h5>
       <form style={{display: 'flex', flexDirection:'column'}} onSubmit={handleSubmit}>
-        <label>  Contact Name: <input type="text" name="name" onChange={handleChange} value={formState.name} /> </label>
         <label> Street: 
           {manualInput ? (
             <input type="text" name="street" onChange={handleChange} value={formState.street} />
           ) : (
-            <PlacesAutocomplete value={formState.street} onChange={handleAddressChange} onSelect={handleAddressSelect}>
+            <PlacesAutocomplete value={formState.street} onChange={handleAddressChange} onSelect={handleAddressSelect}
+            searchOptions={countryRestrictionOptions}>
+              
             {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
               <div>
                 <input {...getInputProps({
                   placeholder: 'Search Places ...',
                   className: 'location-search-input',
                 })} />
-                <div className="autocomplete-dropdown-container">
+                <div className="autocomplete-dropdown-container">   
                   {loading && <div>Loading...</div>}
                   {suggestions.map(suggestion => {
                     const style = {
@@ -127,6 +148,7 @@ export default function BookingAddress(props) {
             {/* Add more country codes as needed */}
           </select> <input type="text" name="phoneNumber" onChange={handleChange} value={formState.phoneNumber} />
         </label> 
+        <label>  Contact Name: <input type="text" name="name" onChange={handleChange} value={formState.name} /> </label>
         <label>  Instructions: <input type="text" name="instructions" onChange={handleChange} value={formState.instructions} /> </label>
         <input type="submit" value="Submit" />
       </form>

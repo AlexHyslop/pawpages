@@ -8,13 +8,20 @@ import QuotePackageSelector from "./quotes/quote-package-selector.component";
 import { TGE_ENDPOINTS } from "../api/transglobal.service";
 import { EXPORT_COUNTRIES } from "../api/tge-countries.model";
 import { COLLECTION_COUNTRIES } from "../api/tge-countries.model";
+import BookingAddress from "./booking/booking-address";
+
 export default function LandingPage(props) {
   const userDoc = useSelector((state) => state.user.doc);
   const redirect = useSelector((state) => state.routeFromLogin);
   const currentQuote = useSelector((state) => state?.quote?.currentQuote); 
+  const collectionCountryCodes = ['GB'] //COLLECTION_COUNTRIES.map(country => country.CountryCode);
+  const exportCountryCodes = EXPORT_COUNTRIES.map(country => country.CountryCode);
 
-  const [collectionCountry, setCollectionCountry] = React.useState(EXPORT_COUNTRIES[0]);
-  const [destinationCountry, setDestinationCountry] = React.useState(COLLECTION_COUNTRIES[0]);
+  const [collectionCountry, setCollectionCountry] = React.useState(COLLECTION_COUNTRIES[0]);
+  const [destinationCountry, setDestinationCountry] = React.useState(EXPORT_COUNTRIES[0]);
+  const [collectionPostcode, setCollectionPostcode] = React.useState('');
+  const [destinationPostcode, setDestinationPostcode] = React.useState('');
+ 
   const navigate = useNavigate();
   const dispatch = useDispatch(); 
 
@@ -89,16 +96,16 @@ export default function LandingPage(props) {
           "Packages": packages
         },
         "CollectionAddress": {
-          // "City": null,
-          // "Postcode": null,
+          // "City": currentQuote?.collectionAddress?.city,
+          "Postcode": collectionPostcode,
           "Country": {
             "CountryID": collectionCountry.CountryID,
             "CountryCode": collectionCountry.CountryCode
           }
         },
         "DeliveryAddress": {
-          // "City": null,
-          // "Postcode": null,
+          // "City": currentQuote?.deliveryAddress?.city,
+          "Postcode": destinationPostcode,
           "Country": {
             "CountryID": destinationCountry.CountryID,
             "CountryCode": destinationCountry.CountryCode
@@ -111,7 +118,7 @@ export default function LandingPage(props) {
 
     TGE_ENDPOINTS.getMinimalQuote(getMinimalQuote, onGetMinimalQuote);
 
-    navigate("/booking")
+    // navigate("/booking")
     console.log(`Collection Country: ${collectionCountry.Title}, Destination Country: ${destinationCountry.Title}`);
   }; 
 
@@ -134,23 +141,46 @@ export default function LandingPage(props) {
         <label>
           <h2>Collection Country:</h2>
           </label>
-          <select value={collectionCountry} onChange={e => setCollectionCountry(e.target.value)}>
-            {COLLECTION_COUNTRIES.map((country, index) => <option key={index} value={country.Title}>{country.Title}</option>)}
+         <select value={JSON.stringify(collectionCountry)} onChange={e => setCollectionCountry(JSON.parse(e.target.value))}>
+              {COLLECTION_COUNTRIES.map((country, index) => (
+                  <option key={index} value={JSON.stringify(country)}>
+                      {country.Title}
+                  </option>
+              ))}
           </select>
-       
+
+          
+          <input
+              type="text"
+              placeholder="Enter collection postcode"
+              value={collectionPostcode}
+              onChange={(e) => setCollectionPostcode(e.target.value)}
+            />
       </div>
+
       <div className="quote-col">
         <label>
           <h2>Destination Country:</h2> 
-          </label>
-          <select value={destinationCountry} onChange={e => setDestinationCountry(e.target.value)}>
-            {EXPORT_COUNTRIES.map((country, index) => <option key={index} value={country.Title}>{country.Title}</option>)}
-          </select> 
+          </label> 
+          <select value={JSON.stringify(destinationCountry)} onChange={e => setDestinationCountry(JSON.parse(e.target.value))}>
+              {EXPORT_COUNTRIES.map((country, index) => (
+                  <option key={index} value={JSON.stringify(country)}>
+                      {country.Title}
+                  </option>
+              ))}
+          </select>
+          
+          <input
+              type="text"
+              placeholder="Enter destination postcode"
+              value={destinationPostcode}
+              onChange={(e) => setDestinationPostcode(e.target.value)}
+            />
       </div>
 
-      <QuotePackageSelector /> 
+      
 
-
+      <QuotePackageSelector />  
       <div className="quote-col-end">
         <button disabled={!currentQuote ||  currentQuote?.totalBoxes == 0} className="button" onClick={handleGetQuotes}>Get Quotes</button>
       </div>
