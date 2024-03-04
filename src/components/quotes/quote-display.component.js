@@ -22,7 +22,6 @@ export default function QuoteDisplay(props) {
   return (
     <div> 
         <div style={{display:'flex', flexDirection:'column'}}> 
-
             <h5> Order Details </h5>
             <p> From: {currentQuote?.collectionCountr?.Title} to {currentQuote?.destinationCountry?.Title} </p>
             <p> SubTotal:  {(currentQuote?.smallBoxes * 20) + (currentQuote?.largeBoxes * 30)}</p>

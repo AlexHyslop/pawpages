@@ -1,0 +1,31 @@
+.service-results-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .service-result {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    width: calc(33.33% - 20px);
+    box-sizing: border-box;
+  }
+  
+  .service-result h2 {
+    margin-top: 0;
+  }
+  
+  .service-result ul {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .service-result ul li {
+    list-style: none;
+  }
+  
+  .service-result ul li:not(:last-child) {
+    margin-bottom: 5px;
+  }
+  

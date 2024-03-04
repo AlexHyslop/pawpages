@@ -21,7 +21,8 @@ export default function LandingPage(props) {
   const [destinationCountry, setDestinationCountry] = React.useState(EXPORT_COUNTRIES[0]);
   const [collectionPostcode, setCollectionPostcode] = React.useState('');
   const [destinationPostcode, setDestinationPostcode] = React.useState('');
- 
+  const [loading, setLoading] = React.useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch(); 
 
@@ -54,11 +55,19 @@ export default function LandingPage(props) {
   }, []); 
   
   const onGetMinimalQuote = (response) => {
-    console.log("onGetMinimalQuote", response)
+    setLoading(false);
+    if(response.status == 200){
+      if(response.data.Status == 'SUCCESS'){
+        console.log("onGetMinimalQuote", response.data.ServiceResults) 
+        dispatch(quoteAction.updateServiceResults(  response.data.ServiceResults ));   
+        navigate("/quote")
+      }
+
+    }
   }
 
   const handleGetQuotes = () => {
-
+    setLoading(true);
    
     console.log("currentQuote handleGetQuoate", currentQuote)
     var packages = [];
@@ -118,7 +127,6 @@ export default function LandingPage(props) {
 
     TGE_ENDPOINTS.getMinimalQuote(getMinimalQuote, onGetMinimalQuote);
 
-    // navigate("/booking")
     console.log(`Collection Country: ${collectionCountry.Title}, Destination Country: ${destinationCountry.Title}`);
   }; 
 
@@ -181,8 +189,14 @@ export default function LandingPage(props) {
       
 
       <QuotePackageSelector />  
-      <div className="quote-col-end">
-        <button disabled={!currentQuote ||  currentQuote?.totalBoxes == 0} className="button" onClick={handleGetQuotes}>Get Quotes</button>
+      <div className="quote-col-end"> 
+        {loading ? (
+              <div className="spinner-border" role="status">
+                <span className="sr-only">Calculating...</span>
+              </div>
+            ) : (
+              <button disabled={!currentQuote || currentQuote?.totalBoxes === 0} className="button" onClick={handleGetQuotes}>Get Quotes</button>
+            )}  
       </div>
      </div>
     

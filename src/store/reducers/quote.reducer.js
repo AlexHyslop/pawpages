@@ -8,6 +8,9 @@ export default handleActions(
     },
     [actions.updateMinimalQuote]: (state, action) => {  
       return {...state, minimalQuote: action.payload};
+    },
+    [actions.updateServiceResults]: (state, action) => {  
+      return {...state, serviceResults: action.payload};
     }
   },
   {}
