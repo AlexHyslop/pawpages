@@ -11,6 +11,9 @@ export default handleActions(
     },
     [actions.updateServiceResults]: (state, action) => {  
       return {...state, serviceResults: action.payload};
+    },
+    [actions.setSelectedService]: (state, action) => {  
+      return {...state, selectedService: action.payload};
     }
   },
   {}

@@ -1,8 +1,15 @@
 import React from 'react';
 import '../../sass/components/_service-results.scss'; 
-
+import quoteAction from '../../store/actions/quote.action';
+import { useDispatch } from 'react-redux';
 
 export default function QuoteServiceResults(props) {
+   const dispatch = useDispatch(); 
+
+   const onSelectQuote = () => {
+    dispatch(quoteAction.setSelectedService(  props.serviceResult ));    
+   }
+
 
    return ( 
         <div className="service-result">
@@ -46,6 +53,7 @@ export default function QuoteServiceResults(props) {
             ))}
           </ul>
           <p><strong>Service Type:</strong> {props.serviceResult.ServiceType}</p>
+          <button onClick={onSelectQuote}> Select Quote</button>
         </div> 
   );
 };
