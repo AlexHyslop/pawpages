@@ -4,34 +4,67 @@ import quoteAction from '../../store/actions/quote.action';
 import { useDispatch } from 'react-redux';
 
 export default function QuoteServiceResults(props) {
-   const dispatch = useDispatch(); 
+  const dispatch = useDispatch(); 
 
    const onSelectQuote = () => {
     dispatch(quoteAction.setSelectedService(  props.serviceResult ));    
    }
 
+   //DHL economy is a road service
+   //DHL express world wide is air, (won't use)
 
+   //TG economy air
+   //TG Express world wide is air 
+
+   //dont care about chargeable weight
+   //warehouse service
+   //only show total cost
+
+   //optional extras
+   //always next day collection 
+   //always accept free upto £50 (maybe £100)
+
+   //duty paid, depends on the the items commodity codes + value of the goods. They must pay when it arrives at destination you can't get quoted duty until its at the end,
+   // you cant get an exact price
+
+   //user declares their value,
+   //shipping price 
+   //default transglobal put buy price but we put sell price
+
+   //alter intial total cost with margin, based on shipping cost 
+   //rates will come as buying vs sell 
+   //within kilo brackets different costs, whatever bracket + 
+
+
+   //use doesn't need to see it, only see it if they look at the label 
+   //we will alter the shipping price
+   //total value customs = shipping price is, quoted shipping price from tge + our buy price + declared
+
+   //always collect but choose when they pickup
+   
    return ( 
         <div className="service-result">
           <h2>{props.serviceResult.ServiceName}</h2>
           <p><strong>Carrier:</strong> {props.serviceResult.CarrierName}</p>
-          <p><strong>Chargeable Weight:</strong> {props.serviceResult.ChargeableWeight} kg</p>
-          <p><strong>Transit Time Estimate:</strong> {props.serviceResult.TransitTimeEstimate}</p>
-          <p><strong>Is Warehouse Service:</strong> {props.serviceResult.IsWarehouseService ? 'Yes' : 'No'}</p>
-          <p><strong>Total Cost:</strong> ${props.serviceResult.TotalCost.TotalCostNetWithCollection.toFixed(2)}</p>
-          <h3>Service Price Breakdown:</h3>
+          <p><strong>Total Cost:</strong> £{props.serviceResult.TotalCost.TotalCostNetWithCollection.toFixed(2)}</p>
+          <p><strong>Transit Time Estimate (Days):</strong> {props.serviceResult.TransitTimeEstimate}</p>
+
+          {/* <p><strong>Chargeable Weight:</strong> {props.serviceResult.ChargeableWeight} kg</p> */}
+          {/* <p><strong>Is Warehouse Service:</strong> {props.serviceResult.IsWarehouseService ? 'Yes' : 'No'}</p> */}
+          {/* <h3>Service Price Breakdown:</h3>
           <ul>
             {props?.serviceResult?.ServicePriceBreakdown?.map((item, i) => (
               <li key={i}>
-                <strong>{item.Description}:</strong> ${item.Cost.toFixed(2)}
+                <strong>{item.Description}:</strong> £{item.Cost.toFixed(2)}
               </li>
             ))}
-          </ul>
+          </ul> */}
+
           <h3>Optional Extras:</h3>
           <ul>
             {props?.serviceResult?.OptionalExtras?.map((extra, i) => (
               <li key={i}>
-                <strong>{extra.Description}:</strong> ${extra.Cost.toFixed(2)}
+                <strong>{extra.Description}:</strong> £{extra.Cost.toFixed(2)}
               </li>
             ))}
           </ul>
@@ -48,7 +81,7 @@ export default function QuoteServiceResults(props) {
           <ul>
             {props?.serviceResult?.CollectionOptions?.map((option, i) => (
               <li key={i}>
-                <strong>{option.CollectionOptionTitle}:</strong> Collection Charge: ${option.CollectionCharge.toFixed(2)}
+                <strong>{option.CollectionOptionTitle}:</strong> Collection Charge: £{option.CollectionCharge.toFixed(2)}
               </li>
             ))}
           </ul>

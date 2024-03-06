@@ -36,6 +36,7 @@ export default function LandingPage(props) {
       } 
     }
 
+    console.log("setting current quote");
     if(createQuote){
       dispatch(quoteAction.updateCurrentQuote( {
         collectionCountry : collectionCountry,
@@ -98,6 +99,7 @@ export default function LandingPage(props) {
     console.log("Collection country", collectionCountry);
     console.log("Destination country", destinationCountry);
     var getMinimalQuote = {
+      //     Credentials:{ APIKey: 'Ry2oBZo6e7', Password: '8sbNkYi9&A'}
       Credentials:{ APIKey: '9rkYJ0Qq6s', Password: 'Z6jxC&dyV2'},
       "Shipment": {
         "Consignment": {
