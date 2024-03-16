@@ -7,34 +7,10 @@
 @import 'base/typography';
 @import 'base/base';
 
-@import 'components/buttons';
-@import 'components/carousel';
-@import 'components/dropdown';
-@import 'components/chat-bot';
-@import 'components/inputs';
-@import 'components/faq';
-@import 'components/explainer';
-@import 'components/paymentForm';
-@import 'components/quotes';
-
-@import 'layout/footer';
-@import 'layout/grid';
-@import 'layout/header';
-@import 'layout/app-header';
-@import 'layout/navigation';
-@import 'layout/sidebar';
-@import 'layout/hero';
-
-@import 'pages/about';
-@import 'pages/contact';
-@import 'pages/pricing';
-@import 'pages/home';
-@import 'pages/login';
-@import 'pages/dashboard';
-@import 'pages/upload-data';
-
 @import 'theme/admin.scss';
 @import 'theme/theme.scss';
+
+@import 'components/buttons';
 
 // ... (import other relevant files)
 

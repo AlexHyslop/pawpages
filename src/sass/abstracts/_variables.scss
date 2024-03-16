@@ -1,6 +1,6 @@
-$primary-color: #031A28;
-$secondary-color: white;
-$body-color: #241c15;
-$cta-color: blue;
-$grey: #e9ebed;
-$light-grey: #f9f8f7;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+$primary-color: theme('colors.primary');
+$secondary-color: theme('colors.secondary');

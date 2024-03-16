@@ -1,14 +1,14 @@
 .button {
     padding: 6px 20px;
     border-radius: 100px;
-    background-color: #fff;
+    background-color: $secondary-color;
     font-size: 20px;
     font-weight: 400;
     font-family: 'Figtree';
     cursor: pointer;
-    border: 2px solid $primary-color;
+    border: 2px solid $secondary-color;
     text-decoration: none;
-    color: $body-color;
+    color: #fff;
     word-break: keep-all;
     display: inline-block;
     line-height: 1.7em;
@@ -30,11 +30,11 @@
     padding:6px 20px;
     line-height: 1.7em;
     border-radius: 100px;
-    background-color: $cta-color;
+    background-color: $primary-color;
     font-size: 20px;
     font-weight: 400;
     cursor: pointer;
-    border: 2px solid $cta-color;
+    border: 2px solid $primary-color;
     text-decoration: none;
     color: #fff;
     word-break: keep-all;

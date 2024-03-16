@@ -8,7 +8,6 @@ import LandingPage from './components/landing-page.component.js';
 import { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from "firebase/auth"; 
 import QuoteDashboard from './components/quotes/quote-dashboard.component.js';
-import '../src/sass/main.scss';
 import BookingDashboard from './components/booking/booking-dashboard.component.js';
 
 function LoadingScreen() {
