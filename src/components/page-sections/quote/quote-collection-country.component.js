@@ -2,7 +2,20 @@ import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 
-
+const countries = [
+  {
+    id: 1,
+    name: 'UK',
+    avatar:
+      'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg',
+  },
+  {
+    id: 2,
+    name: 'US',
+    avatar:
+      'http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg',
+  }
+]
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
