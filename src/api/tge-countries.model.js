@@ -2,22 +2,26 @@ export const COLLECTION_COUNTRIES = [
     {
         "CountryID": 231,
         "Title": "United Kingdom (Mainland)",
-        "CountryCode": "GB"
+        "CountryCode": "GB",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg'
     },
     {
         "CountryID": 247,
         "Title": "United Kingdom (Northern Ireland)",
-        "CountryCode": "GB"
+        "CountryCode": "GB",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg'
     },
     {
         "CountryID": 271,
         "Title": "United Kingdom (Scottish Highlands)",
-        "CountryCode": "GB"
+        "CountryCode": "GB",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg'
     },
     {
         "CountryID": 272,
         "Title": "United Kingdom (Offshore Isles)",
-        "CountryCode": "GB"
+        "CountryCode": "GB",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg'
     } 
 ]
 
@@ -25,92 +29,110 @@ export const EXPORT_COUNTRIES =  [
     {
         "CountryID": 13,
         "Title": "Australia",
-        "CountryCode": "AU"
+        "CountryCode": "AU",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/AU.svg'
     },
     {
         "CountryID": 38,
         "Title": "Canada",
-        "CountryCode": "CA"
+        "CountryCode": "CA",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/CA.svg'
     },
     {
         "CountryID": 73,
         "Title": "France",
-        "CountryCode": "FR"
+        "CountryCode": "FR",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/FR.svg'
     },  
     {
         "CountryID": 80,
         "Title": "Germany",
-        "CountryCode": "DE"
+        "CountryCode": "DE",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/DE.svg'
     },
     {
         "CountryID": 157,
         "Title": "New Zealand",
-        "CountryCode": "NZ"
+        "CountryCode": "NZ",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/NZ.svg'
     },
     {
         "CountryID": 203,
         "Title": "South Africa",
-        "CountryCode": "ZA"
+        "CountryCode": "ZA",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/ZA.svg'
     },
     {
         "CountryID": 232,
         "Title": "United States",
-        "CountryCode": "US"
+        "CountryCode": "US",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg'
     }, 
     {
         "CountryID": 154,
         "Title": "Netherlands",
-        "CountryCode": "NL"
+        "CountryCode": "NL",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/NL.svg'
     }, 
     {
         "CountryID": 21,
         "Title": "Belgium",
-        "CountryCode": "BE"
+        "CountryCode": "BE",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/BE.svg'
     },
     {
         "CountryID": 205,
         "Title": "Spain (Mainland)",
-        "CountryCode": "ES"
+        "CountryCode": "ES",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/ES.svg'
     },
     {
         "CountryID": 107,
         "Title": "Italy",
-        "CountryCode": "IT"
+        "CountryCode": "IT",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/IT.svg'
     },
     {
         "CountryID": 211,
         "Title": "Sweden",
-        "CountryCode": "SE"
+        "CountryCode": "SE",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/SE.svg'
     },
     {
         "CountryID": 58,
         "Title": "Denmark",
-        "CountryCode": "DK"
+        "CountryCode": "DK",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/DK.svg'
     },
     {
         "CountryID": 164,
         "Title": "Norway",
-        "CountryCode": "NO"
+        "CountryCode": "NO",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/NO.svg'
     },
     {
         "CountryID": 231,
         "Title": "United Kingdom (Mainland)",
-        "CountryCode": "GB"
+        "CountryCode": "GB",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg'
     },
     {
         "CountryID": 247,
         "Title": "United Kingdom (Northern Ireland)",
-        "CountryCode": "GB"
+        "CountryCode": "GB",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg'
     },
     {
         "CountryID": 271,
         "Title": "United Kingdom (Scottish Highlands)",
-        "CountryCode": "GB"
+        "CountryCode": "GB",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg'
     },
     {
         "CountryID": 272,
         "Title": "United Kingdom (Offshore Isles)",
-        "CountryCode": "GB"
+        "CountryCode": "GB",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg'
     } 
 ]; 
 
