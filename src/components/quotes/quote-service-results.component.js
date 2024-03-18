@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../sass/components/_service-results.scss'; 
 import quoteAction from '../../store/actions/quote.action';
 import { useDispatch } from 'react-redux';
 
@@ -64,16 +63,25 @@ export default function QuoteServiceResults(props) {
           <ul>
             {props?.serviceResult?.OptionalExtras?.map((extra, i) => (
               <li key={i}>
-                <strong>{extra.Description}:</strong> £{extra.Cost.toFixed(2)}
+                <p className='text-md'><strong>{extra.Description}:</strong> £{extra.Cost.toFixed(2)}</p>
               </li>
             ))}
           </ul>
-          <p><strong>Signature Required Available:</strong> {props.serviceResult.SignatureRequiredAvailable ? 'Yes' : 'No'}</p>
-          <h3>Expected Labels:</h3>
+          <p className='text-md'><strong>Signature Required Available:</strong> {props.serviceResult.SignatureRequiredAvailable ? 'Yes' : 'No'}</p>
+          <p><strong>Service Type:</strong> {props.serviceResult.ServiceType}</p>
+          <br></br>
+          <br></br>
+          <button className='button' onClick={onSelectQuote}> Select Quote</button>
+        </div> 
+  );
+};
+
+   {/* <h3>Expected Labels:</h3>
           <ul>
             {props?.serviceResult?.ExpectedLabels?.map((label, i) => (
               <li key={i}>
-                <strong>{label.LabelRole} Label:</strong> Format: {label.LabelFormat}, Status: {label.LabelGenerateStatus}
+                <p className='text-md'><strong>{label.LabelRole} Label:</strong> 
+                Format: {label.LabelFormat}, Status: {label.LabelGenerateStatus} </p>
               </li>
             ))}
           </ul>
@@ -81,13 +89,7 @@ export default function QuoteServiceResults(props) {
           <ul>
             {props?.serviceResult?.CollectionOptions?.map((option, i) => (
               <li key={i}>
-                <strong>{option.CollectionOptionTitle}:</strong> Collection Charge: £{option.CollectionCharge.toFixed(2)}
+                <p className='text-md'><strong>{option.CollectionOptionTitle}:</strong> Collection Charge: £{option.CollectionCharge.toFixed(2)} </p>
               </li>
             ))}
-          </ul>
-          <p><strong>Service Type:</strong> {props.serviceResult.ServiceType}</p>
-          <button onClick={onSelectQuote}> Select Quote</button>
-        </div> 
-  );
-};
-
+          </ul> */}

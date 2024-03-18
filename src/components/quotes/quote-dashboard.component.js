@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Outlet } from 'react-router-dom'; 
 import quoteAction from "../../store/actions/quote.action"; 
 import QuoteServiceResults from "./quote-service-results.component";
-import '../../sass/components/_service-results.scss'; 
 import QuoteDisplay from "./quote-display.component";
 
 export default function QuoteDashboard(props) {
@@ -19,13 +18,15 @@ export default function QuoteDashboard(props) {
    }; 
 
   return (
-    <div className="container" style={{display: 'flex', flexDirection:'row'}}>
-      <div className="service-results-container">
-            {serviceResults && serviceResults.map((result, index) => (
-              <QuoteServiceResults key={index} serviceResult={result} /> 
-            ))} 
+    <div className="container">
+      <div className="quote-dashboard">
+        <QuoteDisplay />
+        <div className="service-results-container">
+              {serviceResults && serviceResults.map((result, index) => (
+                <QuoteServiceResults key={index} serviceResult={result} /> 
+              ))} 
+        </div>
       </div>
-      <QuoteDisplay />
     </div>
   );
 }

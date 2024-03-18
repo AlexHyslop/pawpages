@@ -18,25 +18,3 @@
          url('../../assets/fonts/figtree/woff/Figtree-Bold.woff') format('woff');
     font-weight: 700; /* Bold font weight */
 }
-
-
-body {
-    font-family: 'Figtree';
-    font-weight: 400;
-}
-
-h1, h2, h3, h4 {
-    font-family: 'Figtree';
-    font-weight: 600;
-}
-
-strong, b {
-    font-family: 'Figtree';
-    font-weight: 700;
-}
-
-a {
-    color: $cta-color;
-    text-decoration: none;
-}
-

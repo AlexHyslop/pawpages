@@ -4,10 +4,15 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import quoteAction from "../store/actions/quote.action";
 import HeroImg from '../assets/images/home-hero-image.jpeg';
-import QuotePackageSelector from "./quotes/quote-package-selector.component";
+
 import { TGE_ENDPOINTS } from "../api/transglobal.service";
 import { EXPORT_COUNTRIES } from "../api/tge-countries.model";
 import { COLLECTION_COUNTRIES } from "../api/tge-countries.model";
+import HomeHero from "./page-sections/home/home-hero";
+import Howitworks from "./page-sections/home/home-how-it-works";
+import WhatWeDeliver from "./page-sections/home/home-what-we-deliver";
+import Sustainability from "./page-sections/home/home-sustainability";
+import Reviews from "./page-sections/home/home-reviews";
 import BookingAddress from "./booking/booking-address";
 import { RATES_SERVICE } from "../services/rates.service";
 export default function LandingPage(props) {
@@ -151,73 +156,80 @@ export default function LandingPage(props) {
   };
 
   return (
-    <div className="full-container hero" style={heroStyle}>
-      <div className="hero-overlay"></div>
-      <div className="container relative">
-        <div className="hero-text">
-        <h1>Your Luggage Delivery Service</h1>
-        <p>RelexCo ship luggage and boxes to over 200 global destinations. Get an instant quote today.</p>
-        </div>
-     <div className="quotes-container">
-      <div className="quote-col">
-        <label>
-          <h2>Collection Country:</h2>
-          </label>
-         <select value={JSON.stringify(collectionCountry)} onChange={e => setCollectionCountry(JSON.parse(e.target.value))}>
-              {COLLECTION_COUNTRIES.map((country, index) => (
-                  <option key={index} value={JSON.stringify(country)}>
-                      {country.Title}
-                  </option>
-              ))}
-          </select>
+    // <div className="full-container hero" style={heroStyle}>
+    //   <div className="hero-overlay"></div>
+    //   <div className="container relative">
+    //     <div className="hero-text">
+    //     <h1>Your Luggage Delivery Service</h1>
+    //     <p>RelexCo ship luggage and boxes to over 200 global destinations. Get an instant quote today.</p>
+    //     </div>
+    //  <div className="quotes-container">
+    //   <div className="quote-col">
+    //     <label>
+    //       <h2>Collection Country:</h2>
+    //       </label>
+    //      <select value={JSON.stringify(collectionCountry)} onChange={e => setCollectionCountry(JSON.parse(e.target.value))}>
+    //           {COLLECTION_COUNTRIES.map((country, index) => (
+    //               <option key={index} value={JSON.stringify(country)}>
+    //                   {country.Title}
+    //               </option>
+    //           ))}
+    //       </select>
 
           
-          <input
-              type="text"
-              placeholder="Enter collection postcode"
-              value={collectionPostcode}
-              onChange={(e) => setCollectionPostcode(e.target.value)}
-            />
-      </div>
+    //       <input
+    //           type="text"
+    //           placeholder="Enter collection postcode"
+    //           value={collectionPostcode}
+    //           onChange={(e) => setCollectionPostcode(e.target.value)}
+    //         />
+    //   </div>
 
-      <div className="quote-col">
-        <label>
-          <h2>Destination Country:</h2> 
-          </label> 
-          <select value={JSON.stringify(destinationCountry)} onChange={e => setDestinationCountry(JSON.parse(e.target.value))}>
-              {EXPORT_COUNTRIES.map((country, index) => (
-                  <option key={index} value={JSON.stringify(country)}>
-                      {country.Title}
-                  </option>
-              ))}
-          </select>
+    //   <div className="quote-col">
+    //     <label>
+    //       <h2>Destination Country:</h2> 
+    //       </label> 
+    //       <select value={JSON.stringify(destinationCountry)} onChange={e => setDestinationCountry(JSON.parse(e.target.value))}>
+    //           {EXPORT_COUNTRIES.map((country, index) => (
+    //               <option key={index} value={JSON.stringify(country)}>
+    //                   {country.Title}
+    //               </option>
+    //           ))}
+    //       </select>
           
-          <input
-              type="text"
-              placeholder="Enter destination postcode"
-              value={destinationPostcode}
-              onChange={(e) => setDestinationPostcode(e.target.value)}
-            />
-      </div>
+    //       <input
+    //           type="text"
+    //           placeholder="Enter destination postcode"
+    //           value={destinationPostcode}
+    //           onChange={(e) => setDestinationPostcode(e.target.value)}
+    //         />
+    //   </div>
 
       
 
-      <QuotePackageSelector />  
-      <div className="quote-col-end"> 
-        {loading ? (
-              <div className="spinner-border" role="status">
-                <span className="sr-only">Calculating...</span>
-              </div>
-            ) : (
-              <button disabled={!currentQuote || currentQuote?.totalBoxes === 0} className="button" onClick={handleGetQuotes}>Get Quotes</button>
-            )}  
-      </div>
-     </div>
+      // <QuotePackageSelector />  
+      // <div className="quote-col-end"> 
+      //   {loading ? (
+      //         <div className="spinner-border" role="status">
+      //           <span className="sr-only">Calculating...</span>
+      //         </div>
+      //       ) : (
+      //         <button disabled={!currentQuote || currentQuote?.totalBoxes === 0} className="button" onClick={handleGetQuotes}>Get Quotes</button>
+      //       )}  
+    //   </div>
+    //  </div>
     
 
-      </div>
+    //   </div>
       
-    </div>
+    // </div>
+    <>
+      <HomeHero />
+      <Howitworks />
+      <WhatWeDeliver />
+      <Sustainability />
+      <Reviews />
+    </>
   );
 }  
   
