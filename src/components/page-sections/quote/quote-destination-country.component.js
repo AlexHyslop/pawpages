@@ -10,7 +10,7 @@ const countries = [
       'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg',
   },
   {
-    id: 1,
+    id: 2,
     name: 'US',
     avatar:
       'http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg',

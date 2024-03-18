@@ -3,15 +3,6 @@ import { useNavigate} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {Link} from "react-router-dom";
 
- 
-const navItems = [
- {name:'Home', path:"/home"}, 
- {name:'How it works', path:"/how-it-works"},
-  {name:'lost Account', path:"/login"},
- {name:'Shop', path:"/home"},
-  {name:'Help', path:'/contact'}
-];
-
   
 export default function Footer(props) {
   const currentPageTitle = useSelector(redux => redux.state.currentFormTitle);
@@ -23,33 +14,33 @@ export default function Footer(props) {
         <nav className="flex flex-wrap justify-center -mx-5 -my-2">
             <div className="px-5 py-2">
                 <a href="#" className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                    About
+                    Link
                 </a>
             </div>
             <div className="px-5 py-2">
                 <a href="#" className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                    Blog
+                    Link
                 </a>
             </div>
             <div className="px-5 py-2">
                 <a href="#" className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                    Team
+                    Link
                 </a>
             </div>
             <div className="px-5 py-2">
                 <a href="#" className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                    Pricing
+                    Link
                 </a>
             </div>
             <div className="px-5 py-2">
                 <a href="#" className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                    Contact
+                    Link
                 </a>
             </div>
             <div className="px-5 py-2">
-                <a href="#" className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                    Terms
-                </a>
+                <Link to="/terms" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                    Terms & Conditions
+                </Link>
             </div>
         </nav>
         <div className="flex justify-center mt-8 space-x-6">
@@ -85,7 +76,7 @@ export default function Footer(props) {
             </a>
         </div>
         <p className="mt-8 text-base leading-6 text-center text-gray-400">
-            © 2021 SomeCompany, Inc. All rights reserved.
+            © 2024 RelexCo, Inc. All rights reserved.
         </p>
     </div>
 </section>

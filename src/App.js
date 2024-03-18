@@ -10,6 +10,9 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import QuoteDashboard from './components/quotes/quote-dashboard.component.js';
 import BookingDashboard from './components/booking/booking-dashboard.component.js';
 import ContactPage from './components/page-sections/contact/contact-page.component.js';
+import Login from './components/page-sections/login/login-page.component.js';
+import Terms from './components/page-sections/terms/terms-page.component.js';
+import ForgottenPassword from './components/page-sections/login/forgotten-password.component.js';
 
 function LoadingScreen() {
 
@@ -60,8 +63,9 @@ function App() {
           <Route path="/quote" element={<QuoteDashboard />} />
           <Route path="/booking" element={<BookingDashboard />} />
           <Route path="/contact" element={<ContactPage/>} />
-
-          
+          <Route path="/login" element={<Login/>} />
+          <Route path="/terms" element={<Terms/>} />
+          <Route path="/login/forgotten-password" element={<ForgottenPassword />} />
           {/* authed routes */}
           {/* <Route path="/account" element={authed ? <Account /> : <Login />} />  */}
           {/* 404 page */}
