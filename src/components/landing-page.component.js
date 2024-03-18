@@ -26,8 +26,6 @@ export default function LandingPage(props) {
 
   const [collectionCountry, setCollectionCountry] = React.useState(COLLECTION_COUNTRIES[0]);
   const [destinationCountry, setDestinationCountry] = React.useState(EXPORT_COUNTRIES[0]);
-  const [collectionPostcode, setCollectionPostcode] = React.useState('');
-  const [destinationPostcode, setDestinationPostcode] = React.useState('');
   const [loading, setLoading] = React.useState(false);
 
   const navigate = useNavigate();

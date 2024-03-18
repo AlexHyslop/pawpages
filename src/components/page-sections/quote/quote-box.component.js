@@ -18,7 +18,7 @@ export default function QuoteBox(props) {
         deepCopyQuote.largeBoxes += 1;
     }
     deepCopyQuote.totalBoxes += 1;
-     dispatch(quoteAction.updateCurrentQuote(deepCopyQuote));
+    dispatch(quoteAction.updateCurrentQuote(deepCopyQuote));
   };
 
   const handleAddRemoveToQuote = () => {

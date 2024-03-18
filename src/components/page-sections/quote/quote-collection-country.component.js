@@ -1,31 +1,30 @@
 import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
-
-const countries = [
-  {
-    id: 1,
-    name: 'UK',
-    avatar:
-      'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg',
-  },
-  {
-    id: 2,
-    name: 'US',
-    avatar:
-      'http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg',
-  }
-]
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid' 
+import { useDispatch, useSelector } from "react-redux";
+import quoteAction from '../../../store/actions/quote.action';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
-  }
+}
 
 export default function QuoteCollectionCountry(props) {
-    const [selected, setSelected] = useState(props.countries[0])
+    const currentQuote = useSelector((state) => state?.quote?.currentQuote); 
+    const [selected, setSelected] = useState(props.countries[0]);
+    const dispatch = useDispatch(); 
+
+    function selectCountry(countryObj){
+      var deepCopyQuote = JSON.parse(JSON.stringify(currentQuote)); 
+      deepCopyQuote.collectionCountry = countryObj; 
+      dispatch(quoteAction.updateCurrentQuote(deepCopyQuote));  
+
+      props.setCountry(countryObj); 
+      setSelected(countryObj); 
+    }
+    
     return (
       <div>
-        <Listbox value={selected} onChange={setSelected}>
+        <Listbox value={selected} onChange={selectCountry}>
           {({ open }) => (
             <>
               <Listbox.Label className="block text-sm font-extrabold leading-6 text-primary text-left">Collection Country</Listbox.Label>
