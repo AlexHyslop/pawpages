@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import HeroImg from '../../../assets/images/home-hero-image.jpeg';
+import QuoteForm from '../quote/quote-form.component';
 
 const navigation = [
   { name: 'Product', href: '#' },
@@ -21,7 +22,7 @@ export default function Hero() {
 
   return (
     <div className="bg-white relative" style={heroStyle}>
-      <div className='absolute w-full h-full bg-white opacity-40'></div>
+      <div className='absolute w-full h-full bg-white opacity-70'></div>
             <div className="relative isolate px-6 lg:px-8">
      
         <div className="mx-auto max-w-2xl py-12 sm:py-28 lg:py-36">
@@ -33,7 +34,7 @@ export default function Hero() {
             Relocating? Moving in and out of University? Or just starting your next adventure. Send your boxes or suitcases with the Wawryer eco friendly hassle free service.
             </p>
             <div className='pt-10'>
-                <p className='w-full'>Add Form Here</p>
+                <QuoteForm />
             </div>
           </div>
         </div>
