@@ -14,7 +14,7 @@ import WhatWeDeliver from "./page-sections/home/home-what-we-deliver";
 import Sustainability from "./page-sections/home/home-sustainability";
 import Reviews from "./page-sections/home/home-reviews";
 import BookingAddress from "./booking/booking-address";
-
+import { RATES_SERVICE } from "../services/rates.service";
 export default function LandingPage(props) {
   const userDoc = useSelector((state) => state.user.doc);
   const redirect = useSelector((state) => state.routeFromLogin);
@@ -32,6 +32,9 @@ export default function LandingPage(props) {
   const dispatch = useDispatch(); 
 
   useEffect(() => {  
+    RATES_SERVICE.getEconomyRates(onGetEconomyRates);
+    RATES_SERVICE.getExpressRates(onGetExpressRates); 
+
     var createQuote = false; 
     if(!currentQuote){
       createQuote = true; 
@@ -60,6 +63,15 @@ export default function LandingPage(props) {
 
   }, []); 
   
+  const onGetEconomyRates = (response) => {
+      console.log('onGetEconomyRates', response)
+  }
+
+  const onGetExpressRates = (response) => {
+    console.log('expressRatesResponse', response)
+  }
+
+
   const onGetMinimalQuote = (response) => {
     setLoading(false);
     if(response.status == 200){
