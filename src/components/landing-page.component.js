@@ -15,6 +15,8 @@ import Sustainability from "./page-sections/home/home-sustainability";
 import Reviews from "./page-sections/home/home-reviews";
 import BookingAddress from "./booking/booking-address";
 import { RATES_SERVICE } from "../services/rates.service";
+
+
 export default function LandingPage(props) {
   const userDoc = useSelector((state) => state.user.doc);
   const redirect = useSelector((state) => state.routeFromLogin);
