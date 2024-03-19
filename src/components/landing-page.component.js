@@ -1,33 +1,26 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, Outlet } from 'react-router-dom';
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'; 
 import quoteAction from "../store/actions/quote.action";
-import HeroImg from '../assets/images/home-hero-image.jpeg';
-
-import { TGE_ENDPOINTS } from "../api/transglobal.service";
+import HeroImg from '../assets/images/home-hero-image.jpeg'; 
 import { EXPORT_COUNTRIES } from "../api/tge-countries.model";
 import { COLLECTION_COUNTRIES } from "../api/tge-countries.model";
 import HomeHero from "./page-sections/home/home-hero";
 import Howitworks from "./page-sections/home/home-how-it-works";
 import WhatWeDeliver from "./page-sections/home/home-what-we-deliver";
 import Sustainability from "./page-sections/home/home-sustainability";
-import Reviews from "./page-sections/home/home-reviews";
-import BookingAddress from "./booking/booking-address";
+import Reviews from "./page-sections/home/home-reviews"; 
 import { RATES_SERVICE } from "../services/rates.service";
+
 
 
 export default function LandingPage(props) {
   const userDoc = useSelector((state) => state.user.doc);
   const redirect = useSelector((state) => state.routeFromLogin);
-  const currentQuote = useSelector((state) => state?.quote?.currentQuote); 
-  const collectionCountryCodes = ['GB'] //COLLECTION_COUNTRIES.map(country => country.CountryCode);
-  const exportCountryCodes = EXPORT_COUNTRIES.map(country => country.CountryCode);
-
+  const currentQuote = useSelector((state) => state?.quote?.currentQuote);  
   const [collectionCountry, setCollectionCountry] = React.useState(COLLECTION_COUNTRIES[0]);
   const [destinationCountry, setDestinationCountry] = React.useState(EXPORT_COUNTRIES[0]);
-  const [loading, setLoading] = React.useState(false);
-
+ 
   const navigate = useNavigate();
   const dispatch = useDispatch(); 
 
@@ -54,13 +47,8 @@ export default function LandingPage(props) {
         largeBoxes : 0
      }));   
     }
-    if (redirect) navigate(redirect);
+    if (redirect) navigate(redirect); 
     
-  //  console.log("Calling getCountries")
-  //   TGE_ENDPOINTS.getCountries({
-  //     Credentials:{ APIKey: 'Ry2oBZo6e7', Password: '8sbNkYi9&A'}
-  // }, onGetCountries);
-
   }, []); 
   
   const onGetEconomyRates = (response) => {
@@ -72,18 +60,6 @@ export default function LandingPage(props) {
   }
 
 
-  const onGetMinimalQuote = (response) => {
-    setLoading(false);
-    if(response.status == 200){
-      if(response.data.Status == 'SUCCESS'){
-        console.log("onGetMinimalQuote", response.data.ServiceResults) 
-        dispatch(quoteAction.updateServiceResults(  response.data.ServiceResults ));   
-        navigate("/quote")
-      }
-
-    }
-  }
-
   
   const heroStyle = {
     backgroundImage: `url(${HeroImg})`,
@@ -91,74 +67,7 @@ export default function LandingPage(props) {
     backgroundPosition: 'center',
   };
 
-  return (
-    // <div className="full-container hero" style={heroStyle}>
-    //   <div className="hero-overlay"></div>
-    //   <div className="container relative">
-    //     <div className="hero-text">
-    //     <h1>Your Luggage Delivery Service</h1>
-    //     <p>RelexCo ship luggage and boxes to over 200 global destinations. Get an instant quote today.</p>
-    //     </div>
-    //  <div className="quotes-container">
-    //   <div className="quote-col">
-    //     <label>
-    //       <h2>Collection Country:</h2>
-    //       </label>
-    //      <select value={JSON.stringify(collectionCountry)} onChange={e => setCollectionCountry(JSON.parse(e.target.value))}>
-    //           {COLLECTION_COUNTRIES.map((country, index) => (
-    //               <option key={index} value={JSON.stringify(country)}>
-    //                   {country.Title}
-    //               </option>
-    //           ))}
-    //       </select>
-
-          
-    //       <input
-    //           type="text"
-    //           placeholder="Enter collection postcode"
-    //           value={collectionPostcode}
-    //           onChange={(e) => setCollectionPostcode(e.target.value)}
-    //         />
-    //   </div>
-
-    //   <div className="quote-col">
-    //     <label>
-    //       <h2>Destination Country:</h2> 
-    //       </label> 
-    //       <select value={JSON.stringify(destinationCountry)} onChange={e => setDestinationCountry(JSON.parse(e.target.value))}>
-    //           {EXPORT_COUNTRIES.map((country, index) => (
-    //               <option key={index} value={JSON.stringify(country)}>
-    //                   {country.Title}
-    //               </option>
-    //           ))}
-    //       </select>
-          
-    //       <input
-    //           type="text"
-    //           placeholder="Enter destination postcode"
-    //           value={destinationPostcode}
-    //           onChange={(e) => setDestinationPostcode(e.target.value)}
-    //         />
-    //   </div>
-
-      
-
-      // <QuotePackageSelector />  
-      // <div className="quote-col-end"> 
-      //   {loading ? (
-      //         <div className="spinner-border" role="status">
-      //           <span className="sr-only">Calculating...</span>
-      //         </div>
-      //       ) : (
-      //         <button disabled={!currentQuote || currentQuote?.totalBoxes === 0} className="button" onClick={handleGetQuotes}>Get Quotes</button>
-      //       )}  
-    //   </div>
-    //  </div>
-    
-
-    //   </div>
-      
-    // </div>
+  return ( 
     <>
       <HomeHero />
       <Howitworks />

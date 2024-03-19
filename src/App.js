@@ -13,6 +13,8 @@ import ContactPage from './components/page-sections/contact/contact-page.compone
 import Login from './components/page-sections/login/login-page.component.js';
 import Terms from './components/page-sections/terms/terms-page.component.js';
 import ForgottenPassword from './components/page-sections/login/forgotten-password.component.js';
+import '@fortawesome/fontawesome-svg-core/styles.css'; 
+import { config } from '@fortawesome/fontawesome-svg-core';
 
 function LoadingScreen() {
 

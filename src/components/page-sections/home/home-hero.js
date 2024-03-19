@@ -27,12 +27,12 @@ export default function Hero() {
      
         <div className="mx-auto max-w-2xl py-12 sm:py-28 lg:py-36">
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+            {/* <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
             Send Boxes or Suitcases Easily
             </h1>
             <p className="mt-6 text-lg leading-8 text-primary font-bold">
             Relocating? Moving in and out of University? Or just starting your next adventure. Send your boxes or suitcases with the Wawryer eco friendly hassle free service.
-            </p>
+            </p> */}
             <div className='pt-10'>
                 <QuoteForm />
             </div>

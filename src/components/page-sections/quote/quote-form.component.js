@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import CollectionCountries from './quote-collection-country.component';
 import DestinationCountries from './quote-destination-country.component';
 import CollectionPostCode from './quote-collection-postcode';
@@ -8,17 +8,17 @@ import { COLLECTION_COUNTRIES } from '../../../api/tge-countries.model';
 import QuotePackageSelector from './quote-package-selector.component';
 import { useDispatch, useSelector } from "react-redux";
 import quoteAction from "../../../store/actions/quote.action";
-import { TGE_ENDPOINTS } from "../../../api/transglobal.service";
+import { TGE_ENDPOINTS } from "../../../api/transglobal.service"; 
+import { useNavigate } from "react-router-dom";
 
 export default function QuoteForm() {
     const dispatch = useDispatch(); 
+    const navigate = useNavigate();
+    const currentQuote = useSelector((state) => state?.quote?.currentQuote);  
     const [collectionCountry, setCollectionCountry] = React.useState(COLLECTION_COUNTRIES[0]);
     const [destinationCountry, setDestinationCountry] = React.useState(EXPORT_COUNTRIES[0]);  
     const [collectionPostcode, setCollectionPostcode] = React.useState('');
-    const [destinationPostcode, setDestinationPostcode] = React.useState('');
-
-    const currentQuote = useSelector((state) => state?.quote?.currentQuote); 
-
+    const [destinationPostcode, setDestinationPostcode] = React.useState(''); 
     const [errorMessage, setErrorMessage] = React.useState(""); 
     const [loading, setLoading] = React.useState(false);
 
@@ -26,7 +26,6 @@ export default function QuoteForm() {
         console.log(event)
         setDestinationPostcode(event.target.value);
     };
-    
 
     const handleCollectionPostcode = (event) => {
         setCollectionPostcode(event.target.value);
@@ -34,34 +33,33 @@ export default function QuoteForm() {
 
 
     const handleGetQuotes = () => {
-        setLoading(true);
-        
-        console.log(" collection country ", collectionCountry)
-        console.log(" destinationCountry  ", destinationCountry)
+        setErrorMessage('');
+        if(!collectionPostcode){
+            setErrorMessage("Please enter collection post code");
+            return; 
+        }
 
-        console.log("currentQuote handleGetQuoate", currentQuote)
+        if(!destinationPostcode){
+            setErrorMessage("Please enter destination post code");
+            return;
+        }
+
+        if(currentQuote && currentQuote.totalBoxes == 0){
+            setErrorMessage("Please select amount of boxes");
+            return;
+        }
+
+        setLoading(true);  
         var packages = [];
         if(currentQuote.smallBoxes){
           for(var i=0; i < currentQuote.smallBoxes; i++){ 
-            packages.push({
-                "Weight": 20.0,
-                "Length": 46.0,
-                "Width": 46.0,
-                "Height": 46.0
-              }
-            );
+            packages.push({ "Weight": 20.0, "Length": 46.0,  "Width": 46.0,  "Height": 46.0 });
           }
         }
     
         if(currentQuote.largeBoxes){
           for(var i=0; i < currentQuote.largeBoxes; i++){
-            packages.push({
-              "Weight": 30.0,
-              "Length": 50.0,
-              "Width": 50.0,
-              "Height": 60.0
-              }
-            );
+            packages.push({ "Weight": 30.0, "Length": 50.0, "Width": 50.0, "Height": 60.0 });
           }
         } 
      
@@ -90,14 +88,22 @@ export default function QuoteForm() {
               }
             }
           }  
-        };
-    
-         dispatch(quoteAction.updateMinimalQuote( getMinimalQuote ));
-    
-        // TGE_ENDPOINTS.getMinimalQuote(getMinimalQuote, onGetMinimalQuote);
-    
-        // console.log(`Collection Country: ${collectionCountry.Title}, Destination Country: ${destinationCountry.Title}`);
-      }; 
+        }; 
+        dispatch(quoteAction.updateMinimalQuote( getMinimalQuote )); 
+        TGE_ENDPOINTS.getMinimalQuote(getMinimalQuote, onGetMinimalQuote); 
+
+        navigate("/quote")
+    }; 
+
+    const onGetMinimalQuote = (response) => {
+        setLoading(false);
+        if(response.status == 200){
+          if(response.data.Status == 'SUCCESS'){
+            console.log("onGetMinimalQuote", response.data.ServiceResults) 
+            dispatch(quoteAction.updateServiceResults(  response.data.ServiceResults ));    
+          } 
+        }
+      }
 
       
     return(
@@ -111,7 +117,18 @@ export default function QuoteForm() {
 
                 <QuotePackageSelector />
             </div>
-            <button className='button mt-8' onClick={handleGetQuotes}>Submit</button>
+
+            <p className="text-red-400"> {errorMessage} </p>
+
+            {loading ? (
+                <i class="fa-solid fa-spinner fa-spin text-lg"></i>  
+            ) : (
+                <button className='button mt-8 float-right'  onClick={handleGetQuotes}>Get Quotes</button>
+            )}  
+          
         </>
     )
 }
+ 
+
+    //transglobal actual service but selling at as DHL 

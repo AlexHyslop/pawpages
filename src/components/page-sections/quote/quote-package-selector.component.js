@@ -17,11 +17,12 @@ export default function QuotePackageSelector(props) {
    }; 
 
   return (
-    <div>
+    <> 
       <QuoteBox displayName="Small Box" type="smallBox" weight='20kg'icon='smallboxIcon' 
         maxHeight="46cm" maxWidth="46cm" maxLength="46cm" />  
+
       <QuoteBox displayName="Large box" type="largeBox" weight='30kg'icon='largeboxIcon' 
        maxHeight="60cm" maxWidth="50cm" maxLength="50cm" />  
-    </div>
+    </>
   );
 }   

@@ -1,13 +1,14 @@
 import React from 'react';
-import quoteAction from '../../store/actions/quote.action';
+import quoteAction from '../../../store/actions/quote.action';
 import { useDispatch } from 'react-redux';
 
 export default function QuoteServiceResults(props) {
+  const currentQuote = useSelector((state) => state?.quote?.currentQuote);  
   const dispatch = useDispatch(); 
 
-   const onSelectQuote = () => {
+  const onSelectQuote = () => {
     dispatch(quoteAction.setSelectedService(  props.serviceResult ));    
-   }
+  }
 
    //DHL economy is a road service
    //DHL express world wide is air, (won't use)

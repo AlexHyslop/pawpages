@@ -35,37 +35,47 @@ export default function QuoteBox(props) {
 
    
   return (
+
     <div>
-        <box> {props.displayName} </box>
-        <box> {props.weight} </box>
-        <box> {props.maxHeight +" " + props.maxWidth + " "+ props.maxLength } </box> 
-
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`w-6 h-6 ${amountSelected === 0 ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} ${amountSelected < 0 ? 'text-red-500' : ''}`}
-            onClick={() => {
-                if (amountSelected > 0) {
-                    setAmountSelected(amountSelected - 1);
-                    handleAddRemoveToQuote();
-                }
-            }}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-        </svg>
+        <label className="block text-sm font-extrabold leading-6 text-primary text-left">
+            {props.displayName} 
+        </label>
+   
+        <div className="flex flex-row justify-around">  
+            {props.type == "smallBox" ? <i class="fa-solid fa-box-open text-3xl text-slate-400 m-3"/> :  <i class="fa-solid fa-cubes text-3xl text-slate-400 m-3"/>  }
+          
+            <div className="flex flex-col">
+                <p className="text-base pt-2"> {props.weight} (max) </p>
+                <p className="text-sm"> {props.maxHeight +" " + props.maxWidth + " "+ props.maxLength } </p> 
+            </div>
 
 
-        <p> {amountSelected} </p>
- 
-
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"
-            onClick={() => {
-                if (currentQuote?.totalBoxes < 5) {
-                setAmountSelected(amountSelected + 1);
-                handleAddBoxToQuote();
-                }
-            }}
-            disabled={currentQuote?.totalBoxes >= 5}
-        >
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-        </svg> 
-
+            <div className="flex flex-row ml-5 pt-3"> 
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" 
+                className={`m-1 w-6 h-6 ${amountSelected === 0 ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} ${amountSelected < 0 ? 'text-red-500' : ''}`}
+                    onClick={() => {
+                        if (amountSelected > 0) {
+                            setAmountSelected(amountSelected - 1);
+                            handleAddRemoveToQuote();
+                        }
+                    }}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg> 
+                <p className="pt-1"> {amountSelected} </p> 
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" 
+                className="m-1 w-6 h-6"
+                    onClick={() => {
+                        if (currentQuote?.totalBoxes < 5) {
+                        setAmountSelected(amountSelected + 1);
+                        handleAddBoxToQuote();
+                        }
+                    }}
+                    disabled={currentQuote?.totalBoxes >= 5}
+                >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg> 
+            </div>
+        </div>
     </div>
   );
 }  

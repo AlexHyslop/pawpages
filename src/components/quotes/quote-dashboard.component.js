@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Outlet } from 'react-router-dom'; 
 import quoteAction from "../../store/actions/quote.action"; 
-import QuoteServiceResults from "./quote-service-results.component";
+import QuoteServiceResults from "../page-sections/quote/quote-service-results.component";
 import QuoteDisplay from "./quote-display.component";
 
 export default function QuoteDashboard(props) {
@@ -22,6 +22,7 @@ export default function QuoteDashboard(props) {
       <div className="quote-dashboard">
         <QuoteDisplay />
         <div className="service-results-container">
+
               {serviceResults && serviceResults.map((result, index) => (
                 <QuoteServiceResults key={index} serviceResult={result} /> 
               ))} 
