@@ -11,9 +11,8 @@ export default function DestinationPostCode({ destinationPostcode, onChange }) {
               className="appearance-none block pl-3 min-h-10 py-1.5 pr-10 w-full border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Enter your postcode"
               value={destinationPostcode}
-              onChange={onChange}
+              onChange={(e) => onChange(e.target.value)}
             />
-    
           </div>
         </div>
       );
