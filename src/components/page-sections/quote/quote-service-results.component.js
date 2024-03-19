@@ -1,7 +1,7 @@
 import React from 'react';
 import quoteAction from '../../../store/actions/quote.action';
 import { useDispatch } from 'react-redux';
-
+import { useSelector } from 'react-redux';
 export default function QuoteServiceResults(props) {
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);  
   const dispatch = useDispatch(); 
