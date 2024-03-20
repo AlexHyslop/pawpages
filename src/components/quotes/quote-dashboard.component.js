@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, Outlet } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom'; 
 import quoteAction from "../../store/actions/quote.action"; 
-import QuoteServiceResults from "../page-sections/quote/quote-service-results.component";
+import QuoteSelector from "../page-sections/quote/quote-selector.component";
 import QuoteDisplay from "./quote-display.component";
 
 export default function QuoteDashboard(props) {
@@ -23,7 +23,7 @@ export default function QuoteDashboard(props) {
     <div className="container">
       <div className="quote-dashboard">
       <div className="service-results-container">  
-         <QuoteServiceResults  />  
+         <QuoteSelector  />  
       </div>
         <QuoteDisplay /> 
       </div>
