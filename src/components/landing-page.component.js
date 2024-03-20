@@ -11,8 +11,7 @@ import WhatWeDeliver from "./page-sections/home/home-what-we-deliver";
 import Sustainability from "./page-sections/home/home-sustainability";
 import Reviews from "./page-sections/home/home-reviews"; 
 import { RATES_SERVICE } from "../services/rates.service";
-
-
+import ratesAction from "../store/actions/rates.action";
 
 export default function LandingPage(props) {
   const userDoc = useSelector((state) => state.user.doc);
@@ -53,13 +52,14 @@ export default function LandingPage(props) {
   
   const onGetEconomyRates = (response) => {
       console.log('onGetEconomyRates', response)
+      dispatch( ratesAction.updateEconomyRates( response ));  
   }
 
   const onGetExpressRates = (response) => {
     console.log('expressRatesResponse', response)
+    dispatch( ratesAction.updateExpressRates( response ));  
   }
-
-
+ 
   
   const heroStyle = {
     backgroundImage: `url(${HeroImg})`,
