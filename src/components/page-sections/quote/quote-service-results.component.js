@@ -1,17 +1,69 @@
-import React from 'react';
-import quoteAction from '../../../store/actions/quote.action';
-import { useDispatch, useSelector } from 'react-redux'; 
-import { useEffect } from 'react';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, Outlet } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import quoteAction from "../../../store/actions/quote.action"; 
+
 export default function QuoteServiceResults(props) {
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);  
   const economyRates = useSelector((state) => state?.rates?.economyRates);  
   const expressRates = useSelector((state) => state?.rates?.expressRates);  
+  const [expressRate, setExpressRate] = React.useState(null);
+  const [economyRate, setEconomyRate] = React.useState(null);
 
+  const navigate = useNavigate();
   const dispatch = useDispatch(); 
+  
 
-  const onSelectQuote = () => {
-    dispatch(quoteAction.setSelectedService(  props.serviceResult ));    
+  useEffect(() => {  
+    console.log("use effect quotes")
+    figureOutQuoteByCountryRates();
+  }, []);
+
+  function figureOutQuoteByCountryRates(){
+    var totalWeight = 0;
+    if(currentQuote){
+      if(currentQuote.largeBoxes){
+        totalWeight +=  (currentQuote.largeBoxes * 30); 
+      }
+      if(currentQuote.smallBoxes){
+        totalWeight +=  (currentQuote.smallBoxes * 30);  
+      } 
+ 
+      var countryCode = currentQuote.destinationCountry.CountryCode;  
+
+      for (var key in economyRates) {
+        if (key.includes(countryCode)) {
+          // console.log("Got express rates for country code", countryCode, ":", economyRates[key][totalWeight]);
+          setEconomyRate(economyRates[key][totalWeight]);
+          break;  
+        }
+      }
+
+      for (var key in expressRates) {
+        if (key.includes(countryCode)) {
+          // console.log("Got express rates for country code", countryCode, ":", expressRates[key][totalWeight]);
+          setEconomyRate(expressRates[key][totalWeight]);
+          break;  
+        }
+      }
+
+      
+      console.log("total weight ", totalWeight); 
+
+      
+      // currentQuote.destinationCountry.CountryCode
+
+    } 
   }
+ 
+  const handleGetQuotes = () => {
+    dispatch(quoteAction.updateCurrentQuote({
+       currentQuote : {
+       }
+     }));   
+
+   }; 
 
 
  

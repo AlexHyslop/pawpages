@@ -22,13 +22,10 @@ export default function QuoteDashboard(props) {
   return (
     <div className="container">
       <div className="quote-dashboard">
-        <QuoteDisplay />
-        <div className="service-results-container">
-
-              {serviceResults && serviceResults.map((result, index) => (
-                <QuoteServiceResults key={index} serviceResult={result} /> 
-              ))} 
-        </div>
+      <div className="service-results-container">  
+         <QuoteServiceResults  />  
+      </div>
+        <QuoteDisplay /> 
       </div>
     </div>
   );
