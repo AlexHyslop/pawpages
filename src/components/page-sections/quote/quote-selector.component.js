@@ -24,7 +24,7 @@ export default function QuoteSelector(props) {
     if (expressRates !== null) {
       figureOutQuoteByCountryRates();
     }
-  },  expressRates);
+  },  []);
 
 
   function figureOutQuoteByCountryRates(){
@@ -69,7 +69,7 @@ export default function QuoteSelector(props) {
   }
  
   const onSelectQuote = (price) => {
-    var tempQuote = JSON.stringify(JSON.parse(currentQuote));
+    var tempQuote = JSON.parse(JSON.stringify(currentQuote));
     tempQuote.actualPrice = price;
     dispatch(quoteAction.updateCurrentQuote(tempQuote));   
     navigate("/booking");

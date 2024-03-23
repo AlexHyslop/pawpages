@@ -96,9 +96,11 @@ export default function BookingAddress(props) {
     // props.incrementStage();  
   };
 
-   return ( <div>  <h5> {props.type === "collection" ? "Collection Address" : "Delivery Address" }</h5>
-      <form style={{display: 'flex', flexDirection:'column'}} onSubmit={handleSubmit}>
-        <label> Street: 
+   return (
+     <div className="p-4"> 
+      <h5> {props.type === "collection" ? "Collection Address" : "Delivery Address" }</h5>
+      <form className="flex flex-col" onSubmit={handleSubmit}>
+        <label className="mt-2">Street: 
           {manualInput ? (
             <input type="text" name="street" onChange={handleChange} value={formState.street} />
           ) : (
@@ -133,24 +135,28 @@ export default function BookingAddress(props) {
         <button type="button" onClick={() => setManualInput(!manualInput)}>Enter address manually?</button>
         {manualInput && (
           <>
-            <label>  City:  <input type="text" name="city" onChange={handleChange} value={formState.city} />
-            </label>
-            <label>  State:  <input type="text" name="state" onChange={handleChange} value={formState.state} />
-            </label>
-            <label>  Country: <input type="text" name="country" onChange={handleChange} value={formState.country} />
-            </label>
-            <label> Postal Code:  <input type="text" name="postalCode" onChange={handleChange} value={formState.postalCode} />
-            </label>
-          </>
+          <label className="mt-2">City:</label>
+          <input className="border border-gray-300 rounded p-1" type="text" name="city" onChange={handleChange} value={formState.city} />
+          <label className="mt-2">State:</label>
+          <input className="border border-gray-300 rounded p-1" type="text" name="state" onChange={handleChange} value={formState.state} />
+          <label className="mt-2">Country:</label>
+          <input className="border border-gray-300 rounded p-1" type="text" name="country" onChange={handleChange} value={formState.country} />
+          <label className="mt-2">Postal Code:</label>
+          <input className="border border-gray-300 rounded p-1" type="text" name="postalCode" onChange={handleChange} value={formState.postalCode} />
+        </>
         )}
-        <label>  Phone Number:  <select name="countryCode" onChange={handleChange} value={formState.countryCode}> <option value="+1">+44</option> <option value="+1">+1</option>
-            <option value="+91">+91</option>
-            {/* Add more country codes as needed */}
-          </select> <input type="text" name="phoneNumber" onChange={handleChange} value={formState.phoneNumber} />
-        </label> 
-        <label>  Contact Name: <input type="text" name="name" onChange={handleChange} value={formState.name} /> </label>
-        <label>  Instructions: <input type="text" name="instructions" onChange={handleChange} value={formState.instructions} /> </label>
-        <input type="submit" value="Submit" />
+        <label className="mt-2">Phone Number:</label>
+        <div className="flex">
+          <select className="border border-gray-300 rounded p-1 mr-1" name="countryCode" onChange={handleChange} value={formState.countryCode}>
+            <option value="+44">+44</option> 
+          </select>
+          <input className="border border-gray-300 rounded p-1" type="text" name="phoneNumber" onChange={handleChange} value={formState.phoneNumber} />
+        </div>
+        <label className="mt-2">Contact Name:</label>
+        <input className="border border-gray-300 rounded p-1" type="text" name="name" onChange={handleChange} value={formState.name} />
+        <label className="mt-2">Instructions:</label>
+        <input className="border border-gray-300 rounded p-1" type="text" name="instructions" onChange={handleChange} value={formState.instructions} />
+        <input className="mt-2 bg-blue-500 text-white px-2 py-1 rounded cursor-pointer" type="submit" value="Submit" />
       </form>
     </div>
   );
