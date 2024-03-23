@@ -68,10 +68,11 @@ export default function QuoteSelector(props) {
     return null; 
   }
  
-  const onSelectQuote = (price) => {
+  const onSelectQuote = (price, expressSelected) => {
     var tempQuote = JSON.parse(JSON.stringify(currentQuote));
     tempQuote.actualPrice = price;
-    dispatch(quoteAction.updateCurrentQuote(tempQuote));   
+    tempQuote.expressSelected = expressSelected;
+     dispatch(quoteAction.updateCurrentQuote(tempQuote));   
     navigate("/booking");
    }; 
 
@@ -114,7 +115,7 @@ export default function QuoteSelector(props) {
       <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
          <th scope="col" class="px-6 py-3">Service</th> 
-         <th scope="col" class="px-6 py-3">Chargeable Weight (kg)</th>
+         <th scope="col" class="px-6 py-3">Detail</th>
          <th scope="col" class="px-6 py-3">Collection</th> 
          <th scope="col" class="px-6 py-3">Insurance</th>
          <th scope="col" class="px-6 py-3">Price (£)</th> 
@@ -127,21 +128,21 @@ export default function QuoteSelector(props) {
                 <i class="fa-brands fa-dhl text-6xl text-red-500"/>  
                 <i class="fa-solid fa-truck-fast text-2xl text-yellow-500" /> 
               </td> 
-              <td> {chargeableWeight} </td>
+              <td> {currentQuote.collectionCountry.Title} to  {currentQuote.destinationCountry.Title} </td>
               <td> Free </td> 
               <td> £50 Free </td>
               <td> {expressRate} </td> 
-              <td> <button onClick={(e) => onSelectQuote(expressRate) }> Select </button></td>
+              <td> <button onClick={(e) => onSelectQuote(expressRate, true) }> Select </button></td>
             </tr>
           : null}
           {economyRate != null ? 
             <tr>
               <td> <i class="fa-brands fa-dhl text-6xl text-red-500"/> </td>
-              <td> {chargeableWeight} </td> 
+              <td> {currentQuote.collectionCountry.Title} to  {currentQuote.destinationCountry.Title} </td>
               <td> Free </td> 
               <td> £50 Free </td>
               <td> {economyRate} </td>
-              <td> <button onClick={(e) => onSelectQuote(economyRate)}> Select </button></td>
+              <td> <button onClick={(e) => onSelectQuote(economyRate, false)}> Select </button></td>
             </tr>
           : null} 
         </tbody>
