@@ -46,24 +46,13 @@ export default function QuoteDisplay(props) {
           setEconomyRate(expressRates[key][totalWeight]);
           break;  
         }
-      }
-
+      } 
       
-      console.log("total weight ", totalWeight); 
-
-      
-      // currentQuote.destinationCountry.CountryCode
-
+      console.log("total weight ", totalWeight);  
+ 
     } 
   }
- 
-  const handleGetQuotes = () => {
-    dispatch(quoteAction.updateCurrentQuote({
-       currentQuote : {
-       }
-     }));   
-
-   }; 
+  
 
   return (
     <div className="quote-display"> 

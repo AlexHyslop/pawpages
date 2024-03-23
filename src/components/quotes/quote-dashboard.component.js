@@ -21,12 +21,10 @@ export default function QuoteDashboard(props) {
 
   return (
     <div className="container">
-      <div className="quote-dashboard">
-      <div className="service-results-container">  
-         <QuoteSelector  />  
-      </div>
+         <div className="service-results-container">  
+          <QuoteSelector  />  
+        </div>
         <QuoteDisplay /> 
-      </div>
-    </div>
+     </div>
   );
 }

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, Outlet } from 'react-router-dom';
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import quoteAction from "../../../store/actions/quote.action"; 
 
 export default function QuoteSelector(props) {
@@ -10,6 +9,7 @@ export default function QuoteSelector(props) {
   const expressRates = useSelector((state) => state?.rates?.expressRates);  
   const [expressRate, setExpressRate] = React.useState(null);
   const [economyRate, setEconomyRate] = React.useState(null);
+  const [chargeableWeight, setChargeableWeight] = React.useState(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch(); 
@@ -17,8 +17,15 @@ export default function QuoteSelector(props) {
 
   useEffect(() => {  
     console.log("use effect quotes")
-    figureOutQuoteByCountryRates();
-  }, []);
+    if (economyRates !== null) {
+      figureOutQuoteByCountryRates();
+    }
+    
+    if (expressRates !== null) {
+      figureOutQuoteByCountryRates();
+    }
+  },  expressRates);
+
 
   function figureOutQuoteByCountryRates(){
     var totalWeight = 0;
@@ -32,37 +39,40 @@ export default function QuoteSelector(props) {
  
       var countryCode = currentQuote.destinationCountry.CountryCode;  
 
-      for (var key in economyRates) {
-        if (key.includes(countryCode)) {
-          // console.log("Got express rates for country code", countryCode, ":", economyRates[key][totalWeight]);
-          setEconomyRate(economyRates[key][totalWeight]);
-          break;  
-        }
-      }
+      setEconomyRate(setRateValues(economyRates, countryCode, totalWeight));
+      setExpressRate(setRateValues(expressRates, countryCode, totalWeight));
+      setChargeableWeight(totalWeight); 
 
-      for (var key in expressRates) {
-        if (key.includes(countryCode)) {
-          // console.log("Got express rates for country code", countryCode, ":", expressRates[key][totalWeight]);
-          setEconomyRate(expressRates[key][totalWeight]);
-          break;  
-        }
-      }
+      // for (var key in expressRates) {
+      //   if (key.includes(countryCode)) {
+      //     console.log("Got express rates for country code", countryCode, ":", expressRates[key][totalWeight]);
+      //     setExpressRate(expressRates[key][totalWeight]);
+      //     break;  
+      //   }
+      // }
 
-      
-      console.log("total weight ", totalWeight); 
-
-      
-      // currentQuote.destinationCountry.CountryCode
 
     } 
   }
- 
-  const handleGetQuotes = () => {
-    dispatch(quoteAction.updateCurrentQuote({
-       currentQuote : {
-       }
-     }));   
 
+  function setRateValues(rates, countryCode, totalWeight){
+    console.log("rate processed", rates, countryCode, totalWeight)
+    for (var key in rates) {
+      if (key.includes(countryCode)) {
+        var rateByKey = rates[key];  
+        var price = rateByKey[totalWeight]; 
+        return price; 
+      }
+    }
+
+    return null; 
+  }
+ 
+  const onSelectQuote = (price) => {
+    var tempQuote = JSON.stringify(JSON.parse(currentQuote));
+    tempQuote.actualPrice = price;
+    dispatch(quoteAction.updateCurrentQuote(tempQuote));   
+    navigate("/booking");
    }; 
 
 
@@ -100,9 +110,43 @@ export default function QuoteSelector(props) {
    //always collect but choose when they pickup
    
    return ( 
-        <div >
-        kekw
-        </div> 
+    <div class="relative overflow-x-auto">
+      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+         <th scope="col" class="px-6 py-3">Service</th> 
+         <th scope="col" class="px-6 py-3">Chargeable Weight (kg)</th>
+         <th scope="col" class="px-6 py-3">Collection</th> 
+         <th scope="col" class="px-6 py-3">Insurance</th>
+         <th scope="col" class="px-6 py-3">Price (£)</th> 
+         <th scope="col" class="px-6 py-3"></th>
+        </thead>
+        <tbody> 
+          {expressRate != null ? 
+            <tr> 
+              <td>  
+                <i class="fa-brands fa-dhl text-6xl text-red-500"/>  
+                <i class="fa-solid fa-truck-fast text-2xl text-yellow-500" /> 
+              </td> 
+              <td> {chargeableWeight} </td>
+              <td> Free </td> 
+              <td> £50 Free </td>
+              <td> {expressRate} </td> 
+              <td> <button onClick={(e) => onSelectQuote(expressRate) }> Select </button></td>
+            </tr>
+          : null}
+          {economyRate != null ? 
+            <tr>
+              <td> <i class="fa-brands fa-dhl text-6xl text-red-500"/> </td>
+              <td> {chargeableWeight} </td> 
+              <td> Free </td> 
+              <td> £50 Free </td>
+              <td> {economyRate} </td>
+              <td> <button onClick={(e) => onSelectQuote(economyRate)}> Select </button></td>
+            </tr>
+          : null} 
+        </tbody>
+      </table>
+      </div>
   );
 };
 

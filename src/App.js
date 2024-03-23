@@ -8,7 +8,7 @@ import LandingPage from './components/landing-page.component.js';
 import { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from "firebase/auth"; 
 import QuoteDashboard from './components/quotes/quote-dashboard.component.js';
-import BookingDashboard from './components/booking/booking-dashboard.component.js';
+import BookingDashboard from './components/page-sections/booking/booking-dashboard.component.js';
 import ContactPage from './components/page-sections/contact/contact-page.component.js';
 import Login from './components/page-sections/login/login-page.component.js';
 import Terms from './components/page-sections/terms/terms-page.component.js';

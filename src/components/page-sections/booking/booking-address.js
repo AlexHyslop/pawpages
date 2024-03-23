@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import quoteAction from '../../store/actions/quote.action';
+import quoteAction from '../../../store/actions/quote.action';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
 export default function BookingAddress(props) {
