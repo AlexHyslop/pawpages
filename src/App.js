@@ -15,6 +15,7 @@ import Terms from './components/page-sections/terms/terms-page.component.js';
 import ForgottenPassword from './components/page-sections/login/forgotten-password.component.js';
 import '@fortawesome/fontawesome-svg-core/styles.css'; 
 import { config } from '@fortawesome/fontawesome-svg-core';
+import BookingItemDeclare from './components/page-sections/booking/booking-item-declare.component.js';
 
 function LoadingScreen() {
 
@@ -65,6 +66,7 @@ function App() {
           <Route path="/quote" element={<QuoteDashboard />} />
           <Route path="/booking" element={<BookingDashboard />} />
           <Route path="/contact" element={<ContactPage/>} />
+          <Route path="/items" element={<BookingItemDeclare />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/terms" element={<Terms/>} />
           <Route path="/login/forgotten-password" element={<ForgottenPassword />} />

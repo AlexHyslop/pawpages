@@ -93,13 +93,13 @@ export default function BookingAddress(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     autoSubmit();
-    // props.incrementStage();  
+    props.incrementStage();  
   };
 
    return (
      <div className="p-4"> 
       <h5> {props.type === "collection" ? "Collection Address" : "Delivery Address" }</h5>
-      <form className="flex flex-col" onSubmit={handleSubmit}>
+      <form className="flex flex-col" onSubmit={handleSubmit}> 
         <label className="mt-2">Street: 
           {manualInput ? (
             <input type="text" name="street" onChange={handleChange} value={formState.street} />
@@ -134,7 +134,7 @@ export default function BookingAddress(props) {
         </label>
         <button type="button" onClick={() => setManualInput(!manualInput)}>Enter address manually?</button>
         {manualInput && (
-          <>
+        <>
           <label className="mt-2">City:</label>
           <input className="border border-gray-300 rounded p-1" type="text" name="city" onChange={handleChange} value={formState.city} />
           <label className="mt-2">State:</label>
@@ -156,7 +156,7 @@ export default function BookingAddress(props) {
         <input className="border border-gray-300 rounded p-1" type="text" name="name" onChange={handleChange} value={formState.name} />
         <label className="mt-2">Instructions:</label>
         <input className="border border-gray-300 rounded p-1" type="text" name="instructions" onChange={handleChange} value={formState.instructions} />
-        <input className="mt-2 bg-blue-500 text-white px-2 py-1 rounded cursor-pointer" type="submit" value="Submit" />
+        <input className="mt-2 bg-blue-500 text-white px-2 py-1 rounded cursor-pointer" type="submit" value="Continue" />
       </form>
     </div>
   );
