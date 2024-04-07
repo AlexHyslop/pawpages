@@ -22,13 +22,13 @@ export default function QuoteForm() {
     const [errorMessage, setErrorMessage] = React.useState(""); 
     const [loading, setLoading] = React.useState(false);
 
-    const handleDestinationPostcode = (event) => {
+    const handleDestinationCountry = (event) => {
         console.log(event)
-        setDestinationPostcode(event.target.value);
+        setDestinationCountry(event.target.value);
     };
 
-    const handleCollectionPostcode = (event) => {
-        setCollectionPostcode(event.target.value);
+    const handleCollectionCountry = (event) => {
+      setCollectionCountry(event.target.value);
     };
 
 
@@ -99,8 +99,27 @@ export default function QuoteForm() {
         setLoading(false);
         if(response.status == 200){
           if(response.data.Status == 'SUCCESS'){
-            console.log("onGetMinimalQuote", response.data.ServiceResults) 
-            dispatch(quoteAction.updateServiceResults(  response.data.ServiceResults ));    
+            console.log("onGetMinimalQuote full data", response.data) 
+            console.log("onGetMinimalQuote serviceResults", response.data.ServiceResults) 
+            console.log("onGetMinimalQuote quoteId ", response.data.QuoteID) 
+
+            var quoteId = response.data.QuoteID; 
+            console.log("pre filtered"); 
+
+            var filteredServiceResults = response.data.ServiceResults.filter(res =>               
+              res.ServiceName === 'TG Express Worldwide' ||
+              res.ServiceName === 'TG Express Worldwide Light (DHL)' ||
+              res.ServiceName === 'DHL Express Worldwide' ||
+              res.ServiceName === 'TG International Economy' ||
+              res.ServiceName === 'TG International Express'
+          );
+            console.log("filteredResults", filteredServiceResults); 
+
+
+            filteredServiceResults.forEach(res => res.QuoteId = quoteId); 
+
+            console.log("filteredResults", filteredServiceResults); 
+            dispatch(quoteAction.updateServiceResults(  filteredServiceResults ));    
           } 
         }
       }
@@ -109,10 +128,10 @@ export default function QuoteForm() {
     return(
         <>
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-8'>
-                <CollectionCountries setCountry={handleCollectionPostcode} countries={COLLECTION_COUNTRIES} />
+                <CollectionCountries setCountry={setCollectionCountry} countries={COLLECTION_COUNTRIES} />
                 <CollectionPostCode collectionPostcode={collectionPostcode} onChange={setCollectionPostcode} />
 
-                <DestinationCountries setCountry={handleDestinationPostcode}  countries={EXPORT_COUNTRIES}/>
+                <DestinationCountries setCountry={setDestinationCountry}  countries={EXPORT_COUNTRIES}/>
                 <DestinationPostCode destinationPostcode={destinationPostcode} onChange={setDestinationPostcode} />
 
                 <QuotePackageSelector />

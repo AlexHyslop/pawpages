@@ -151,7 +151,7 @@ export default function BookingAddress(props) {
             <option value="+44">+44</option> 
           </select>
           <input className="border border-gray-300 rounded p-1" type="text" name="phoneNumber" onChange={handleChange} value={formState.phoneNumber} />
-        </div>
+        </div> 
         <label className="mt-2">Contact Name:</label>
         <input className="border border-gray-300 rounded p-1" type="text" name="name" onChange={handleChange} value={formState.name} />
         <label className="mt-2">Instructions:</label>

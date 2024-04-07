@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import BookingIndividualItem from './booking-individual-item';
 
 const generateArray = (n) => Array.from({ length: n }, (_, index) => index);
 
@@ -14,11 +15,7 @@ const BookingItemDeclare = () => {
     itemType: ''
   });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setItem({ ...item, [name]: value });
-  };
-
+ 
   const handleSubmit = (e) => {
     
     e.preventDefault();
@@ -40,12 +37,12 @@ const BookingItemDeclare = () => {
       <div className="space-y-4 flex flexrow">
         {/* Rendering large boxes */}
         {currentQuote && generateArray(currentQuote.largeBoxes).map((_, index) => (
-          <div key={`large-box-${index}`} className="large-box">Large Box {index + 1}</div>
+          <BookingIndividualItem key={`large-box-${index}`} itemType={'Box/Parcel'} weight={'30kg'} height={'60cm'} length={'50cm'} width={'50cm'}/>
         ))}
         
         {/* Rendering small boxes */}
         {currentQuote && generateArray(currentQuote.smallBoxes).map((_, index) => (
-          <div key={`small-box-${index}`} className="small-box">Small Box {index + 1}</div>
+          <BookingIndividualItem  key={`small-box-${index}`}itemType={'Box/Parcel'}  weight={'20kg'} height={'46cm'} length={'46cm'} width={'46cm'}/>
         ))}
  
       </div>

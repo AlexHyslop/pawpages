@@ -18,7 +18,7 @@ export default function QuoteCollectionCountry(props) {
       deepCopyQuote.collectionCountry = countryObj; 
       dispatch(quoteAction.updateCurrentQuote(deepCopyQuote));  
 
-      props.setCountry(countryObj); 
+      // props.setCountry(countryObj); 
       setSelected(countryObj); 
     }
     

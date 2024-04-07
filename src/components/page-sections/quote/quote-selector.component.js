@@ -131,8 +131,8 @@ export default function QuoteSelector(props) {
               <td> {currentQuote.collectionCountry.Title} to  {currentQuote.destinationCountry.Title} </td>
               <td> Free </td> 
               <td> £50 Free </td>
-              <td> {expressRate} </td> 
-              <td> <button onClick={(e) => onSelectQuote(expressRate, true) }> Select </button></td>
+              <td> £{expressRate} </td> 
+              <td> <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onClick={(e) => onSelectQuote(expressRate, true) }> Select </button></td>
             </tr>
           : null}
           {economyRate != null ? 
@@ -141,8 +141,8 @@ export default function QuoteSelector(props) {
               <td> {currentQuote.collectionCountry.Title} to  {currentQuote.destinationCountry.Title} </td>
               <td> Free </td> 
               <td> £50 Free </td>
-              <td> {economyRate} </td>
-              <td> <button onClick={(e) => onSelectQuote(economyRate, false)}> Select </button></td>
+              <td> £{economyRate} </td>
+              <td> <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onClick={(e) => onSelectQuote(economyRate, false)}> Select </button></td>
             </tr>
           : null} 
         </tbody>

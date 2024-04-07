@@ -4,6 +4,7 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import QuoteDisplay from "../../quotes/quote-display.component";
 import BookingAddress from "./booking-address";
 import BookingItemDeclare from "./booking-item-declare.component";
+import BookingCollectionTime from "./booking-collection-time.component";
 
 export default function BookingDashboard(props) {
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);
@@ -28,6 +29,7 @@ export default function BookingDashboard(props) {
 
          <BookingItemDeclare/> 
          } 
+         <BookingCollectionTime />
         <QuoteDisplay />
     </div>
   );
