@@ -66,5 +66,45 @@ const BookingIndividualItem = (props) => {
 
 export default BookingIndividualItem;
 
-
+/*
+{
+  "Weight": 25.0,
+  "Length": 30.0,
+  "Width": 20.0,
+  "Height": 10.0,
+  "CommodityDetails": [
+      {
+          "CommodityCode": "8708999790",
+          "CommodityDescription": "Car Batteries",
+          "CountryOfOrigin": {
+              "CountryCode": "DE"
+          },
+          "NumberOfUnits": 5,
+          "UnitValue": 15.5,
+          "UnitWeight": 4.0,
+          "ProductCode": "YourProductCode",
+          "ManufacturerAddress": {
+              "CompanyName": "[MANUFACTURER ADDRESS COMPANY NAME]",
+              "AddressLineOne": "[MANUFACTURER ADDRESS LINE 1]",
+              "AddressLineTwo": "[MANUFACTURER ADDRESS LINE 2]",
+              "City": "[MANUFACTURER ADDRESS CITY]",
+              "County": "[MANUFACTURER ADDRESS COUNTY]",
+              "Postcode": "[MANUFACTURER ADDRESS POSTCODE]",
+              "Country": {
+                  "CountryCode": "GB"
+              }
+          }
+      },
+      {
+          "CommodityCode": "8708301040",
+          "CommodityDescription": "Brake Pads",
+          "CountryOfOrigin": {
+              "CountryCode": "FR"
+          },
+          "NumberOfUnits": 2,
+          "UnitValue": 11.0,
+          "UnitWeight": 2.5,
+          "ProductCode": "YourProductCode2"
+      }  
+*/
 

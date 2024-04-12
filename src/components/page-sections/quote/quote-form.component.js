@@ -106,6 +106,10 @@ export default function QuoteForm() {
             var quoteId = response.data.QuoteID; 
             console.log("pre filtered"); 
 
+            // For express (non - europe, service name is 'TG Express Worldwide' )
+            //Collection option only: DHLParcelMulti
+            //Next day only 9 - 5pm, hourly increments (from time not exact time)
+            // TG International Economy for economy.
             var filteredServiceResults = response.data.ServiceResults.filter(res =>               
               res.ServiceName === 'TG Express Worldwide' ||
               res.ServiceName === 'TG Express Worldwide Light (DHL)' ||

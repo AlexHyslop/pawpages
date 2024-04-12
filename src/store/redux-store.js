@@ -3,6 +3,7 @@ import user from './reducers/user.reducer';
 import state from './reducers/state.reducer';
 import quote from './reducers/quote.reducer';
 import rates from './reducers/rates.reducer';
+import shipment from './reducers/shipment.reducer';
 import { compose, combineReducers } from 'redux'; 
 import logger from 'redux-logger'
 import { batchedSubscribe } from 'redux-batched-subscribe';
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
     user: user,
     state: state,
     quote: quote,
-    rates: rates
+    rates: rates,
+    shipment: shipment
 })
   
 const initialState = {
@@ -26,6 +28,9 @@ const initialState = {
 
     },
     rates :{
+        
+    },
+    shipment :{
         
     }
 }

@@ -51,3 +51,4 @@ const BookingItemDeclare = () => {
 };
 
 export default BookingItemDeclare;
+
