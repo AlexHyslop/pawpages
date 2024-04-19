@@ -60,10 +60,10 @@ export default function Example() {
           <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
             Link
           </a> */}
-          <Link to="/contact" className="text-sm font-semibold leading-6 text-gray-900">
+          <Link to="/how-it-works" className="text-sm font-semibold leading-6 text-gray-900">
             How It Works
           </Link>
-          <Link to="/contact" className="text-sm font-semibold leading-6 text-gray-900">
+          <Link to="/faq" className="text-sm font-semibold leading-6 text-gray-900">
             FAQ
           </Link>
           <Link to="/contact" className="text-sm font-semibold leading-6 text-gray-900">
