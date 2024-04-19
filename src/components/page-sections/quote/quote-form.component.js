@@ -139,15 +139,15 @@ export default function QuoteForm() {
                 <DestinationPostCode destinationPostcode={destinationPostcode} onChange={setDestinationPostcode} />
 
                 <QuotePackageSelector />
+                <p className="text-red-400 text-center col-span-2"> {errorMessage} </p> 
             </div>
-
-            <p className="text-red-400"> {errorMessage} </p>
-
+            <div class="text-center">
             {loading ? (
-                <i class="fa-solid fa-spinner fa-spin text-lg"></i>  
-            ) : (
-                <button className='button mt-8 float-right'  onClick={handleGetQuotes}>Get Quotes</button>
-            )}  
+                    <i class="fa-solid fa-spinner fa-spin text-lg"></i>  
+                ) : (
+                    <button className='button mt-3'  onClick={handleGetQuotes}>Get Quotes</button>
+                )} 
+           </div>
           
         </>
     )

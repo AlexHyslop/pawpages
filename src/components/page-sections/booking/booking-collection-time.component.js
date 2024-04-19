@@ -28,7 +28,7 @@ const BookingCollectionTime = () => {
   };
 
   return (
-    <div className="bg-gray-100 py-8 px-4">
+    <div className="bg-gray-100 py-8 px-4 col-span-3">
       <form onSubmit={handleSubmit} className="max-w-sm mx-auto bg-white p-6 rounded-lg shadow-md">
         <div className="mb-4">
           <label htmlFor="date" className="block text-gray-700">Select a Date:</label>

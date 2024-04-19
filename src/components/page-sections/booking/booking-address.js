@@ -14,7 +14,8 @@ export default function BookingAddress(props) {
   };
   
   const [formState, setFormState] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     street: '',
     city: '',
     state: '',
@@ -97,66 +98,63 @@ export default function BookingAddress(props) {
   };
 
    return (
-     <div className="p-4"> 
-      <h5> {props.type === "collection" ? "Collection Address" : "Delivery Address" }</h5>
-      <form className="flex flex-col" onSubmit={handleSubmit}> 
-        <label className="mt-2">Street: 
-          {manualInput ? (
-            <input type="text" name="street" onChange={handleChange} value={formState.street} />
-          ) : (
-            <PlacesAutocomplete value={formState.street} onChange={handleAddressChange} onSelect={handleAddressSelect}
-            searchOptions={countryRestrictionOptions}>
-              
-            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-              <div>
-                <input {...getInputProps({
-                  placeholder: 'Search Places ...',
-                  className: 'location-search-input',
-                })} />
-                <div className="autocomplete-dropdown-container">   
-                  {loading && <div>Loading...</div>}
-                  {suggestions.map(suggestion => {
-                    const style = {
-                      backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
-                    };
-                    return (
-                      <div {...getSuggestionItemProps(suggestion, { style })}>
-                        {suggestion.description}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </PlacesAutocomplete>
-          
-          )}
-        </label>
-        <button type="button" onClick={() => setManualInput(!manualInput)}>Enter address manually?</button>
-        {manualInput && (
-        <>
-          <label className="mt-2">City:</label>
-          <input className="border border-gray-300 rounded p-1" type="text" name="city" onChange={handleChange} value={formState.city} />
-          <label className="mt-2">State:</label>
-          <input className="border border-gray-300 rounded p-1" type="text" name="state" onChange={handleChange} value={formState.state} />
-          <label className="mt-2">Country:</label>
-          <input className="border border-gray-300 rounded p-1" type="text" name="country" onChange={handleChange} value={formState.country} />
-          <label className="mt-2">Postal Code:</label>
-          <input className="border border-gray-300 rounded p-1" type="text" name="postalCode" onChange={handleChange} value={formState.postalCode} />
-        </>
-        )}
-        <label className="mt-2">Phone Number:</label>
-        <div className="flex">
-          <select className="border border-gray-300 rounded p-1 mr-1" name="countryCode" onChange={handleChange} value={formState.countryCode}>
+     <div className="p-4 col-span-3"> 
+      <h1 className='text-xl mb-4'> {props.type === "collection" ? "Collection Address" : "Delivery Address" }</h1>
+      <form className="grid grid-cols-2 gap-4" onSubmit={handleSubmit}> 
+      <div>
+        <label className="block mb-2 text-primary text-sm">Street: </label>
+        <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="street" onChange={handleChange} value={formState.street} />
+      </div>
+      
+      <div>
+        <label className="block mb-2 text-primary text-sm">City:</label>
+        <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="city" onChange={handleChange} value={formState.city} />
+      </div>
+
+      <div>
+        <label className="block mb-1 text-primary text-sm">State:</label>
+        <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="state" onChange={handleChange} value={formState.state} />
+      </div>
+      
+      <div>
+        <label className="block mb-1 text-primary text-sm">Country:</label>
+        <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="country" onChange={handleChange} value={formState.country} />
+      </div>
+      
+      <div>
+        <label className="block mb-1 text-primary text-sm">Postal Code:</label>
+        <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="postalCode" onChange={handleChange} value={formState.postalCode} />
+      </div>
+       
+      <div>
+      <label className="block mb-1 text-primary text-sm">Phone Number:</label>
+        <div className="grid grid-cols-6 justify-items-start">
+          <select className="border text-sm text-primary col-span-1 border-gray-300 rounded p-1 mr-1" name="countryCode" onChange={handleChange} value={formState.countryCode}>
             <option value="+44">+44</option> 
           </select>
-          <input className="border border-gray-300 rounded p-1" type="text" name="phoneNumber" onChange={handleChange} value={formState.phoneNumber} />
+          <input className="border col-span-5 border-gray-300 rounded p-1 justify-self-stretch text-sm text-primary" type="text" name="phoneNumber" onChange={handleChange} value={formState.phoneNumber} />
         </div> 
-        <label className="mt-2">Contact Name:</label>
-        <input className="border border-gray-300 rounded p-1" type="text" name="name" onChange={handleChange} value={formState.name} />
-        <label className="mt-2">Instructions:</label>
-        <input className="border border-gray-300 rounded p-1" type="text" name="instructions" onChange={handleChange} value={formState.instructions} />
-        <input className="mt-2 bg-blue-500 text-white px-2 py-1 rounded cursor-pointer" type="submit" value="Continue" />
+      </div>
+
+      <div>
+        <label className="block mb-2 text-primary text-sm">Contact First Name:</label>
+        <input className="border border-gray-300 rounded p-1 w-full text-primary" type="text" name="name" onChange={handleChange} value={formState.firstName} />
+      </div>
+
+      <div>
+        <label className="block mb-2 text-primary text-sm">Contact Last Name:</label>
+        <input className="border border-gray-300 rounded p-1 w-full text-primary" type="text" name="name" onChange={handleChange} value={formState.lastName} />
+      </div>
+      
+      <div className='col-span-2'>
+        <label className="block mb-2 text-primary text-sm">Instructions:</label>
+        <input className="border text-primary w-full border-gray-300 rounded p-1" type="text" name="instructions" onChange={handleChange} value={formState.instructions} />
+      </div>
+        
+      <div className='col-span-2 text-right'>
+        <input className="button col-span-2 mt-4 w-full mx-auto block" type="submit" value="Continue" />
+      </div>
+
       </form>
     </div>
   );

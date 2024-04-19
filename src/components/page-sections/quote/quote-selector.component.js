@@ -111,43 +111,43 @@ export default function QuoteSelector(props) {
    //always collect but choose when they pickup
    
    return ( 
-    <div class="relative overflow-x-auto">
-      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-         <th scope="col" class="px-6 py-3">Service</th> 
-         <th scope="col" class="px-6 py-3">Detail</th>
-         <th scope="col" class="px-6 py-3">Collection</th> 
-         <th scope="col" class="px-6 py-3">Insurance</th>
-         <th scope="col" class="px-6 py-3">Price (£)</th> 
-         <th scope="col" class="px-6 py-3"></th>
-        </thead>
-        <tbody> 
-          {expressRate != null ? 
-            <tr> 
-              <td>  
-                <i class="fa-brands fa-dhl text-6xl text-red-500"/>  
-                <i class="fa-solid fa-truck-fast text-2xl text-yellow-500" /> 
-              </td> 
-              <td> {currentQuote.collectionCountry.Title} to  {currentQuote.destinationCountry.Title} </td>
-              <td> Free </td> 
-              <td> £50 Free </td>
-              <td> £{expressRate} </td> 
-              <td> <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onClick={(e) => onSelectQuote(expressRate, true) }> Select </button></td>
-            </tr>
-          : null}
-          {economyRate != null ? 
-            <tr>
-              <td> <i class="fa-brands fa-dhl text-6xl text-red-500"/> </td>
-              <td> {currentQuote.collectionCountry.Title} to  {currentQuote.destinationCountry.Title} </td>
-              <td> Free </td> 
-              <td> £50 Free </td>
-              <td> £{economyRate} </td>
-              <td> <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onClick={(e) => onSelectQuote(economyRate, false)}> Select </button></td>
-            </tr>
-          : null} 
-        </tbody>
-      </table>
-      </div>
+      <div class="relative overflow-x-auto">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <th scope="col" class="px-6 py-3">Service</th> 
+          <th scope="col" class="px-6 py-3">Detail</th>
+          <th scope="col" class="px-6 py-3">Collection</th> 
+          <th scope="col" class="px-6 py-3">Insurance</th>
+          <th scope="col" class="px-6 py-3">Price (£)</th> 
+          <th scope="col" class="px-6 py-3"></th>
+          </thead>
+          <tbody> 
+            {expressRate != null ? 
+              <tr class="text-center"> 
+                <td>  
+                  <i class="fa-brands fa-dhl text-6xl text-red-500"/>  
+                  <i class="fa-solid fa-truck-fast text-2xl text-yellow-500" /> 
+                </td> 
+                <td> {currentQuote.collectionCountry.Title} to  {currentQuote.destinationCountry.Title} </td>
+                <td> Free </td> 
+                <td> £50 Free </td>
+                <td> £{expressRate} </td> 
+                <td> <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onClick={(e) => onSelectQuote(expressRate, true) }> Select </button></td>
+              </tr>
+            : null}
+            {economyRate != null ? 
+              <tr>
+                <td> <i class="fa-brands fa-dhl text-6xl text-red-500"/> </td>
+                <td> {currentQuote.collectionCountry.Title} to  {currentQuote.destinationCountry.Title} </td>
+                <td> Free </td> 
+                <td> £50 Free </td>
+                <td> £{economyRate} </td>
+                <td> <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onClick={(e) => onSelectQuote(economyRate, false)}> Select </button></td>
+              </tr>
+            : null} 
+          </tbody>
+        </table>
+        </div>
   );
 };
  

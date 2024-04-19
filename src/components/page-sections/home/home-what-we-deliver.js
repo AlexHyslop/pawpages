@@ -17,8 +17,8 @@ export default function WhatWeDeliver() {
           <div className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3 lg:gap-y-16">
             <div className='relative bg-third rounded-lg p-4'>
                 <img className='max-w-full h-72 absolute -top-10' src={Luggage} />
-                <h3 className="text-2xl text-primary font-bold mb-2 pt-72">Luggage</h3>
-                <p className="text-gray-600">Send luggage securely and easily throughout the globe with Wawryer</p>
+                <h3 className="text-2xl text-white font-bold mb-2 pt-72">Luggage</h3>
+                <p className="text-white">Send luggage securely and easily throughout the globe with Wawryer</p>
             </div>
             <div className='relative bg-fourth rounded-lg p-4'>
             <img className='max-w-full h-72 absolute -top-10' src={Boxes} />
