@@ -139,7 +139,7 @@ export default function QuoteForm() {
                 <DestinationPostCode destinationPostcode={destinationPostcode} onChange={setDestinationPostcode} />
 
                 <QuotePackageSelector />
-                <p className="text-red-400 text-center col-span-2"> {errorMessage} </p> 
+                <p className="text-red-400 text-center sm:col-span-2"> {errorMessage} </p> 
             </div>
             <div class="text-center">
             {loading ? (
