@@ -38,6 +38,7 @@ export default function LandingPage(props) {
 
     console.log("setting current quote");
     if(createQuote){
+    
       dispatch(quoteAction.updateCurrentQuote( {
         collectionCountry : collectionCountry,
         destinationCountry : destinationCountry,

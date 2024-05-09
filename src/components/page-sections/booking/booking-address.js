@@ -6,21 +6,15 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 export default function BookingAddress(props) {
   const dispatch = useDispatch(); 
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);
-  const [manualInput, setManualInput] = useState(false);
-
-  const countryRestrictionOptions = {
-    types: ['address'],
-    componentRestrictions: { country: props.limitedCountries } 
-  };
   
+  const [manualInput, setManualInput] = useState(false);
+ 
   const [formState, setFormState] = useState({
     firstName: '',
     lastName: '',
     street: '',
     city: '',
-    state: '',
-    country: '',
-    postalCode: '',
+    state: '', 
     phoneNumber: '',
     instructions: ''
   });
@@ -30,62 +24,29 @@ export default function BookingAddress(props) {
       ...formState,
       [event.target.name]: event.target.value
     });
-  };
-
-  const handleAddressChange = (address) => {
-    setFormState({
-      ...formState,
-      street: address
-    });
-  };
-
-  const handleAddressSelect = async (address) => {
-    const results = await geocodeByAddress(address);
-    const latLng = await getLatLng(results[0]);
-  
-    const addressComponents = results[0].address_components;
-    const streetNumberComponent = addressComponents.find(component => component.types.includes('street_number'));
-    const streetNameComponent = addressComponents.find(component => component.types.includes('route'));
-    const cityComponent = addressComponents.find(component => component.types.includes('locality') || component.types.includes('postal_town'));    const stateComponent = addressComponents.find(component => component.types.includes('administrative_area_level_1'));
-    const countryComponent = addressComponents.find(component => component.types.includes('country'));
-    const postalCodeComponent = addressComponents.find(component => component.types.includes('postal_code'));
-  
-    const streetNumber = streetNumberComponent ? streetNumberComponent.long_name : '';
-    const streetName = streetNameComponent ? streetNameComponent.long_name : '';
-    const city = cityComponent ? cityComponent.long_name : '';
-    const state = stateComponent ? stateComponent.short_name : '';
-    const country = countryComponent ? countryComponent.long_name : '';
-    const postalCode = postalCodeComponent ? postalCodeComponent.long_name : '';
-  
-    setFormState({
-      ...formState,
-      street: `${streetNumber} ${streetName}`,
-      city,
-      state,
-      country,
-      postalCode
-    });
-
-    var currAddr = {
-    street: `${streetNumber} ${streetName}`,
-    city,
-    state,
-    country,
-    postalCode
-  }
-
-    autoSubmit(currAddr);
-  };
+  };  
   
   const autoSubmit = (currAddr) => {
-    if(currAddr){ 
-      console.log("auto submit redux addresses", formState)
+    if(currAddr){   
+      console.log("auto submit redux addresses", formState);
       var quote = JSON.parse(JSON.stringify(currentQuote));
       if(props.type === "collection"){
-        quote.collectionAddress = currAddr; 
+        quote.collectionAddress.firstName = formState.firstName;
+        quote.collectionAddress.lastName = formState.lastName;
+        quote.collectionAddress.street = formState.street;
+        quote.collectionAddress.city = formState.city;
+        quote.collectionAddress.state = formState.state;
+        quote.collectionAddress.phoneNumber = formState.phoneNumber;
+        quote.collectionAddress.instructions = formState.instructions;
       }
       if(props.type === "delivery"){
-        quote.deliveryAddress = currAddr; 
+        quote.destinationAddress.firstName = formState.firstName;
+        quote.destinationAddress.lastName = formState.lastName;
+        quote.destinationAddress.street = formState.street;
+        quote.destinationAddress.city = formState.city;
+        quote.destinationAddress.state = formState.state;
+        quote.destinationAddress.phoneNumber = formState.phoneNumber;
+        quote.destinationAddress.instructions = formState.instructions;
       }
       dispatch(quoteAction.updateCurrentQuote(quote));    
     }
@@ -118,13 +79,15 @@ export default function BookingAddress(props) {
       
       <div>
         <label className="block mb-1 text-primary text-sm">Country:</label>
-        <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="country" onChange={handleChange} value={formState.country} />
+        <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="country"  disabled={true}
+         value={props.type === "collection" ? currentQuote.collectionCountry.Title : currentQuote.destinationCountry.Title} />
       </div>
       
       <div>
         <label className="block mb-1 text-primary text-sm">Postal Code:</label>
-        <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="postalCode" onChange={handleChange} value={formState.postalCode} />
-      </div>
+        <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="postalCode" disabled={true}
+        value={props.type === "collection" ? currentQuote.collectionCountry?.postalCode : currentQuote.destinationCountry.postalCode} />
+      </div> 
        
       <div>
       <label className="block mb-1 text-primary text-sm">Phone Number:</label>
@@ -158,4 +121,54 @@ export default function BookingAddress(props) {
       </form>
     </div>
   );
+
+  // const countryRestrictionOptions = {
+  //   types: ['address'],
+  //   componentRestrictions: { country: props.limitedCountries } 
+  // };
+
+  // const handleAddressChange = (address) => {
+  //   setFormState({
+  //     ...formState,
+  //     street: address
+  //   });
+  // };
+
+  // const handleAddressSelect = async (address) => {
+  //   const results = await geocodeByAddress(address);
+  //   const latLng = await getLatLng(results[0]);
+  
+  //   const addressComponents = results[0].address_components;
+  //   const streetNumberComponent = addressComponents.find(component => component.types.includes('street_number'));
+  //   const streetNameComponent = addressComponents.find(component => component.types.includes('route'));
+  //   const cityComponent = addressComponents.find(component => component.types.includes('locality') || component.types.includes('postal_town'));    const stateComponent = addressComponents.find(component => component.types.includes('administrative_area_level_1'));
+  //   const countryComponent = addressComponents.find(component => component.types.includes('country'));
+  //   const postalCodeComponent = addressComponents.find(component => component.types.includes('postal_code'));
+  
+  //   const streetNumber = streetNumberComponent ? streetNumberComponent.long_name : '';
+  //   const streetName = streetNameComponent ? streetNameComponent.long_name : '';
+  //   const city = cityComponent ? cityComponent.long_name : '';
+  //   const state = stateComponent ? stateComponent.short_name : '';
+  //   const country = countryComponent ? countryComponent.long_name : '';
+  //   const postalCode = postalCodeComponent ? postalCodeComponent.long_name : '';
+  
+  //   setFormState({
+  //     ...formState,
+  //     street: `${streetNumber} ${streetName}`,
+  //     city,
+  //     state,
+  //     country,
+  //     postalCode
+  //   });
+
+  //   var currAddr = {
+  //   street: `${streetNumber} ${streetName}`,
+  //   city,
+  //   state,
+  //   country,
+  //   postalCode
+  // }
+
+  //   autoSubmit(currAddr);
+  // };
 }

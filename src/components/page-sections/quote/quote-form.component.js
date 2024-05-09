@@ -88,7 +88,13 @@ export default function QuoteForm() {
               }
             }
           }  
-        }; 
+        };  
+
+        var deepCopyQuote = JSON.parse(JSON.stringify(currentQuote)); 
+        deepCopyQuote.collectionCountry.postalCode = collectionPostcode;
+        deepCopyQuote.destinationCountry.postalCode = destinationPostcode; 
+        dispatch(quoteAction.updateCurrentQuote( deepCopyQuote ));   
+        
         dispatch(quoteAction.updateMinimalQuote( getMinimalQuote )); 
         TGE_ENDPOINTS.getMinimalQuote(getMinimalQuote, onGetMinimalQuote); 
 

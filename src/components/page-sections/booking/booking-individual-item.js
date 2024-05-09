@@ -103,7 +103,7 @@ export default BookingIndividualItem;
           "NumberOfUnits": 5,
           "UnitValue": 15.5,
           "UnitWeight": 4.0,
-          "ProductCode": "YourProductCode",
+          1
           "ManufacturerAddress": {
               "CompanyName": "[MANUFACTURER ADDRESS COMPANY NAME]",
               "AddressLineOne": "[MANUFACTURER ADDRESS LINE 1]",
