@@ -37,11 +37,11 @@ export default function QuoteBox(props) {
   return (
 
     <div>
-        <label className="block text-sm font-extrabold leading-6 text-primary text-left">
+        <label className="text-center sm:text-left block text-sm font-extrabold leading-6 text-primary text-left">
             {props.displayName} 
         </label>
    
-        <div className="flex flex-row justify-around">  
+        <div className="text-center sm:text-left block sm:flex sm:flex-row justify-around">  
             {props.type == "smallBox" ? <i class="fa-solid fa-box-open text-3xl text-slate-400 m-3"/> :  <i class="fa-solid fa-cubes text-3xl text-slate-400 m-3"/>  }
           
             <div className="flex flex-col">
@@ -50,7 +50,7 @@ export default function QuoteBox(props) {
             </div>
 
 
-            <div className="flex flex-row ml-5 pt-3"> 
+            <div className="flex flex-row sm:ml-5 pt-3 justify-center"> 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" 
                 className={`m-1 w-6 h-6 ${amountSelected === 0 ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} ${amountSelected < 0 ? 'text-red-500' : ''}`}
                     onClick={() => {

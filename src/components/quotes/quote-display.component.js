@@ -65,10 +65,10 @@ export default function QuoteDisplay(props) {
             {currentQuote?.largeBoxes > 0 ? <p className="text-md"> Small Boxes: {currentQuote?.largeBoxes} </p> : null}
             <hr className="mb-4"></hr>
             <div>
-              <p className="text-md">Collection Address: {currentQuote?.collectionCountry?.postalCode + ","+  currentQuote?.collectionAddress?.city } </p>
+              <p className="text-md break-words">Collection Address: {currentQuote?.collectionCountry?.postalCode } </p>
             </div>
             <div>
-              <p className="text-md"> Delivery Address:{currentQuote?.destinationCountry?.postalCode + ","+ currentQuote?.deliveryAddress?.city} </p>
+              <p className="text-md break-words"> Delivery Address:{currentQuote?.destinationCountry?.postalCode } </p>
             </div>
         </div>
 

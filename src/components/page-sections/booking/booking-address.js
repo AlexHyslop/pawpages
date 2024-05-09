@@ -59,52 +59,52 @@ export default function BookingAddress(props) {
   };
 
    return (
-     <div className="p-4 col-span-3"> 
+     <div className="p-4 col-span-1 md:col-span-3"> 
       <h1 className='text-xl mb-4'> {props.type === "collection" ? "Collection Address" : "Delivery Address" }</h1>
-      <form className="grid grid-cols-2 gap-4" onSubmit={handleSubmit}> 
-      <div>
+      <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleSubmit}> 
+      <div className='col-span-2 md:col-span-1'>
         <label className="block mb-2 text-primary text-sm">Street: </label>
         <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="street" onChange={handleChange} value={formState.street} />
       </div>
       
-      <div>
+      <div className='col-span-2 md:col-span-1'>
         <label className="block mb-2 text-primary text-sm">City:</label>
         <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="city" onChange={handleChange} value={formState.city} />
       </div>
 
-      <div>
+      <div className='col-span-2 md:col-span-1'>
         <label className="block mb-1 text-primary text-sm">State:</label>
         <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="state" onChange={handleChange} value={formState.state} />
       </div>
       
-      <div>
+      <div className='col-span-2 md:col-span-1'>
         <label className="block mb-1 text-primary text-sm">Country:</label>
         <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="country"  disabled={true}
          value={props.type === "collection" ? currentQuote.collectionCountry.Title : currentQuote.destinationCountry.Title} />
       </div>
       
-      <div>
+      <div className='col-span-2 md:col-span-1'>
         <label className="block mb-1 text-primary text-sm">Postal Code:</label>
         <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="postalCode" disabled={true}
         value={props.type === "collection" ? currentQuote.collectionCountry?.postalCode : currentQuote.destinationCountry.postalCode} />
       </div> 
        
-      <div>
+      <div className='col-span-2 md:col-span-1'>
       <label className="block mb-1 text-primary text-sm">Phone Number:</label>
-        <div className="grid grid-cols-6 justify-items-start">
+        <div className="flex">
           <select className="border text-sm text-primary col-span-1 border-gray-300 rounded p-1 mr-1" name="countryCode" onChange={handleChange} value={formState.countryCode}>
             <option value="+44">+44</option> 
           </select>
-          <input className="border col-span-5 border-gray-300 rounded p-1 justify-self-stretch text-sm text-primary" type="text" name="phoneNumber" onChange={handleChange} value={formState.phoneNumber} />
+          <input className="border self-stretch w-full border-gray-300 rounded p-1 justify-self-stretch text-sm text-primary" type="text" name="phoneNumber" onChange={handleChange} value={formState.phoneNumber} />
         </div> 
       </div>
 
-      <div>
+      <div className='col-span-2 md:col-span-1'>
         <label className="block mb-2 text-primary text-sm">Contact First Name:</label>
         <input className="border border-gray-300 rounded p-1 w-full text-primary" type="text" name="name" onChange={handleChange} value={formState.firstName} />
       </div>
 
-      <div>
+      <div className='col-span-2 md:col-span-1'>
         <label className="block mb-2 text-primary text-sm">Contact Last Name:</label>
         <input className="border border-gray-300 rounded p-1 w-full text-primary" type="text" name="name" onChange={handleChange} value={formState.lastName} />
       </div>

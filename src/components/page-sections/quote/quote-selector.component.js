@@ -111,9 +111,9 @@ export default function QuoteSelector(props) {
    //always collect but choose when they pickup
    
    return ( 
-      <div class="relative overflow-x-auto">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead class="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <div class="relative pb-4">
+        <table class="w-full overflow-x-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead class="text-xs  text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <th scope="col" class="px-6 py-3">Service</th> 
           <th scope="col" class="px-6 py-3">Detail</th>
           <th scope="col" class="px-6 py-3">Collection</th> 
