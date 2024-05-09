@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 
 const BookingCollectionTime = () => {
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleDateChange = (e) => {
     setSelectedDate(e.target.value);
@@ -25,6 +27,8 @@ const BookingCollectionTime = () => {
     console.log('Selected Date:', selectedDate);
     console.log('Selected Time:', selectedTime);
     setError('');
+
+    navigate("/items"); 
   };
 
   return (
