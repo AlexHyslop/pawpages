@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import CommodityForm from './booking-commodity.component';
 
 const BookingIndividualItem = (props) => {
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);
@@ -9,60 +10,38 @@ const BookingIndividualItem = (props) => {
     itemType: '',
     commodityDetails: []
   });
-
-  const handleInputChange = (e, index) => {
-    const { name, value } = e.target;
-    const newCommodityDetails = [...item.commodityDetails];
-    newCommodityDetails[index] = { ...newCommodityDetails[index], [name]: value };
-    setItem({ ...item, commodityDetails: newCommodityDetails });
-  };
-
-  const handleAddCommodity = () => {
-    setItem({ ...item, commodityDetails: [...item.commodityDetails, {}] });
-  };
-
+ 
   useEffect(() => {
     if (props.commodityDetails) {
       setItem({ ...item, commodityDetails: props.commodityDetails });
     }
   }, [props.commodityDetails]);
-   
-  return (
-    <> 
-      <div>
-        <label htmlFor="weight" className="block text-sm font-medium text-gray-700">Weight</label>
-        <p className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-        > {props.weight} </p>
-      </div>
-      <div>
-        <label htmlFor="height" className="block text-sm font-medium text-gray-700">Height</label>
-        <p  className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" > 
-        {props.height} </p>
-      </div>
 
-      <div>
-        <label htmlFor="width" className="block text-sm font-medium text-gray-700">Width</label>
-        <p
-          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-        > {props.width} </p>
-      </div>
-      <div>
-        <label htmlFor="length" className="block text-sm font-medium text-gray-700">Length</label>
-        <p
-          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-        >{props.length} </p>
+  const handleAddCommodity = (commodity) => {
+    setItem(prevItem => ({
+      ...prevItem,
+      commodityDetails: [...prevItem.commodityDetails, commodity]
+    }));
+  }
+   
+
+  return (
+    <div className='flex flex-col rounded shadow-lg overflow-hidden p-5 m-5'>
+      <h3> { (props.large ? 'Large Parcel ': 'Small Parcel ') + (props.index +1) }</h3>
+      <div className='flex flex-row'>
+        <p> {props.weight} - {props.height} x  {props.width} x  {props.length} </p> 
       </div>
       
       {item?.commodityDetails.map((commodity, index) => (
-        <div key={index}>
+        <div key={index} className='flex flex-row'>
           <h3>Commodity {index + 1}</h3>
           <p>Commodity Code: {commodity.CommodityCode}</p>
           <p>Commodity Description: {commodity.CommodityDescription}</p>
-          <p>Country of Origin: {commodity.CountryOfOrigin.CountryCode}</p>
+          {/* <p>Country of Origin: {commodity.CountryOfOrigin.CountryCode}</p> */}
           <p>Number of Units: {commodity.NumberOfUnits}</p>
           <p>Unit Value: {commodity.UnitValue}</p>
           <p>Unit Weight: {commodity.UnitWeight}</p>
-          <p>Product Code: {commodity.ProductCode}</p>
+          {/* <p>Product Code: {commodity.ProductCode}</p> */}
           {commodity.ManufacturerAddress && (
             <div>
               <h4>Manufacturer Address</h4>
@@ -78,10 +57,10 @@ const BookingIndividualItem = (props) => {
         </div>
       ))}
 
-      <div>
-        <button onClick={handleAddCommodity}>Add New Item</button> 
-      </div>
-    </>
+  
+      <CommodityForm onAdd={handleAddCommodity} />
+      
+    </div>
   );
 };
 
