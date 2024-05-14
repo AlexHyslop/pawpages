@@ -6,6 +6,7 @@ import quoteAction from '../../../store/actions/quote.action';
 
 const generateArray = (n) => Array.from({ length: n }, (_, index) => index);
 
+
 const BookingItemDeclare = () => {
   const dispatch = useDispatch(); 
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);
@@ -41,6 +42,7 @@ const BookingItemDeclare = () => {
       itemType: ''
     });
   };
+  
 
   return (
     <div className="max-w-lg mx-auto">

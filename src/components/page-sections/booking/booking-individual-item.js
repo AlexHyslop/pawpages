@@ -6,6 +6,8 @@ import CommodityForm from './booking-commodity.component';
 const BookingIndividualItem = (props) => {
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);
 
+
+
   const [item, setItem] = useState({ 
     itemType: '',
     commodityDetails: []
