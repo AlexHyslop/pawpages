@@ -18,6 +18,7 @@ import ForgottenPassword from './components/page-sections/login/forgotten-passwo
 import '@fortawesome/fontawesome-svg-core/styles.css'; 
 import { config } from '@fortawesome/fontawesome-svg-core';
 import BookingItemDeclare from './components/page-sections/booking/booking-item-declare.component.js';
+import Stripe from './components/page-sections/payment/stripe.component.js';
 
 function LoadingScreen() {
 
@@ -74,6 +75,9 @@ function App() {
           <Route path="/faq" element={<FAQ/>} />
           <Route path="/how-it-works" element={<Howitworks/>} />
           <Route path="/login/forgotten-password" element={<ForgottenPassword />} />
+          <Route path="/pay" element={<Stripe />} />
+
+          
           {/* authed routes */}
           {/* <Route path="/account" element={authed ? <Account /> : <Login />} />  */}
           {/* 404 page */}

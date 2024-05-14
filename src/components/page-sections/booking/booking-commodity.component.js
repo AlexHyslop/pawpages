@@ -53,8 +53,8 @@ function CommodityForm({ onAdd }) {
   };
 
   return (
-    <div className='flex flex-row'>
-      <form onSubmit={handleSubmit}>
+    <div className='flex flex-row border border-sky-500'>
+      <form onSubmit={handleSubmit} >
         <Select
           value={options.find(option => option.value === commodity.CommodityCode)}
           onChange={handleSelectChange}
@@ -76,6 +76,7 @@ function CommodityForm({ onAdd }) {
         <input name="ManufacturerAddress.County" value={commodity.ManufacturerAddress.County} onChange={handleChange} placeholder="County" />
         <input name="ManufacturerAddress.Postcode" value={commodity.ManufacturerAddress.Postcode} onChange={handleChange} placeholder="Postcode" />
         <input name="ManufacturerAddress.Country.CountryCode" value={commodity.ManufacturerAddress.Country.CountryCode} onChange={handleChange} placeholder="Country" /> */}
+      
         <button type="submit">Add New Item</button>
       </form>
     </div>

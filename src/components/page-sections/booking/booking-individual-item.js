@@ -61,7 +61,6 @@ const BookingIndividualItem = (props) => {
 
   
       <CommodityForm onAdd={handleAddCommodity} />
-      
     </div>
   );
 };

@@ -1,22 +1,26 @@
-import React from 'react';
-import { loadStripe } from '@stripe/stripe-js';
-import {
-  CardElement,
-  Elements,
-  useStripe,
-  useElements,
-} from '@stripe/react-stripe-js';
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 
-export default function Stripe(props) { 
+// pk_live_51P6COu02R2DxG1YvL9H87F0EGviewVbTML2Gi3SqbRkuFz9ZARUvhGsmLUq7rvzBdJMOP9VRo0yyAdF5VxeOkISR00TbZ0oA82
+const stripePromise = loadStripe("stripekey");
 
-const stripePromise = loadStripe('stripekey');
+export default function Stripe(props) {
+  return (
+    <Elements stripe={stripePromise}>
+      <CheckoutForm />
+    </Elements>
+  );
+}
+
+function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
+      type: "card",
       card: elements.getElement(CardElement),
     });
 
@@ -34,6 +38,4 @@ const stripePromise = loadStripe('stripekey');
       </button>
     </form>
   );
-};
-
- 
+}

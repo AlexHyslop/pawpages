@@ -3,11 +3,13 @@ import { useSelector } from 'react-redux';
 import BookingIndividualItem from './booking-individual-item'; 
 import { useDispatch } from 'react-redux';
 import quoteAction from '../../../store/actions/quote.action';
+import { useNavigate } from 'react-router-dom'; 
 
 const generateArray = (n) => Array.from({ length: n }, (_, index) => index);
 
 
 const BookingItemDeclare = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch(); 
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);
 
@@ -56,6 +58,11 @@ const BookingItemDeclare = () => {
         {currentQuote && generateArray(currentQuote.smallBoxes).map((_, index) => (
           <BookingIndividualItem large={false} index={index} key={`small-box-${index}`}itemType={'Box/Parcel'}  weight={'20kg'} height={'46cm'} length={'46cm'} width={'46cm'}/>
         ))}
+
+
+      <div className='col-span-2 text-right'>
+        <input className="button col-span-2 mt-4 w-full mx-auto block" type="submit" value="Continue" onClick={(e) => { navigate('/pay')}}/>
+      </div>
  
     </div>
   );
