@@ -53,20 +53,22 @@ function CommodityForm({ onAdd }) {
   };
 
   return (
-    <div className='flex flex-row border border-sky-500'>
+    <div className=''>
       <form onSubmit={handleSubmit} >
-        <Select
+        <Select className=''
           value={options.find(option => option.value === commodity.CommodityCode)}
           onChange={handleSelectChange}
           options={options}
           placeholder="Item Name"
           isSearchable
         />
-        <p> {commodity.CommodityDescription}  </p> 
-
-        <input name="NumberOfUnits" value={commodity.NumberOfUnits} onChange={handleChange} placeholder="Number of Units" />
-        <input name="UnitValue" value={commodity.UnitValue} onChange={handleChange} placeholder="Unit Value" />
-        <input name="UnitWeight" value={commodity.UnitWeight} onChange={handleChange} placeholder="Unit Weight" />
+        <p className='pt-2 text-center bold capitalize'> {commodity.CommodityDescription}  </p> 
+        <div className="grid grid-cols-1 gap-4 pt-4">
+          <input className='border-secondary border-2 py-2 px-4 rounded-3xl' name="NumberOfUnits" value={commodity.NumberOfUnits} onChange={handleChange} placeholder="Number of Units" />
+          <input className='border-secondary border-2 py-2 px-4 rounded-3xl' name="UnitValue" value={commodity.UnitValue} onChange={handleChange} placeholder="Unit Value" />
+          <input className='border-secondary border-2 py-2 px-4 rounded-3xl' name="UnitWeight" value={commodity.UnitWeight} onChange={handleChange} placeholder="Unit Weight" />
+        </div>
+      
         {/* <input name="CountryOfOrigin.CountryCode" value={commodity.CountryOfOrigin.CountryCode} onChange={handleChange} placeholder="Country of Origin" />
         <input name="ProductCode" value={commodity.ProductCode} onChange={handleChange} placeholder="Product Code" />
         <input name="ManufacturerAddress.CompanyName" value={commodity.ManufacturerAddress.CompanyName} onChange={handleChange} placeholder="Company Name" />
@@ -77,7 +79,7 @@ function CommodityForm({ onAdd }) {
         <input name="ManufacturerAddress.Postcode" value={commodity.ManufacturerAddress.Postcode} onChange={handleChange} placeholder="Postcode" />
         <input name="ManufacturerAddress.Country.CountryCode" value={commodity.ManufacturerAddress.Country.CountryCode} onChange={handleChange} placeholder="Country" /> */}
       
-        <button type="submit">Add New Item</button>
+        <button className='button mt-6 mx-auto' type="submit">Add New Item</button>
       </form>
     </div>
   );

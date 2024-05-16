@@ -47,8 +47,8 @@ const BookingItemDeclare = () => {
   
 
   return (
-    <div className="max-w-lg mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Declare Items</h2>
+    <div className="max-w-7xl mx-auto pt-10 px-10">
+      <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center">Declare Items</h1>
         {/* Rendering large boxes */}
         {currentQuote && generateArray(currentQuote.largeBoxes).map((_, index) => (
           <BookingIndividualItem large={true} index={index} key={`large-box-${index}`} itemType={'Box/Parcel'} weight={'30kg'} height={'60cm'} length={'50cm'} width={'50cm'}/>
