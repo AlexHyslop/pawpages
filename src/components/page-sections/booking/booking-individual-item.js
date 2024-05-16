@@ -8,7 +8,6 @@ const BookingIndividualItem = (props) => {
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);
 
 
-
   const [item, setItem] = useState({ 
     itemType: '',
     commodityDetails: []
@@ -27,7 +26,12 @@ const BookingIndividualItem = (props) => {
     }));
   }
    
-
+  function handleRemoveCommodity(index) {
+    const newCommodities = [...item.commodityDetails];
+    newCommodities.splice(index, 1);
+    setItem({ ...item, commodityDetails: newCommodities });
+  }
+  
   return (
     <div className='grid xl:grid-cols-4 gap-8 mt-8'>
     <div className=''>
@@ -69,7 +73,7 @@ const BookingIndividualItem = (props) => {
                 <span className='text-secondary'>{commodity.UnitWeight}</span>
             </div>
             <div className='absolute -right-2 top-5'>
-              <XMarkIcon className='h-6 text-lg cursor-pointer text-red-700' />
+              <XMarkIcon className='h-6 text-lg cursor-pointer text-red-700' onClick={() => handleRemoveCommodity(index)} />
             </div>
             {commodity.ManufacturerAddress && (
               <div className='mb-4 grid grid-cols-6 gap-4'>

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import quoteAction from "../../../store/actions/quote.action"; 
 
 export default function QuoteSelector(props) {
+  const foundServices = useSelector((state) => state?.quote?.ServiceResults);  
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);  
   const economyRates = useSelector((state) => state?.rates?.economyRates);  
   const expressRates = useSelector((state) => state?.rates?.expressRates);  
@@ -64,15 +65,13 @@ export default function QuoteSelector(props) {
         return price; 
       }
     }
-
     return null; 
-  }
+  } 
  
   const onSelectQuote = (price, expressSelected) => {
     var tempQuote = JSON.parse(JSON.stringify(currentQuote));
     tempQuote.actualPrice = price;
-    tempQuote.expressSelected = expressSelected;
-     dispatch(quoteAction.updateCurrentQuote(tempQuote));   
+    tempQuote.expressSelected = expressSelected; 
     navigate("/booking");
    }; 
 

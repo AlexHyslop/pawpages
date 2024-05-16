@@ -118,19 +118,33 @@ export default function QuoteForm() {
             // TG International Economy for economy.
             var filteredServiceResults = response.data.ServiceResults.filter(res =>               
               res.ServiceName === 'TG Express Worldwide' ||
-              res.ServiceName === 'TG Express Worldwide Light (DHL)' ||
-              res.ServiceName === 'DHL Express Worldwide' ||
-              res.ServiceName === 'TG International Economy' ||
-              res.ServiceName === 'TG International Express'
-          );
-            console.log("filteredResults", filteredServiceResults); 
-
+              // res.ServiceName === 'TG Express Worldwide Light (DHL)' ||
+              // res.ServiceName === 'DHL Express Worldwide' ||
+              res.ServiceName === 'TG International Economy' 
+              // res.ServiceName === 'TG International Express'
+            );
+            console.log("filteredResults", filteredServiceResults);  
 
             filteredServiceResults.forEach(res => res.QuoteId = quoteId); 
 
             console.log("filteredResults", filteredServiceResults); 
             dispatch(quoteAction.updateServiceResults(  filteredServiceResults ));    
+
+            var tempQuote = JSON.parse(JSON.stringify(currentQuote));
+            if(tempQuote.expressSelected != undefined || tempQuote.expressSelected != null){
+              if(tempQuote.expressSelected){
+                tempQuote.selectedServiceResult = tempQuote.ServiceResults?.filter(res => res.ServiceName === 'TG Express Worldwide');
+              }else { 
+                tempQuote.selectedServiceResult = tempQuote.ServiceResults?.filter(res => res.ServiceName === 'TG International Economy');
+              }
+            }
+            dispatch(quoteAction.updateCurrentQuote(  tempQuote ));    
+
+
+
           } 
+        } else {
+          //TODO create error + redirect to /
         }
       }
 

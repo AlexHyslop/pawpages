@@ -22,14 +22,13 @@ export default function QuoteDashboard(props) {
   return (
     <div className="container mx-auto mt-14 px-6 lg:px-8">
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 border p-6">
-      <div className="service-results-container col-span-3 overflow-x-scroll">  
+        <div className="service-results-container col-span-3 overflow-x-scroll">  
           <QuoteSelector  />  
         </div>
         <div className="col-span-1">
           <QuoteDisplay /> 
         </div>
-      </div>
-        
+      </div> 
      </div>
   );
 }

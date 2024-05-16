@@ -1,7 +1,7 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useStripe, useElements, CardElement, AddressElement } from "@stripe/react-stripe-js";
-
+import QuoteDisplay from "../../quotes/quote-display.component";
 // pk_live_51P6COu02R2DxG1YvL9H87F0EGviewVbTML2Gi3SqbRkuFz9ZARUvhGsmLUq7rvzBdJMOP9VRo0yyAdF5VxeOkISR00TbZ0oA82
 const stripePromise = loadStripe('pk_test_qblFNYngBkEdjEZ16jxxoWSM');
 
@@ -46,21 +46,24 @@ function CheckoutForm() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto pt-10 px-10 pb-20">
-      <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center">Payment</h1>
-      <p className="text-center py-4">Please provide your payment details below</p>
-      <form className="pt-4 mt-2 max-w-xl mx-auto text-center border-2 border-secondary p-4 rounded-xl" onSubmit={handleSubmit}>
-        <div className="">
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 mx-auto pt-10 px-10 pb-20">
+      <div className="col-span-3 overflow-x-scroll">  
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center">Payment</h1>
+        <p className="text-center py-4">Please provide your payment details below</p>
+        <form className="pt-4 mt-2 max-w-xl mx-auto text-center border-2 border-secondary p-4 rounded-xl" onSubmit={handleSubmit}>
             <AddressElement options={{mode: 'billing'}}/>
-        </div>
-        <div className="mt-8">
-            <CardElement options={cardElementOptions} /> {/* Add options prop */}
-        </div>
-      
-        <button className="button mt-8 w-full block mx-auto" type="submit" disabled={!stripe}>
-          Pay
-        </button>
-      </form>
+          <div className="mt-8">
+              <CardElement options={cardElementOptions} /> {/* Add options prop */}
+          </div>
+        
+          <button className="button mt-8 w-full block mx-auto" type="submit" disabled={!stripe}>
+            Pay
+          </button>
+        </form>
+      </div>
+      <div className="col-span-1">
+        <QuoteDisplay /> 
+      </div>
     </div>
   );
 }

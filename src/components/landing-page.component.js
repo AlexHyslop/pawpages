@@ -25,28 +25,16 @@ export default function LandingPage(props) {
 
   useEffect(() => {  
     RATES_SERVICE.getEconomyRates(onGetEconomyRates);
-    RATES_SERVICE.getExpressRates(onGetExpressRates); 
-
-    var createQuote = false; 
-    if(!currentQuote){
-      createQuote = true; 
-    }else {
-      if(currentQuote.totalBoxes == 0){
-        createQuote = true; 
-      } 
-    }
-
-    console.log("setting current quote");
-    if(createQuote){
+    RATES_SERVICE.getExpressRates(onGetExpressRates);  
+     
+    dispatch(quoteAction.updateCurrentQuote( {
+      collectionCountry : collectionCountry,
+      destinationCountry : destinationCountry,
+      totalBoxes : 0,
+      smallBoxes : 0,
+      largeBoxes : 0
+    }));    
     
-      dispatch(quoteAction.updateCurrentQuote( {
-        collectionCountry : collectionCountry,
-        destinationCountry : destinationCountry,
-        totalBoxes : 0,
-        smallBoxes : 0,
-        largeBoxes : 0
-     }));   
-    }
     if (redirect) navigate(redirect); 
     
   }, []); 
