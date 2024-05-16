@@ -1,9 +1,9 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
+import { useStripe, useElements, CardElement, AddressElement } from "@stripe/react-stripe-js";
 
 // pk_live_51P6COu02R2DxG1YvL9H87F0EGviewVbTML2Gi3SqbRkuFz9ZARUvhGsmLUq7rvzBdJMOP9VRo0yyAdF5VxeOkISR00TbZ0oA82
-const stripePromise = loadStripe("stripekey");
+const stripePromise = loadStripe('pk_test_qblFNYngBkEdjEZ16jxxoWSM');
 
 const appearance = {
   theme: 'stripe' // Specify the theme as 'stripe'
@@ -48,9 +48,12 @@ function CheckoutForm() {
   return (
     <div className="max-w-7xl mx-auto pt-10 px-10 pb-20">
       <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center">Payment</h1>
-      <p className="text-center pt-4">Please provide your card details below</p>
-      <form className="pt-4 max-w-xl mx-auto text-center" onSubmit={handleSubmit}>
-        <div className="border-2 border-secondary p-4 rounded-xl">
+      <p className="text-center py-4">Please provide your payment details below</p>
+      <form className="pt-4 mt-2 max-w-xl mx-auto text-center border-2 border-secondary p-4 rounded-xl" onSubmit={handleSubmit}>
+        <div className="">
+            <AddressElement options={{mode: 'billing'}}/>
+        </div>
+        <div className="mt-8">
             <CardElement options={cardElementOptions} /> {/* Add options prop */}
         </div>
       
