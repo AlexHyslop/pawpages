@@ -21,7 +21,7 @@ export default function Terms() {
 
 <p>Country refers to: United Kingdom</p>
 
-<p>Company (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to Relexco Ltd, The Ridings, Bracknell Road, Bracknell, TG42 6LD.</p>
+<p>Company (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to Relexco Ltd.</p>
 
 <p>Device means any device that can access the Service such as a computer, a cellphone or a digital tablet.</p>
 
@@ -169,7 +169,7 @@ export default function Terms() {
 
 <p>If you have any questions about these Terms and Conditions, You can contact us:</p>
 
-<p>By email: Terry.churchill@relexco.com</p>
+<p>By email: sales@relexco.com</p>
 
 <p>By visiting this page on our website: HTTP://www.relexco.com/termsandconditions</p>
                  </div>

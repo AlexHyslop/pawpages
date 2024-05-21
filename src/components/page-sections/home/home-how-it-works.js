@@ -8,25 +8,25 @@ const features = [
   {
     name: 'Book your item(s)',
     description:
-      'Get an instant quote online and book your item(s) with our easy to use site',
+      'Get an instant quote online and book your item(s) with our easy to use site.',
     icon: BookItems,
   },
   {
     name: 'Pack your item(s)',
     description:
-      'Once you have booked, pack your item(s) securely in a robust suitcase or box',
+      'Once you have booked, pack your item(s) securely in a robust suitcase or box.',
     icon: Pack,
   },
   {
-    name: 'Drop Off or We Collect',
+    name: 'We Collect',
     description:
-      'Drop your boxes or suitcases at one of hundreds of local drop off points or if you have chose collection one of our partners will collect your items',
+      'We offer next day collection services to ensure your items are picked up promptly and efficiently.',
     icon: Drop,
   },
   {
     name: 'Track your item(s)',
     description:
-      'Track your item every step of the way. Enjoy a hassle-free journey and on-time item arrival',
+      'Track your item every step of the way.',
     icon: Track,
   },
 ]
@@ -38,7 +38,7 @@ export default function Howitworks() {
         <div className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-secondary font-semibold leading-7 text-indigo-600">How it Works</h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          The easy way to send boxes and luggage
+          The easy way to send boxes.
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
