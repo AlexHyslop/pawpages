@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import CommodityForm from './booking-commodity.component';
 import { XMarkIcon } from '@heroicons/react/20/solid' 
+import { TGE_ENDPOINTS } from '../../../api/transglobal.service';
+import { useDispatch, useSelector } from "react-redux";
+import quoteAction from '../../../store/actions/quote.action';
 
 const BookingIndividualItem = (props) => {
+  const dispatch = useDispatch();  
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);
-
 
   const [item, setItem] = useState({ 
     itemType: '',
@@ -20,16 +22,55 @@ const BookingIndividualItem = (props) => {
   }, [props.commodityDetails]);
 
   const handleAddCommodity = (commodity) => {
-    setItem(prevItem => ({
-      ...prevItem,
-      commodityDetails: [...prevItem.commodityDetails, commodity]
-    }));
+    // call from child component with commodity details 
+    console.log("commodity passed to parent", commodity); 
+    TGE_ENDPOINTS.getCommodity( 
+      { 
+        "Searches": [
+              {
+                  "Description": commodity.Name
+              }
+          ],
+        "MessageLanguage": "EN",
+        "CountryCode": "GB",
+        "NumberOfResults": 5
+      },
+      commodity,
+      onGetCommodity);
+  }
+
+  const onGetCommodity = (response, commodity) => {
+    console.log("tge response", response);
+    console.log("tge commodity", commodity);
+
+    console.log("data check", response.data);
+    console.log("status check", response.data.Status);
+    console.log("results check", response.data.SearchResults); 
+    if(response && response.data && response.data.Status == "SUCCESS" && response.data.SearchResults){
+      
+      console.log("Selected code check", response.SearchResults.Results[0].CommodityCode); 
+      console.log("Selected description check", response.SearchResults.Results[0].CommodityDescription); 
+
+      commodity.CommodityCode = response.SearchResults.Results[0].CommodityCode;
+      commodity.CommodityDescription = response.SearchResults.Results[0].CommodityDescription;
+
+      setItem(prevItem => ({
+        ...prevItem,
+        commodityDetails: [...prevItem.commodityDetails, commodity]
+      }));
+
+      const deepCopyQuote = { ...currentQuote };
+      deepCopyQuote.packages[props.index].CommodityDetails.push(commodity);
+      dispatch(quoteAction.updateCurrentQuote(deepCopyQuote)); 
+
+    };
+    
   }
    
   function handleRemoveCommodity(index) {
     const newCommodities = [...item.commodityDetails];
     newCommodities.splice(index, 1);
-    setItem({ ...item, commodityDetails: newCommodities });
+    setItem({ ...item, commodityDetails: newCommodities }); 
   }
   
   return (

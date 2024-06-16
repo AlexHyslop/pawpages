@@ -64,8 +64,6 @@ export default function QuoteForm() {
         } 
      
         var getMinimalQuote = {
-          //     Credentials:{ APIKey: 'Ry2oBZo6e7', Password: '8sbNkYi9&A'}
-          Credentials:{ APIKey: '9rkYJ0Qq6s', Password: 'Z6jxC&dyV2'},
           "Shipment": {
             "Consignment": {
               "ItemType": "Parcel",

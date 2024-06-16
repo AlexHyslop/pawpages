@@ -3,7 +3,7 @@ import axios from 'axios';
 //twilio sms urlhttps://api.twilio.com/2010-04-01/Accounts/AC8efce7063172f70780ac030a732a5bb5
 // 
 //live https://services3.transglobalexpress.co.uk/Country/V2/GetCountries
-const baseURL = 'https://staging2.services3.transglobalexpress.co.uk';
+const baseURL = 'https://staging.services3.transglobalexpress.co.uk';
 //const baseURL = 'https://services3.transglobalexpress.co.uk';
 
 export const API_SERVICE = axios.create({
@@ -18,25 +18,24 @@ export const API_SERVICE = axios.create({
 
 const credentials = {
     APIKey: '9rkYJ0Qq6s',
-    Password: 'Z6jxC&A'
+    Password: 'Z6jxC&dyV2'
 }; 
-
 
 API_SERVICE.interceptors.request.use(function (config) { 
         config.headers['Content-Type'] =  'application/json';
         
         // config.headers.Authorization = 'Basic ' + btoa('AC8efce7063172f70780ac030a732a5bb5:e67e40f0073bcb0b279368c48a0024d5'); 
 
-        //  if (config.data) {
-        //      config.data = {
-        //     ...config.data,
-        //     Credentials: credentials
-        //     };
-        // } else { 
-        //     config.data = {
-        //     Credentials: credentials
-        //     };
-        // }
+         if (config.data) {
+             config.data = {
+            ...config.data,
+            Credentials: credentials
+            };
+        } else { 
+            config.data = {
+            Credentials: credentials
+            };
+        }
         
         return config; 
     }

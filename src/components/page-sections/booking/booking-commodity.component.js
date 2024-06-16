@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { COMMODITY_CODES } from "../../../api/commodity-codes.model";
 import Select from 'react-select';
+import { TGE_ENDPOINTS } from '../../../api/transglobal.service';
 
 const options = COMMODITY_CODES.map(item => ({
   value: item.CommodityCode,
@@ -10,6 +11,7 @@ const options = COMMODITY_CODES.map(item => ({
 function CommodityForm({ onAdd }) {
 
   const [commodity, setCommodity] = useState({
+    Name: '',
     CommodityCode: '',
     CommodityDescription: '',
     NumberOfUnits: '',
@@ -35,9 +37,10 @@ function CommodityForm({ onAdd }) {
     e.preventDefault();
     onAdd(commodity);
     setCommodity({
+      Name: '',
       CommodityCode: '',
       CommodityDescription: '',
-       NumberOfUnits: '',
+      NumberOfUnits: '',
       UnitValue: '',
       UnitWeight: '', 
     });
@@ -55,17 +58,18 @@ function CommodityForm({ onAdd }) {
   return (
     <div className=''>
       <form onSubmit={handleSubmit} >
+        {/* change to text and call api then return actual code
         <Select className=''
           value={options.find(option => option.value === commodity.CommodityCode)}
           onChange={handleSelectChange}
           options={options}
           placeholder="Item Name"
           isSearchable
-        />
-        <p className='pt-2 text-center bold capitalize'> {commodity.CommodityDescription}  </p> 
+        /> */}
         <div className="grid grid-cols-1 gap-4 pt-4">
+        <input className='border-secondary border-2 py-2 px-4 rounded-3xl' name="Name" value={commodity.Name} onChange={handleChange} placeholder="Item Name" />
           <input className='border-secondary border-2 py-2 px-4 rounded-3xl' name="NumberOfUnits" value={commodity.NumberOfUnits} onChange={handleChange} placeholder="Number of Units" />
-          <input className='border-secondary border-2 py-2 px-4 rounded-3xl' name="UnitValue" value={commodity.UnitValue} onChange={handleChange} placeholder="Unit Value" />
+          <input className='border-sec  ondary border-2 py-2 px-4 rounded-3xl' name="UnitValue" value={commodity.UnitValue} onChange={handleChange} placeholder="Unit Value" />
           <input className='border-secondary border-2 py-2 px-4 rounded-3xl' name="UnitWeight" value={commodity.UnitWeight} onChange={handleChange} placeholder="Unit Weight" />
         </div>
       

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import { useDispatch, useSelector } from "react-redux"; 
-import { addDays, startOfDay, setHours, setMinutes, endOfDay, addMinutes, format} from 'date-fns';
+import { addDays, addMinutes, format} from 'date-fns';
 import quoteAction from '../../../store/actions/quote.action';
 
 
@@ -10,7 +10,7 @@ import quoteAction from '../../../store/actions/quote.action';
 export default function BookingCollectionTime(props) { 
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);  
   const [selectedDate, setSelectedDate] = useState('');
-  const [selectedTime, setSelectedTime] = useState('');
+  // const [selectedTime, setSelectedTime] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch(); 
@@ -32,23 +32,28 @@ export default function BookingCollectionTime(props) {
     setSelectedDate(e.target.value);
   };
 
-  const handleTimeChange = (e) => {
-    setSelectedTime(e.target.value);
-  };
+   
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const selectedDateTime = new Date(`${selectedDate}T${selectedTime}`);
+    const selectedDateTime = new Date(`${selectedDate}`);
     const currentTime = new Date();
+
+    if(!selectedDate){
+      setError('Please select date.')
+      return; 
+    }
     if (selectedDateTime < currentTime) {
       setError('Please select a date and time in the future.');
       return;
     }
     // Do something with the selected date and time
     console.log('Selected Date:', selectedDate);
-    console.log('Selected Time:', selectedTime);
-    setError('');
+    setError(''); 
 
+    const deepCopyQuote = { ...currentQuote };
+    deepCopyQuote.collectionDate = selectedDate; 
+    dispatch(quoteAction.updateCurrentQuote(deepCopyQuote)); 
     navigate("/items"); 
   };
 
@@ -86,11 +91,14 @@ export default function BookingCollectionTime(props) {
           <label htmlFor="date" className="block text-gray-700">Select a Date:</label>
           <input type="date" id="date" value={selectedDate} onChange={handleDateChange} min={getTomorrow()} className="mt-1 block w-full border-gray-300 rounded-md focus:border-blue-300 focus:ring focus:ring-blue-200" />
         </div>
-        <div className="mb-4 max-w-40">
+        {/* <div className="mb-4 max-w-40">
           <label htmlFor="time" className="block text-gray-700">Select a Time:</label>
           <select id="time" value={selectedTime} onChange={handleTimeChange} className="mt-1 block w-full border-gray-300 rounded-md focus:border-blue-300 focus:ring focus:ring-blue-200">
             {getTimes().map(time => <option key={time} value={time}>{time}</option>)}
           </select>
+        </div> */}
+        <div className="mb-4">
+          <label htmlFor="time" className="block text-gray-700">Collection will be between 9:00am and 17:30pm on selected date.</label>
         </div>
         {error && <p className="text-red-500">{error}</p>}
         <button type="submit" className="button mt-4">Submit</button>
