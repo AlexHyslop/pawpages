@@ -7,8 +7,7 @@ import { EXPORT_COUNTRIES } from "../api/tge-countries.model";
 import { COLLECTION_COUNTRIES } from "../api/tge-countries.model";
 import HomeHero from "./page-sections/home/home-hero";
 import Howitworks from "./page-sections/home/home-how-it-works";
-import WhatWeDeliver from "./page-sections/home/home-what-we-deliver";
-import Sustainability from "./page-sections/home/home-sustainability";
+import WhatWeDeliver from "./page-sections/home/what-we-deliver";
 import Reviews from "./page-sections/home/home-reviews"; 
 import { RATES_SERVICE } from "../services/rates.service";
 import ratesAction from "../store/actions/rates.action";
@@ -60,9 +59,7 @@ export default function LandingPage(props) {
     <>
       <HomeHero />
       <Howitworks />
-      <WhatWeDeliver />
-      <Sustainability />
-      <Reviews />
+      < WhatWeDeliver />
     </>
   );
 }  
