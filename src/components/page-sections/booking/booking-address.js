@@ -6,9 +6,16 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 export default function BookingAddress(props) {
   const dispatch = useDispatch(); 
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);
-  
+  const [errorMessage, setErrorMessage] = useState(false);
   const [manualInput, setManualInput] = useState(false);
- 
+  const requiredFields = [
+    "firstName",
+    "lastName",
+    "street",
+    "city",
+    "state",
+    "phoneNumber"
+  ];
   const [formState, setFormState] = useState({
     firstName: '',
     lastName: '',
@@ -26,8 +33,19 @@ export default function BookingAddress(props) {
     });
   };  
   
+  function formIsValid(){
+    for (const field of requiredFields) {
+      console.log("checking field"+field)
+        if (!formState[field]) {
+          setErrorMessage("Required field is missing.")
+          return false;
+        }
+    } 
+    return true;
+  }
   const autoSubmit = (currAddr) => {
-    if(currAddr){   
+    if(currAddr && formIsValid){  
+      
       console.log("auto submit redux addresses", formState);
       var quote = JSON.parse(JSON.stringify(currentQuote));
       if(props.type === "collection"){
@@ -49,13 +67,15 @@ export default function BookingAddress(props) {
         quote.destinationAddress.instructions = formState.instructions;
       }
       dispatch(quoteAction.updateCurrentQuote(quote));    
-    }
+    } 
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    autoSubmit();
-    props.incrementStage();  
+    if(formIsValid()){
+      autoSubmit();
+      props.incrementStage();  
+    }
   };
 
    return (
@@ -64,29 +84,29 @@ export default function BookingAddress(props) {
       <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleSubmit}> 
       <div className='col-span-2 md:col-span-1'>
         <label className="block mb-2 text-primary text-sm">Street: </label>
-        <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="street" onChange={handleChange} value={formState.street} />
+        <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="street" onChange={handleChange} value={formState.street} required/>
       </div>
       
       <div className='col-span-2 md:col-span-1'>
         <label className="block mb-2 text-primary text-sm">City:</label>
-        <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="city" onChange={handleChange} value={formState.city} />
+        <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="city" onChange={handleChange} value={formState.city} required/>
       </div>
 
       <div className='col-span-2 md:col-span-1'>
         <label className="block mb-1 text-primary text-sm">State:</label>
-        <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="state" onChange={handleChange} value={formState.state} />
+        <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="state" onChange={handleChange} value={formState.state} required/>
       </div>
       
       <div className='col-span-2 md:col-span-1'>
         <label className="block mb-1 text-primary text-sm">Country:</label>
         <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="country"  disabled={true}
-         value={props.type === "collection" ? currentQuote.collectionCountry.Title : currentQuote.destinationCountry.Title} />
+         value={props.type === "collection" ? currentQuote?.collectionCountry?.Title : currentQuote.destinationCountry.Title} />
       </div>
       
       <div className='col-span-2 md:col-span-1'>
         <label className="block mb-1 text-primary text-sm">Postal Code:</label>
         <input className="border text-primary border-gray-300 rounded p-1 w-full" type="text" name="postalCode" disabled={true}
-        value={props.type === "collection" ? currentQuote.collectionCountry?.postalCode : currentQuote.destinationCountry.postalCode} />
+        value={props.type === "collection" ? currentQuote?.collectionCountry?.postalCode : currentQuote.destinationCountry.postalCode} />
       </div> 
        
       <div className='col-span-2 md:col-span-1'>
@@ -95,18 +115,18 @@ export default function BookingAddress(props) {
           <select className="border text-sm text-primary col-span-1 border-gray-300 rounded p-1 mr-1" name="countryCode" onChange={handleChange} value={formState.countryCode}>
             <option value="+44">+44</option> 
           </select>
-          <input className="border self-stretch w-full border-gray-300 rounded p-1 justify-self-stretch text-sm text-primary" type="text" name="phoneNumber" onChange={handleChange} value={formState.phoneNumber} />
+          <input className="border self-stretch w-full border-gray-300 rounded p-1 justify-self-stretch text-sm text-primary" type="text" name="phoneNumber" onChange={handleChange} value={formState.phoneNumber} required/>
         </div> 
       </div>
 
       <div className='col-span-2 md:col-span-1'>
         <label className="block mb-2 text-primary text-sm">Contact First Name:</label>
-        <input className="border border-gray-300 rounded p-1 w-full text-primary" type="text" name="name" onChange={handleChange} value={formState.firstName} />
+        <input className="border border-gray-300 rounded p-1 w-full text-primary" type="text" name="name" onChange={handleChange} value={formState.firstName} required/>
       </div>
 
       <div className='col-span-2 md:col-span-1'>
         <label className="block mb-2 text-primary text-sm">Contact Last Name:</label>
-        <input className="border border-gray-300 rounded p-1 w-full text-primary" type="text" name="name" onChange={handleChange} value={formState.lastName} />
+        <input className="border border-gray-300 rounded p-1 w-full text-primary" type="text" name="name" onChange={handleChange} value={formState.lastName} required/>
       </div>
       
       <div className='col-span-2'>
@@ -118,6 +138,7 @@ export default function BookingAddress(props) {
         <input className="button col-span-2 mt-4 w-full mx-auto block" type="submit" value="Continue" />
       </div>
 
+      {errorMessage && <p className="text-red-500">{errorMessage}</p>}
       </form>
     </div>
   );

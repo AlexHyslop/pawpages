@@ -72,6 +72,7 @@ export default function QuoteSelector(props) {
     var tempQuote = JSON.parse(JSON.stringify(currentQuote));
     tempQuote.actualPrice = price;
     tempQuote.expressSelected = expressSelected; 
+    dispatch(quoteAction.updateCurrentQuote(tempQuote));    
     navigate("/booking");
    }; 
 
