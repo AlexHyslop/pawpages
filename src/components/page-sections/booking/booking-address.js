@@ -121,12 +121,12 @@ export default function BookingAddress(props) {
 
       <div className='col-span-2 md:col-span-1'>
         <label className="block mb-2 text-primary text-sm">Contact First Name:</label>
-        <input className="border border-gray-300 rounded p-1 w-full text-primary" type="text" name="name" onChange={handleChange} value={formState.firstName} required/>
+        <input className="border border-gray-300 rounded p-1 w-full text-primary" type="text" name="firstName" onChange={handleChange} value={formState.firstName} required/>
       </div>
 
       <div className='col-span-2 md:col-span-1'>
         <label className="block mb-2 text-primary text-sm">Contact Last Name:</label>
-        <input className="border border-gray-300 rounded p-1 w-full text-primary" type="text" name="name" onChange={handleChange} value={formState.lastName} required/>
+        <input className="border border-gray-300 rounded p-1 w-full text-primary" type="text" name="lastName" onChange={handleChange} value={formState.lastName} required/>
       </div>
       
       <div className='col-span-2'>
