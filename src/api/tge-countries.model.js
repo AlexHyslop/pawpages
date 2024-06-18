@@ -69,6 +69,12 @@ export const EXPORT_COUNTRIES =  [
         "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg'
     }, 
     {
+        "CountryID": 176,
+        "Title": "Portugal (Mainland)",
+        "CountryCode": "PT",
+        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/PT.svg'
+    },
+    {
         "CountryID": 154,
         "Title": "Netherlands",
         "CountryCode": "NL",
@@ -92,24 +98,24 @@ export const EXPORT_COUNTRIES =  [
         "CountryCode": "IT",
         "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/IT.svg'
     },
-    {
-        "CountryID": 211,
-        "Title": "Sweden",
-        "CountryCode": "SE",
-        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/SE.svg'
-    },
-    {
-        "CountryID": 58,
-        "Title": "Denmark",
-        "CountryCode": "DK",
-        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/DK.svg'
-    },
-    {
-        "CountryID": 164,
-        "Title": "Norway",
-        "CountryCode": "NO",
-        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/NO.svg'
-    },
+    // {
+    //     "CountryID": 211,
+    //     "Title": "Sweden",
+    //     "CountryCode": "SE",
+    //     "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/SE.svg'
+    // },
+    // {
+    //     "CountryID": 58,
+    //     "Title": "Denmark",
+    //     "CountryCode": "DK",
+    //     "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/DK.svg'
+    // },
+    // {
+    //     "CountryID": 164,
+    //     "Title": "Norway",
+    //     "CountryCode": "NO",
+    //     "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/NO.svg'
+    // },
     {
         "CountryID": 231,
         "Title": "United Kingdom (Mainland)",

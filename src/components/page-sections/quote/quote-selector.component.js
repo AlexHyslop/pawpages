@@ -136,7 +136,7 @@ export default function QuoteSelector(props) {
               </tr>
             : null}
             {economyRate != null ? 
-              <tr>
+              <tr class="text-center"> 
                 <td> <i class="fa-brands fa-dhl text-6xl text-red-500"/> </td>
                 <td> {currentQuote.collectionCountry.Title} to  {currentQuote.destinationCountry.Title} </td>
                 <td> Free </td> 
