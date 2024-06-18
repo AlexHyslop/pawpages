@@ -76,7 +76,7 @@ const BookingItemDeclare = () => {
       <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center">Declare Items</h1>
         {/* Rendering large boxes */}
         {currentQuote?.packages?.map((item, index) => (
-          <BookingIndividualItem large={item.Weight ==30.0} index={index} key={`box-${index}`} itemType={'Box/Parcel'} weight={item.Weight+'kg'} height={item.Height+'cm'} length={item.Length+'cm'} width={item.Width+'cm'}/>
+          <BookingIndividualItem commodityDetails={item.CommodityDetails} large={item.Weight ==30.0} index={index} key={`box-${index}`} itemType={'Box/Parcel'} weight={item.Weight+'kg'} height={item.Height+'cm'} length={item.Length+'cm'} width={item.Width+'cm'}/>
         ))} 
 
       <div className='col-span-2 text-right'>

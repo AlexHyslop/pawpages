@@ -47,8 +47,7 @@ export default function BookingCollectionTime(props) {
       setError('Please select a date and time in the future.');
       return;
     }
-    // Do something with the selected date and time
-    console.log('Selected Date:', selectedDate);
+    
     setError(''); 
 
     const deepCopyQuote = { ...currentQuote };

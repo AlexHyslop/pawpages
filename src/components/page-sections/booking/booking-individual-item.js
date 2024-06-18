@@ -9,6 +9,7 @@ import quoteAction from '../../../store/actions/quote.action';
 const BookingIndividualItem = (props) => {
   const dispatch = useDispatch();  
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);
+  const [errorMessage, setErrorMessage] = React.useState(null); 
 
   const [item, setItem] = useState({ 
     itemType: '',
@@ -40,30 +41,30 @@ const BookingIndividualItem = (props) => {
   }
 
   const onGetCommodity = (response, commodity) => {
-    console.log("tge response", response);
-    console.log("tge commodity", commodity);
+    setErrorMessage(null);  
 
-    console.log("data check", response.data);
-    console.log("status check", response.data.Status);
-    console.log("results check", response.data.SearchResults); 
-    if(response && response.data && response.data.Status == "SUCCESS" && response.data.SearchResults){
-      
-      console.log("Selected code check", response.SearchResults.Results[0].CommodityCode); 
-      console.log("Selected description check", response.SearchResults.Results[0].CommodityDescription); 
+    if(response && response.data && response.data.Status == "SUCCESS"){
+      console.log("got inside iff statement")
 
-      commodity.CommodityCode = response.SearchResults.Results[0].CommodityCode;
-      commodity.CommodityDescription = response.SearchResults.Results[0].CommodityDescription;
+      console.log("Selected code check", response.data.SearchResults[0].Results[0].CommodityCode); 
+      console.log("Selected description check", response.data.SearchResults[0].Results[0].CommodityDescription); 
+
+      commodity.CommodityCode = response.data.SearchResults[0].Results[0].CommodityCode;
+      commodity.CommodityDescription = response.data.SearchResults[0].Results[0].CommodityDescription; 
+ 
 
       setItem(prevItem => ({
         ...prevItem,
         commodityDetails: [...prevItem.commodityDetails, commodity]
-      }));
-
+      })); 
+      
       const deepCopyQuote = { ...currentQuote };
       deepCopyQuote.packages[props.index].CommodityDetails.push(commodity);
       dispatch(quoteAction.updateCurrentQuote(deepCopyQuote)); 
 
-    };
+    }else{
+      setErrorMessage("Commodity not found, try a different phrase.")
+    }
     
   }
    
@@ -71,6 +72,11 @@ const BookingIndividualItem = (props) => {
     const newCommodities = [...item.commodityDetails];
     newCommodities.splice(index, 1);
     setItem({ ...item, commodityDetails: newCommodities }); 
+
+    const deepCopyQuote = { ...currentQuote };
+    deepCopyQuote.packages[props.index].CommodityDetails = newCommodities;
+    dispatch(quoteAction.updateCurrentQuote(deepCopyQuote)); 
+
   }
   
   return (
@@ -84,13 +90,11 @@ const BookingIndividualItem = (props) => {
         <p> {props.weight} - {props.height} x  {props.width} x  {props.length} </p> 
       </div>
       
-      {item?.commodityDetails.map((commodity, index) => (
+      {errorMessage && <p className="text-red-500">{errorMessage}</p>} 
+
+      {props?.commodityDetails?.map((commodity, index) => (
         <div key={index} className='border-2 grid-cols-6 gap-4 p-4 mb-4'>
-          <div className='mb-4 grid lg:grid-cols-6 gap-2 relative'>
-            <div className='text-center'>
-               <h3>Commodity:</h3>
-               <span className='text-secondary'>{index + 1}</span>
-            </div>
+          <div className='mb-4 grid lg:grid-cols-6 gap-2 relative'> 
             <div className='text-center'>
                 <p>Commodity Code:</p>
                 <span className='text-secondary'>{commodity.CommodityCode}</span>
@@ -106,12 +110,12 @@ const BookingIndividualItem = (props) => {
             </div>
             <div className='text-center'>
                 <p>Unit Value:</p>
-                <span className='text-secondary'>{commodity.UnitValue}</span>
+                <span className='text-secondary'>£{commodity.UnitValue}</span>
             </div>
             <div className='text-center'>
                 <p>Unit Weight:</p>
                 {/* <p>Product Code: {commodity.ProductCode}</p> */}
-                <span className='text-secondary'>{commodity.UnitWeight}</span>
+                <span className='text-secondary'>{commodity.UnitWeight}kg</span>
             </div>
             <div className='absolute -right-2 top-5'>
               <XMarkIcon className='h-6 text-lg cursor-pointer text-red-700' onClick={() => handleRemoveCommodity(index)} />
@@ -169,7 +173,7 @@ export default BookingIndividualItem;
   "Length": 30.0,
   "Width": 20.0,
   "Height": 10.0,
-  "CommodityDetails": [
+  "commodityDetails": [
       {
           "CommodityCode": "8708999790",
           "CommodityDescription": "Car Batteries",

@@ -8,17 +8,19 @@ import { COLLECTION_COUNTRIES } from '../../../api/tge-countries.model';
 import QuotePackageSelector from './quote-package-selector.component';
 import { useDispatch, useSelector } from "react-redux";
 import quoteAction from "../../../store/actions/quote.action";
+import stateAction from "../../../store/actions/state.action";
 import { TGE_ENDPOINTS } from "../../../api/transglobal.service"; 
 import { useNavigate } from "react-router-dom";
 
 export default function QuoteForm() {
     const dispatch = useDispatch(); 
     const navigate = useNavigate();
+    const currentState = useSelector((redux) => redux?.state);  
     const currentQuote = useSelector((state) => state?.quote?.currentQuote);  
     const [collectionCountry, setCollectionCountry] = React.useState(COLLECTION_COUNTRIES[0]);
     const [destinationCountry, setDestinationCountry] = React.useState(EXPORT_COUNTRIES[0]);  
-    const [collectionPostcode, setCollectionPostcode] = React.useState('');
-    const [destinationPostcode, setDestinationPostcode] = React.useState(''); 
+    const [collectionPostcode, setCollectionPostcode] = React.useState(currentQuote?.collectionCountry?.postalCode || '');
+    const [destinationPostcode, setDestinationPostcode] = React.useState(currentQuote?.destinationCountry?.postalCode || '');
     const [errorMessage, setErrorMessage] = React.useState(""); 
     const [loading, setLoading] = React.useState(false);
 
@@ -100,9 +102,8 @@ export default function QuoteForm() {
     }; 
 
     const onGetMinimalQuote = (response) => {
-        setLoading(false);
-        if(response.status == 200){
-          if(response.data.Status == 'SUCCESS'){
+        setLoading(false); 
+          if(response.status == 200  && response.data.Status == 'SUCCESS'){
             console.log("onGetMinimalQuote full data", response.data) 
             console.log("onGetMinimalQuote serviceResults", response.data.ServiceResults) 
             console.log("onGetMinimalQuote quoteId ", response.data.QuoteID) 
@@ -136,13 +137,15 @@ export default function QuoteForm() {
                 tempQuote.selectedServiceResult = tempQuote.ServiceResults?.filter(res => res.ServiceName === 'TG International Economy');
               }
             }
+            const shallowCopyState = { ...currentState };
+            shallowCopyState.homeErrorMessage = null; 
+            dispatch(stateAction.updateState(  shallowCopyState ));    
             dispatch(quoteAction.updateCurrentQuote(  tempQuote ));    
-
-
-
-          } 
         } else {
-          //TODO create error + redirect to /
+          const shallowCopyState = { ...currentState };
+          shallowCopyState.homeErrorMessage = "No quotes found. Please review countries and post codes. "; 
+          dispatch(stateAction.updateState(  shallowCopyState ));    
+          navigate("");
         }
       }
 
@@ -156,7 +159,8 @@ export default function QuoteForm() {
                 <DestinationCountries setCountry={setDestinationCountry}  countries={EXPORT_COUNTRIES}/>
                 <DestinationPostCode destinationPostcode={destinationPostcode} onChange={setDestinationPostcode} />
 
-                <QuotePackageSelector />
+                <QuotePackageSelector /> 
+                <p className="text-red-400 text-center sm:col-span-2"> {currentState?.homeErrorMessage} </p> 
                 <p className="text-red-400 text-center sm:col-span-2"> {errorMessage} </p> 
             </div>
             <div class="text-center">
