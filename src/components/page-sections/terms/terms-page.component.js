@@ -1,6 +1,6 @@
 export default function Terms() {
     return(
-        <div className="isolate bg-white px-6 py-24 sm:py-12 lg:px-8">
+        <div className="isolate bg-white px-6 py-10 sm:py-12 lg:px-8">
             <div className="container sm:w-full sm:max-w-screen-lg mx-auto text-left">
                  <h2 className="text-4xl text-center font-bold tracking-tight text-gray-900 sm:text-4xl mb-10">Terms & Conditions</h2>
                  <div className="container mt-4 ">
