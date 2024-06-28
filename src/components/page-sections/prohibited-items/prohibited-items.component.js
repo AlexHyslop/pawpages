@@ -16,9 +16,9 @@ export default function Prohibited() {
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Prohibited Items</h2>
       </div>
-      <div className='container pt-10'>
+      <div className='container pt-10 sm:w-full sm:max-w-screen-lg mx-auto text-left'>
         <p>This list includes items which are prohibited for carriage by any law, regulation or statute of any federal, state or local government of any country from, to or through which the items may be carried. The list is not exhaustive and RelexCo may update this list from time to time and/or refuse to carry other items not listed below.</p>
-        <p>Shipment of any prohibited item(s) shall be considered a material breach of our <Link to="/terms">Terms and Conditions</Link> of Carriage and RelexCo shall hold no liability for any prohibited item(s), which are subsequently damaged or lost whilst in our control. You shall remain fully liable to DHL for any losses caused to RelexCo as a consequence of your shipping of a Prohibited Item in accordance with our Terms and Conditions of Carriage.</p>
+        <p>Shipment of any prohibited item(s) shall be considered a material breach of our <Link to="/terms">Terms and Conditions</Link> of Carriage and RelexCo shall hold no liability for any prohibited item(s), which are subsequently damaged or lost whilst in our control. You shall remain fully liable to RelexCo for any losses caused to RelexCo as a consequence of your shipping of a Prohibited Item in accordance with our Terms and Conditions of Carriage.</p>
         <p>If your parcel contains a prohibited item, it may be delayed or stopped.</p>
         <h3 className='text-2xl font-bold pt-5'>Most common items</h3>      
         <ul className='list-disc'>
