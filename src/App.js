@@ -13,6 +13,7 @@ import ContactPage from './components/page-sections/contact/contact-page.compone
 import Login from './components/page-sections/login/login-page.component.js';
 import Terms from './components/page-sections/terms/terms-page.component.js';
 import FAQ from './components/page-sections/faq/faq.js';
+import ProhibitedItems from './components/page-sections/prohibited-items/prohibited-items.component.js';
 import Howitworks from './components/page-sections/how-it-works/how-it-works.js';
 import ForgottenPassword from './components/page-sections/login/forgotten-password.component.js';
 import '@fortawesome/fontawesome-svg-core/styles.css'; 
@@ -72,6 +73,7 @@ function App() {
           <Route path="/items" element={<BookingItemDeclare />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/terms" element={<Terms/>} />
+          <Route path="/prohibited-items" element={<ProhibitedItems />} />
           <Route path="/faq" element={<FAQ/>} />
           <Route path="/how-it-works" element={<Howitworks/>} />
           <Route path="/login/forgotten-password" element={<ForgottenPassword />} />

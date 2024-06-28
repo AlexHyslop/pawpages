@@ -45,9 +45,9 @@ export default function Example() {
           <Link to="/faq" className="text-sm font-semibold leading-6 text-gray-900" onClick={closeMobileMenu}>
             FAQ
           </Link>
-          <HashLink smooth to="/#prohibited" className="text-sm font-semibold leading-6 text-gray-900" onClick={closeMobileMenu}>
+          <Link to="/prohibited-items" className="text-sm font-semibold leading-6 text-gray-900" onClick={closeMobileMenu}>
           Prohibited Items
-          </HashLink>
+          </Link>
           <Link to="/contact" className="text-sm font-semibold leading-6 text-gray-900" onClick={closeMobileMenu}>
             Contact
           </Link>
@@ -85,9 +85,9 @@ export default function Example() {
                 <Link to="/how-it-works" className="-mx-3 block px-3 py-2 text-sm font-semibold leading-6 text-gray-900" onClick={closeMobileMenu}>
                   How It Works
                 </Link>
-                <HashLink smooth to="/#prohibited" className="-mx-3 block px-3 py-2 text-sm font-semibold leading-6 text-gray-900" onClick={closeMobileMenu}>
+                <Link to="/prohibited-items" className="-mx-3 block px-3 py-2 text-sm font-semibold leading-6 text-gray-900" onClick={closeMobileMenu}>
                  Prohibited Items
-                </HashLink>
+                </Link>
                 <Link to="/faq" className="-mx-3 block px-3 py-2 text-sm font-semibold leading-6 text-gray-900" onClick={closeMobileMenu}>
                   FAQ
                 </Link>
