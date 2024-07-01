@@ -71,9 +71,22 @@ export default function QuoteSelector(props) {
   const onSelectQuote = (price, expressSelected) => {
     var tempQuote = JSON.parse(JSON.stringify(currentQuote));
     tempQuote.actualPrice = price;
-    tempQuote.expressSelected = expressSelected; 
+    tempQuote.expressSelected = expressSelected;  
+
+    localStorage.setItem("expressSelected", expressSelected);
+    
+    if(tempQuote.ServiceResults){
+      if(expressSelected){
+        tempQuote.selectedServiceResult = tempQuote?.ServiceResults?.filter(res => res.ServiceName === 'TG Express Worldwide'); 
+      }else{
+        tempQuote.selectedServiceResult = tempQuote?.ServiceResults?.filter(res => res.ServiceName === 'TG International Economy');
+      }
+    } 
+    
+    console.log("Setting express/econmony on curr quote",tempQuote );
     dispatch(quoteAction.updateCurrentQuote(tempQuote));    
     navigate("/booking");
+    
    }; 
 
 

@@ -16,6 +16,11 @@ export const TGE_ENDPOINTS = {
         .then((response) => callback(response, currentCommodity)) 
         .catch(error => error);
     },
+    bookShipment: function bookShipment(input, currentCommodity, callback){   
+        API_SERVICE.post('/book/v2/bookShipment', input)
+        .then((response) => callback(response, currentCommodity)) 
+        .catch(error => error);
+    },
     
 } 
 

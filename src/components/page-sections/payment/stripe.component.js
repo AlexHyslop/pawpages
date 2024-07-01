@@ -1,15 +1,12 @@
-import { Elements } from "@stripe/react-stripe-js";
+import { CardCvcElement, CardExpiryElement, CardNumberElement, Elements } from "@stripe/react-stripe-js";
+import React from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import { useStripe, useElements, CardElement, AddressElement } from "@stripe/react-stripe-js";
+import { useStripe, useElements, AddressElement } from "@stripe/react-stripe-js";
 import QuoteDisplay from "../../quotes/quote-display.component";
-// pk_live_51P6COu02R2DxG1YvL9H87F0EGviewVbTML2Gi3SqbRkuFz9ZARUvhGsmLUq7rvzBdJMOP9VRo0yyAdF5VxeOkISR00TbZ0oA82
-const stripePromise = loadStripe('pk_test_qblFNYngBkEdjEZ16jxxoWSM');
-
-const appearance = {
-  theme: 'stripe' // Specify the theme as 'stripe'
-};
-
-// Define different styles for your CardElement
+import { useSelector } from "react-redux";
+import { TGE_ENDPOINTS } from "../../../api/transglobal.service";
+const stripePromise = loadStripe('pk_test_51P6COu02R2DxG1YvFLAxID2SLMnzzzKJTGK0WtfAPxX0E482MZhE3KNR2yH1rWx8FU6EKUpr46H72BfBdbfrOjzh00HzyNsmzP');
+ 
 const cardElementOptions = {
   style: {
     base: {
@@ -18,9 +15,11 @@ const cardElementOptions = {
       fontSize: '18px',
     },
   },
-};
+}; 
 
-export default function Stripe(props) {
+
+export default function Stripe(props) { 
+  
   return (
     <Elements stripe={stripePromise}>
       <CheckoutForm />
@@ -29,21 +28,124 @@ export default function Stripe(props) {
 }
 
 function CheckoutForm() {
+  const currentQuote = useSelector((state) => state?.quote?.currentQuote);  
   const stripe = useStripe();
   const elements = useElements();
+  const [loading, setLoading] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState('');
+  const [paymentSuccess, setPaymentSuccess] = React.useState(false);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card: elements.getElement(CardElement),
-    });
 
-    if (!error) {
-      const { id } = paymentMethod;
-      // send id to server, create PaymentIntent and confirm payment
+  const createPaymentIntent = async () => {
+    if(currentQuote && currentQuote.actualPrice){
+    console.log("in payment intent")
+    try {
+      const response = await fetch('https://us-central1-relexco-446af.cloudfunctions.net/createPaymentIntent', {
+        method: 'POST',
+        headers: {
+          'Access-Control-Allow-Origin':'*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(
+          {
+            amount: currentQuote.actualPrice,
+            currency: 'gbp' 
+          }
+          ),  
+      });
+  
+        const { clientSecret } = await response.json();
+        console.log("got response ", clientSecret)
+    
+        return clientSecret;
+      } catch (error) {
+        console.error('Error creating payment intent:', error); 
+      }
     }
   };
+  
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true); 
+    
+      const clientSecret = await createPaymentIntent();
+      console.log("got client secret", clientSecret); 
+
+      const cardNumberElement = elements.getElement(CardNumberElement);
+      const addressElement = elements.getElement(AddressElement);
+
+      // Optional: Logging card elements (for debugging purposes only, should not be done in production)
+      console.log("CardNumberElement: ", cardNumberElement);
+
+      // We use confirmCardPayment and pass the card elements directly
+      const result = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: cardNumberElement, // Includes all required card details securely
+          billing_details: {
+            ...addressElement.getValue().billingDetails // Ensure to get values securely
+          },
+        },
+      });
+
+ 
+      console.log("result from stripe", result); 
+
+      if (result.error) {
+        setErrorMessage(result.error.message);
+        setLoading(false);
+        return; 
+      } else {
+        if (result.paymentIntent.status === 'succeeded') {
+          setPaymentSuccess(true);
+          setLoading(false);
+          console.log('Payment successful!');
+
+          //create TGE booking now
+          TGE_ENDPOINTS.bookShipment( {
+            "Shipment": {
+                "Consignment": {
+                    "ItemType": "Parcel",
+                    "ItemsAreStackable": true,
+                    "ConsignmentSummary": "Stationary",
+                    "ConsignmentValue": 50.45,
+                    "ConsignmentCurrency":{
+                        "CurrencyCode": "GBP"
+                    },
+                    "Packages": currentQuote?.packages 
+                },
+                "CollectionAddress": currentQuote?.collectionAddress,
+                "DeliveryAddress":  currentQuote?.deliveryAddress
+            },
+            "BookDetails": {
+                "ServiceID": currentQuote.selectedServiceResult.ServiceID,
+                "YourReference": "MyRef123",
+                "ShippingCharges": 45.89,
+                "Collection": {
+                    "CollectionDate": "2020-04-07",
+                    "ReadyFrom": "12:30",
+                    "CollectionOptionID": 1
+                },
+                "BookAccessories": [
+                    {
+                        "Code": "SIG"
+                    }
+                ],
+                "Insurance": {
+                    "CoverValue": 50,
+                    "ExcessValue": 0.0,
+                    "GoodsAreNew": true,
+                    "GoodsAreFragile": false
+                }
+            }
+        }, onBookShipment);
+        } 
+      }    
+  };
+
+  const onBookShipment = (response) => {
+
+  }
+
 
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-4 mx-auto pt-10 px-10 pb-20">
@@ -53,7 +155,9 @@ function CheckoutForm() {
         <form className="pt-4 mt-2 max-w-xl mx-auto text-center border-2 border-secondary p-4 rounded-xl" onSubmit={handleSubmit}>
             <AddressElement options={{mode: 'billing'}}/>
           <div className="mt-8">
-              <CardElement options={cardElementOptions} /> {/* Add options prop */}
+            <CardNumberElement id="card-number" options={cardElementOptions} />
+            <CardExpiryElement id="card-expiry" options={cardElementOptions} />
+            <CardCvcElement id="card-cvc" options={cardElementOptions} /> 
           </div>
         
           <button className="button mt-8 w-full block mx-auto" type="submit" disabled={!stripe}>

@@ -93,8 +93,8 @@ export default function QuoteForm() {
         var deepCopyQuote = JSON.parse(JSON.stringify(currentQuote)); 
         deepCopyQuote.collectionCountry.postalCode = collectionPostcode;
         deepCopyQuote.destinationCountry.postalCode = destinationPostcode; 
-        dispatch(quoteAction.updateCurrentQuote( deepCopyQuote ));   
-        
+        console.log("pre received services", deepCopyQuote);
+        dispatch(quoteAction.updateCurrentQuote( deepCopyQuote ));
         dispatch(quoteAction.updateMinimalQuote( getMinimalQuote )); 
         TGE_ENDPOINTS.getMinimalQuote(getMinimalQuote, onGetMinimalQuote); 
 
@@ -129,8 +129,13 @@ export default function QuoteForm() {
             console.log("filteredResults", filteredServiceResults); 
             dispatch(quoteAction.updateServiceResults(  filteredServiceResults ));    
 
-            var tempQuote = JSON.parse(JSON.stringify(currentQuote));
-            if(tempQuote.expressSelected != undefined || tempQuote.expressSelected != null){
+            var tempQuote = JSON.parse(JSON.stringify(currentQuote)); 
+            console.log("post received services", tempQuote);
+            var expressSelected = localStorage.getItem("expressSelected");
+
+            if(expressSelected != undefined && expressSelected != null){
+              tempQuote.expressSelected = expressSelected;
+              console.log("setting express selection in quote resp"); 
               if(tempQuote.expressSelected){
                 tempQuote.selectedServiceResult = tempQuote.ServiceResults?.filter(res => res.ServiceName === 'TG Express Worldwide');
               }else { 
