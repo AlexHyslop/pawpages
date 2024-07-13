@@ -129,23 +129,14 @@ export default function QuoteForm() {
             console.log("filteredResults", filteredServiceResults); 
             dispatch(quoteAction.updateServiceResults(  filteredServiceResults ));    
 
-            var tempQuote = JSON.parse(JSON.stringify(currentQuote)); 
-            console.log("post received services", tempQuote);
+            const shallowCopyState = { ...currentState };
+            shallowCopyState.homeErrorMessage = null;  
             var expressSelected = localStorage.getItem("expressSelected");
 
             if(expressSelected != undefined && expressSelected != null){
-              tempQuote.expressSelected = expressSelected;
-              console.log("setting express selection in quote resp"); 
-              if(tempQuote.expressSelected){
-                tempQuote.selectedServiceResult = tempQuote.ServiceResults?.filter(res => res.ServiceName === 'TG Express Worldwide');
-              }else { 
-                tempQuote.selectedServiceResult = tempQuote.ServiceResults?.filter(res => res.ServiceName === 'TG International Economy');
-              }
-            }
-            const shallowCopyState = { ...currentState };
-            shallowCopyState.homeErrorMessage = null; 
-            dispatch(stateAction.updateState(  shallowCopyState ));    
-            dispatch(quoteAction.updateCurrentQuote(  tempQuote ));    
+              shallowCopyState.expressSelected = expressSelected;  
+            } 
+            dispatch(stateAction.updateState(  shallowCopyState ));     
         } else {
           const shallowCopyState = { ...currentState };
           shallowCopyState.homeErrorMessage = "No quotes found. Please review countries and post codes. "; 
