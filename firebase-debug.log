@@ -1,0 +1,95 @@
+[debug] [2024-07-13T12:20:56.161Z] ----------------------------------------------------------------------
+[debug] [2024-07-13T12:20:56.162Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2024-07-13T12:20:56.163Z] CLI Version:   13.7.3
+[debug] [2024-07-13T12:20:56.163Z] Platform:      darwin
+[debug] [2024-07-13T12:20:56.163Z] Node Version:  v18.15.0
+[debug] [2024-07-13T12:20:56.163Z] Time:          Sat Jul 13 2024 13:20:56 GMT+0100 (British Summer Time)
+[debug] [2024-07-13T12:20:56.163Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-07-13T12:20:56.193Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-07-13T12:20:56.193Z] > authorizing via signed-in user (adylex.business@gmail.com)
+[debug] [2024-07-13T12:20:56.193Z] [iam] checking project relexco-446af for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-07-13T12:20:56.194Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/relexco-446af:testIamPermissions [none]
+[debug] [2024-07-13T12:20:56.194Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/relexco-446af:testIamPermissions x-goog-quota-user=projects/relexco-446af
+[debug] [2024-07-13T12:20:56.194Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/relexco-446af:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-07-13T12:20:56.694Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/relexco-446af:testIamPermissions 200
+[debug] [2024-07-13T12:20:56.695Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/relexco-446af:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-07-13T12:20:56.696Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/relexco-446af [none]
+[debug] [2024-07-13T12:20:57.263Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/relexco-446af 200
+[debug] [2024-07-13T12:20:57.263Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/relexco-446af {"projectId":"relexco-446af","projectNumber":"958214222713","displayName":"relexco","name":"projects/relexco-446af","resources":{"hostingSite":"relexco-446af"},"state":"ACTIVE","etag":"1_a31b2e19-0cbf-4557-a466-593fa57acd14"}
+[info] 
+[info] === Deploying to 'relexco-446af'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2024-07-13T12:20:57.270Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/relexco-446af/versions [none]
+[debug] [2024-07-13T12:20:57.270Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/relexco-446af/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2024-07-13T12:20:59.443Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/relexco-446af/versions 200
+[debug] [2024-07-13T12:20:59.443Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/relexco-446af/versions {"name":"projects/958214222713/sites/relexco-446af/versions/0eaf47725fe7406e","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[relexco-446af]: beginning deploy... 
+[info] i  hosting[relexco-446af]: found 38 files in build 
+[debug] [2024-07-13T12:20:59.457Z] [hosting] uploading with 200 concurrency
+[debug] [2024-07-13T12:20:59.820Z] [hosting] hash cache [YnVpbGQ] stored for 38 files
+[debug] [2024-07-13T12:20:59.820Z] [hosting][hash queue][FINAL] {"max":354,"min":11,"avg":22.42105263157895,"active":0,"complete":38,"success":38,"errored":0,"retried":0,"total":38,"elapsed":359}
+[debug] [2024-07-13T12:20:59.820Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/958214222713/sites/relexco-446af/versions/0eaf47725fe7406e:populateFiles [none]
+[debug] [2024-07-13T12:20:59.820Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/958214222713/sites/relexco-446af/versions/0eaf47725fe7406e:populateFiles {"files":{"/asset-manifest.json":"271c3a4c061c377cd516a4d6fd52ad1127ba11e69ea835228abcb8278ce35687","/index.html":"dd79454f0fbdc0dab0132b1bdf57d8a86caecb54e62f8e50b2fc5b9ed7c661db","/favicon.ico":"b72f7455f00e4e58792d2bca892abb068e2213838c0316d6b7a0d6d16acd1955","/manifest.json":"341d52628782f8ac9290bbfc43298afccb47b7cbfcee146ae30cf0f46bc30900","/robots.txt":"391d14b3c2f8c9143a27a28c7399585142228d4d1bdbe2c87ac946de411fa9a2","/logo192.png":"caff018b7f1e8fd481eb1c50d75b0ef236bcd5078b1d15c8bb348453fee30293","/static/js/787.384e59a3.chunk.js":"580aa0d3cbe73014a81bb50db7b3318cafdb4ed62d3196da318371e656aec413","/logo512.png":"191fc21360b4ccfb1cda11a1efb97f489ed22672ca83f4064316802bbfdd750e","/static/js/787.384e59a3.chunk.js.map":"88f899dc0cff0edac2af17b7d166ca15b2e4b13b2a417edf6706bb2f49784756","/static/css/main.53600d03.css.map":"836f82cf604f795e99f8ee1a8d2926d0f1006fcb351e97cfe5c8254e4ff1763a","/static/js/main.34562d18.js.LICENSE.txt":"dab1e71cf5b5438d0c4ff84b3547b49218954190043acb60267ab2a629e6437c","/static/css/main.53600d03.css":"26a79a6b113c416913d0828eaddcbc8aee0311d6d36c6544c770b80bd4768f8e","/static/media/bookitems.304154e4893d36940af2830bdfe096d3.svg":"894962fdbf01f35c1712a0e4bb804432e247923767a320acbb25d731cfa3f852","/static/media/battery-full-solid.f2ba3b6c5f70739c609a196c25f3f962.svg":"bea410e0faa64809114e4d9d1aadc2b1233ec77edcdca12ec13343f66bfc78eb","/static/media/fire-solid.a6f47c74d220825b53288e5b35dd06cd.svg":"977704c0b2afa43180ccf0a5d40f932cd21f1b2bd97750a470a1bd261ca69e52","/static/media/gun-solid.733e068163c8b74824ea5636a3507eaf.svg":"330e2770b151f99f4894dd42ab8e8f114477e19f5928ea3f84152c464e657649","/static/media/food_bev.80a76848e2bd52718b79355a6176dc59.svg":"158335bb73898c8675eee521ca8347cc5bcf4abf675141cbecdc8aad7e2bab6e","/static/media/drop.755283032b851ab3d930f1e373c38455.svg":"e01840b32696bd4bc4936ef91072e70ca8f7dc82800365b4f05ff56c1c597ce2","/static/media/pills-solid.2e40a721d1b7a28e964e9e099604aa91.svg":"ee5402110478fbcf3811de7d295e7db27d8e76fa211636e51115338da0b15025","/static/media/paw-solid.5293ebbbff4fb77b613782ee032ed550.svg":"31819a9435399276201954a484f608b2a2b19a4f207522814711962426d105b2","/static/media/link-solid.7d5551873434ed9805ca26dd33a2bc5c.svg":"a353a8cae2231e9871de0a3f5b1f9e3be3991f91c65e512b9e9262ba77566865","/static/media/pack.300d35adfe802845e316a34e0dfe09c0.svg":"d9b5ef308871bbe79e77e1293ca627f8e2fe9c5c8810fe92195040bd21111a05","/static/media/sack-dollar-solid.fcfa39ecf509225f7453607e2430e96f.svg":"d5581235dc83aba4131bb0f5f2206a5c68c10e07b650aaf75b25bccdfc8f17b5","/static/media/spray-can-solid.3fe626ee673d1c5b9090e7fa57ba5fff.svg":"9b8540a4f0046b50c8b55acaf85abe3f15b894ba7b3eb0f58d59bcf52f7689b8","/static/media/track.6f6dceb674d54301bcb58b716d425e3e.svg":"5d1fda9187b9c6ae22de38fd6b68aafc896f332f39435a978eb5fe70bf0ebc18","/relexco-nobg.png":"e4bb388c56e14fd042062a9b0a8850171c5bdf085a5f0c11bf79618eead0a775","/static/media/Figtree-Bold.a0c5380d0735d7cc0a1a.woff":"229fdb4ff39c37f84fb3cc8ed6953a000d5d6ff8488d9fd6f64388f7024192de","/static/media/Figtree-Regular.3bf72131024a7656938b.woff":"65fa24575230d5b671247b3f5ba299e79f304de2db3948ac4fe8984ea90342af","/static/media/Figtree-SemiBold.a44dde265b9ed5a147f2.woff":"33d4f96401211bbd498d5fbbf2c599858d1552f423c6b0c18c47c65c59b8c3c7","/static/media/Figtree-Bold.20d002e242f16b5005ac.ttf":"d1c35adfcdaed218c40a54d6e94a4717212c786d262ef3b598c46b54af7b7f84","/static/media/Figtree-Regular.eb52c4570a34a02898c8.ttf":"6d3e895c87ed7bf08c06994ad48db84a9e4743220f08de11e0583028727d02c8","/static/media/Figtree-SemiBold.e7c36b47e6cec9d98046.ttf":"39925ce76e658356aec42a435469c744ee047a30782ed7ad1d7499bb4adb7f89","/static/media/relexco-nobg.b577f8ecf33c5d61348f.png":"e4bb388c56e14fd042062a9b0a8850171c5bdf085a5f0c11bf79618eead0a775","/static/media/happy-box-transparent.3f76892162abecad783d.png":"217c9ef2b91a19c34f27bef9a8697534535e4c856308c4ad2df8ac54a86ba2b5","/static/media/home-hero-image.d4c3343acbf6517df6a3.jpeg":"afafa2f01e7c3963ccda1c2f3bdae741960f1144820cdfa28cecb951bfe55e48","/static/media/relexco-hero.d82602e2e4e9680d479b.jpeg":"e1195ffc56f822b6870c904a90e8f9db3d7c9c2503b736102bc6752ae34c47ae","/static/js/main.34562d18.js":"0558639750daca51e1d10fb70d81d3cc62cfa61845c3b06ee8d63136949e30d0","/static/js/main.34562d18.js.map":"c1dc2526d24d81fa58043dfd787bc75e50b4ff98a41f4891702be3ed4baa4506"}}
+[debug] [2024-07-13T12:21:01.317Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/958214222713/sites/relexco-446af/versions/0eaf47725fe7406e:populateFiles 200
+[debug] [2024-07-13T12:21:01.317Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/958214222713/sites/relexco-446af/versions/0eaf47725fe7406e:populateFiles {"uploadRequiredHashes":["271c3a4c061c377cd516a4d6fd52ad1127ba11e69ea835228abcb8278ce35687","26a79a6b113c416913d0828eaddcbc8aee0311d6d36c6544c770b80bd4768f8e","c1dc2526d24d81fa58043dfd787bc75e50b4ff98a41f4891702be3ed4baa4506","dd79454f0fbdc0dab0132b1bdf57d8a86caecb54e62f8e50b2fc5b9ed7c661db","836f82cf604f795e99f8ee1a8d2926d0f1006fcb351e97cfe5c8254e4ff1763a","0558639750daca51e1d10fb70d81d3cc62cfa61845c3b06ee8d63136949e30d0"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files"}
+[debug] [2024-07-13T12:21:01.319Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/271c3a4c061c377cd516a4d6fd52ad1127ba11e69ea835228abcb8278ce35687 [none]
+[debug] [2024-07-13T12:21:01.319Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/271c3a4c061c377cd516a4d6fd52ad1127ba11e69ea835228abcb8278ce35687 [stream]
+[debug] [2024-07-13T12:21:01.321Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/26a79a6b113c416913d0828eaddcbc8aee0311d6d36c6544c770b80bd4768f8e [none]
+[debug] [2024-07-13T12:21:01.321Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/26a79a6b113c416913d0828eaddcbc8aee0311d6d36c6544c770b80bd4768f8e [stream]
+[debug] [2024-07-13T12:21:01.322Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/c1dc2526d24d81fa58043dfd787bc75e50b4ff98a41f4891702be3ed4baa4506 [none]
+[debug] [2024-07-13T12:21:01.323Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/c1dc2526d24d81fa58043dfd787bc75e50b4ff98a41f4891702be3ed4baa4506 [stream]
+[debug] [2024-07-13T12:21:01.324Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/dd79454f0fbdc0dab0132b1bdf57d8a86caecb54e62f8e50b2fc5b9ed7c661db [none]
+[debug] [2024-07-13T12:21:01.324Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/dd79454f0fbdc0dab0132b1bdf57d8a86caecb54e62f8e50b2fc5b9ed7c661db [stream]
+[debug] [2024-07-13T12:21:01.325Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/836f82cf604f795e99f8ee1a8d2926d0f1006fcb351e97cfe5c8254e4ff1763a [none]
+[debug] [2024-07-13T12:21:01.325Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/836f82cf604f795e99f8ee1a8d2926d0f1006fcb351e97cfe5c8254e4ff1763a [stream]
+[debug] [2024-07-13T12:21:01.327Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/0558639750daca51e1d10fb70d81d3cc62cfa61845c3b06ee8d63136949e30d0 [none]
+[debug] [2024-07-13T12:21:01.327Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/0558639750daca51e1d10fb70d81d3cc62cfa61845c3b06ee8d63136949e30d0 [stream]
+[debug] [2024-07-13T12:21:01.328Z] [hosting][populate queue][FINAL] {"max":1501,"min":1501,"avg":1501,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":1510}
+[debug] [2024-07-13T12:21:01.328Z] [hosting] uploads queued: 6
+[debug] [2024-07-13T12:21:02.778Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/271c3a4c061c377cd516a4d6fd52ad1127ba11e69ea835228abcb8278ce35687 200
+[debug] [2024-07-13T12:21:02.778Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/271c3a4c061c377cd516a4d6fd52ad1127ba11e69ea835228abcb8278ce35687 [stream]
+[debug] [2024-07-13T12:21:02.812Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/26a79a6b113c416913d0828eaddcbc8aee0311d6d36c6544c770b80bd4768f8e 200
+[debug] [2024-07-13T12:21:02.812Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/26a79a6b113c416913d0828eaddcbc8aee0311d6d36c6544c770b80bd4768f8e [stream]
+[debug] [2024-07-13T12:21:02.848Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/836f82cf604f795e99f8ee1a8d2926d0f1006fcb351e97cfe5c8254e4ff1763a 200
+[debug] [2024-07-13T12:21:02.848Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/836f82cf604f795e99f8ee1a8d2926d0f1006fcb351e97cfe5c8254e4ff1763a [stream]
+[debug] [2024-07-13T12:21:02.926Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/dd79454f0fbdc0dab0132b1bdf57d8a86caecb54e62f8e50b2fc5b9ed7c661db 200
+[debug] [2024-07-13T12:21:02.926Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/dd79454f0fbdc0dab0132b1bdf57d8a86caecb54e62f8e50b2fc5b9ed7c661db [stream]
+[debug] [2024-07-13T12:21:03.524Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/0558639750daca51e1d10fb70d81d3cc62cfa61845c3b06ee8d63136949e30d0 200
+[debug] [2024-07-13T12:21:03.525Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/0558639750daca51e1d10fb70d81d3cc62cfa61845c3b06ee8d63136949e30d0 [stream]
+[debug] [2024-07-13T12:21:05.082Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/c1dc2526d24d81fa58043dfd787bc75e50b4ff98a41f4891702be3ed4baa4506 200
+[debug] [2024-07-13T12:21:05.082Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/relexco-446af/versions/0eaf47725fe7406e/files/c1dc2526d24d81fa58043dfd787bc75e50b4ff98a41f4891702be3ed4baa4506 [stream]
+[debug] [2024-07-13T12:21:05.083Z] [hosting][upload queue][FINAL] {"max":3764,"min":1461,"avg":2010.6666666666667,"active":0,"complete":6,"success":6,"errored":0,"retried":0,"total":6,"elapsed":3766}
+[info] ✔  hosting[relexco-446af]: file upload complete 
+[debug] [2024-07-13T12:21:05.084Z] [hosting] deploy completed after 5639ms
+[debug] [2024-07-13T12:21:05.084Z] [
+  {
+    "config": {
+      "public": "build",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "site": "relexco-446af"
+    },
+    "version": "projects/958214222713/sites/relexco-446af/versions/0eaf47725fe7406e"
+  }
+]
+[info] i  hosting[relexco-446af]: finalizing version... 
+[debug] [2024-07-13T12:21:05.087Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/relexco-446af/versions/0eaf47725fe7406e updateMask=status%2Cconfig
+[debug] [2024-07-13T12:21:05.087Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/relexco-446af/versions/0eaf47725fe7406e {"status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]}}
+[debug] [2024-07-13T12:21:06.620Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/relexco-446af/versions/0eaf47725fe7406e 200
+[debug] [2024-07-13T12:21:06.620Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/relexco-446af/versions/0eaf47725fe7406e {"name":"projects/958214222713/sites/relexco-446af/versions/0eaf47725fe7406e","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2024-07-13T12:20:30.454188Z","createUser":{"email":"adylex.business@gmail.com"},"finalizeTime":"2024-07-13T12:20:38.342360Z","finalizeUser":{"email":"adylex.business@gmail.com"}}
+[debug] [2024-07-13T12:21:06.621Z] [hosting] finalized version for relexco-446af:[object Object]
+[info] ✔  hosting[relexco-446af]: version finalized 
+[info] i  hosting[relexco-446af]: releasing new version... 
+[debug] [2024-07-13T12:21:06.622Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/relexco-446af/channels/live/releases versionName=projects%2F958214222713%2Fsites%2Frelexco-446af%2Fversions%2F0eaf47725fe7406e
+[debug] [2024-07-13T12:21:06.622Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/relexco-446af/channels/live/releases {}
