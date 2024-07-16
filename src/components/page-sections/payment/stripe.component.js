@@ -29,6 +29,8 @@ export default function Stripe(props) {
 
 function CheckoutForm() {
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);  
+  const serviceResults = useSelector((state) => state?.quote?.serviceResults);  
+
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = React.useState(false);
@@ -99,13 +101,26 @@ function CheckoutForm() {
           setPaymentSuccess(true);
           setLoading(false);
           console.log('Payment successful!');
+          console.log("Service reults:", serviceResults);
+          var selectedService =  currentQuote.expressSelescted ? 
+              serviceResults.filter(res => res.ServiceName === 'TG Express Worldwide') :
+              serviceResults.filter(res => res.ServiceName === 'TG International Economy');
 
-          //create TGE booking now
-          TGE_ENDPOINTS.bookShipment( {
+          selectedService = selectedService[0];
+          console.log("Selected service", selectedService);
+          
+          var collectionService = selectedService.CollectionOptions.filter(res => res.CollectionOptionTitle === "DHLParcel");
+          if(collectionService.length == 0){
+            collectionService = selectedService.CollectionOptions.filter(res => res.CollectionOptionTitle === "DHLParcelMulti");
+          }
+          
+          console.log("Collection option", collectionService);
+
+          var shipmentObject = {
             "Shipment": {
                 "Consignment": {
                     "ItemType": "Parcel",
-                    "ItemsAreStackable": true,
+                    "ItemsAreStackable": false,
                     "ConsignmentSummary": "Stationary",
                     "ConsignmentValue": 50.45,
                     "ConsignmentCurrency":{
@@ -115,35 +130,37 @@ function CheckoutForm() {
                 },
                 "CollectionAddress": currentQuote?.collectionAddress,
                 "DeliveryAddress":  currentQuote?.deliveryAddress
-            },
+            },  
             "BookDetails": {
-                "ServiceID": currentQuote.selectedServiceResult.ServiceID,
-                "YourReference": "MyRef123",
-                "ShippingCharges": 45.89,
+                "ServiceID": selectedService.ServiceID,
+                "YourReference": "OurIdCOuldSaveThisObjinFB",
+                "ShippingCharges": currentQuote.actualPrice,
                 "Collection": {
-                    "CollectionDate": "2020-04-07",
+                    "CollectionDate": currentQuote.collectionDate,
                     "ReadyFrom": "12:30",
-                    "CollectionOptionID": 1
+                    "CollectionOptionID": collectionService.CollectionOptionID
                 },
-                "BookAccessories": [
-                    {
-                        "Code": "SIG"
-                    }
-                ],
+                // "BookAccessories": [
+                //     {
+                //         "Code": "SIG"
+                //     }
+                // ],
                 "Insurance": {
                     "CoverValue": 50,
-                    "ExcessValue": 0.0,
+                    "ExcessValue": 0,
                     "GoodsAreNew": true,
                     "GoodsAreFragile": false
                 }
             }
-        }, onBookShipment);
+        };
+
+        TGE_ENDPOINTS.bookShipment( shipmentObject, onBookShipment);
         } 
       }    
   };
 
   const onBookShipment = (response) => {
-
+    console.log("On bookshipment: ", response);
   }
 
 

@@ -53,7 +53,8 @@ const BookingIndividualItem = (props) => {
 
       commodity.CommodityCode = response.data.SearchResults[0].Results[0].CommodityCode;
       commodity.CommodityDescription = response.data.SearchResults[0].Results[0].CommodityDescription; 
- 
+      commodity.CountryOfOrigin = { CountryCode: 'GB' }; 
+      
 
       setItem(prevItem => ({
         ...prevItem,

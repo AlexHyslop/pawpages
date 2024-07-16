@@ -40,7 +40,7 @@ function CommodityForm({ onAdd }) {
       CommodityDescription: '',
       NumberOfUnits: '',
       UnitValue: '',
-      UnitWeight: '', 
+      UnitWeight: ''
     });
   };
 
@@ -57,10 +57,10 @@ function CommodityForm({ onAdd }) {
     <div className=''>
       <form onSubmit={handleSubmit} > 
         <div className="grid grid-cols-1 gap-4 pt-4">
-        <input className='border-secondary border-2 py-2 px-4 rounded-3xl' name="Name" value={commodity.Name} onChange={handleChange} placeholder="Item Name" />
-          <input className='border-secondary border-2 py-2 px-4 rounded-3xl' name="NumberOfUnits" value={commodity.NumberOfUnits} onChange={handleChange} placeholder="Number of Units" />
-          <input className='border-sec  ondary border-2 py-2 px-4 rounded-3xl' name="UnitValue" value={commodity.UnitValue} onChange={handleChange} placeholder="Unit Value" />
-          <input className='border-secondary border-2 py-2 px-4 rounded-3xl' name="UnitWeight" value={commodity.UnitWeight} onChange={handleChange} placeholder="Unit Weight" />
+        <input className='border-secondary border-2 py-2 px-4 rounded-3xl' name="Name" value={commodity.Name} onChange={handleChange} placeholder="Item Name" required />
+          <input className='border-secondary border-2 py-2 px-4 rounded-3xl' name="NumberOfUnits" value={commodity.NumberOfUnits} onChange={handleChange} placeholder="Number of Units" required />
+          <input className='border-sec  ondary border-2 py-2 px-4 rounded-3xl' name="UnitValue" value={commodity.UnitValue} onChange={handleChange} placeholder="Unit Value" required />
+          <input className='border-secondary border-2 py-2 px-4 rounded-3xl' name="UnitWeight" value={commodity.UnitWeight} onChange={handleChange} placeholder="Unit Weight" required />
         </div> 
         <button className='button mt-6 mx-auto' type="submit">Add New Item</button>
       </form>

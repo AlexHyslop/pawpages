@@ -12,6 +12,7 @@ const BookingItemDeclare = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch(); 
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     if(currentQuote){ 
@@ -71,6 +72,35 @@ const BookingItemDeclare = () => {
   };
   
 
+  const validatePackages = () => {
+    for (let pkg of currentQuote.packages) {
+      if (!pkg.CommodityDetails || pkg.CommodityDetails.length === 0) {
+        setErrorMessage('Commodity details cannot be empty in any package.');
+        return false;
+      }
+    
+      var currWeight  = 0;
+      for (let commodity of pkg.CommodityDetails) {
+        currWeight += commodity.UnitWeight * commodity.NumberOfUnits
+      } 
+      
+      if(currWeight > pkg.Weight){
+        setErrorMessage("Current weight selected parcel weight");
+        return false;
+      } 
+         
+    }
+    return true;
+  };
+
+  const handleContinue = (e) => {
+    e.preventDefault();
+    if (validatePackages()) {
+      setErrorMessage(null);
+      navigate('/pay');
+    }  
+  };  
+
   return (
     <div className="max-w-7xl mx-auto pt-10 px-10">
       <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center">Declare Items</h1>
@@ -79,8 +109,11 @@ const BookingItemDeclare = () => {
           <BookingIndividualItem commodityDetails={item.CommodityDetails} large={item.Weight ==30.0} index={index} key={`box-${index}`} itemType={'Box/Parcel'} weight={item.Weight+'kg'} height={item.Height+'cm'} length={item.Length+'cm'} width={item.Width+'cm'}/>
         ))} 
 
+      { errorMessage && <p className="text-red-500">{errorMessage}</p>} 
+
       <div className='col-span-2 text-right'>
-        <input className="button col-span-2 mt-4 w-full mx-auto block" type="submit" value="Continue" onClick={(e) => { navigate('/pay')}}/>
+        {/* loop through packages.commodity check not empty before continue */}
+        <input className="button col-span-2 mt-4 w-full mx-auto block" type="submit" value="Continue" onClick={ handleContinue }/>
       </div>
  
     </div>

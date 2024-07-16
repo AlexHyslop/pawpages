@@ -66,6 +66,7 @@ export default function QuoteDisplay(props) {
             <hr className="mb-4"></hr>
             {currentQuote?.actualPrice != null ? <p className="text-md font-bold"> Price: £{currentQuote?.actualPrice}  </p> : null}
             <hr className="mb-4"></hr>
+            {/* TODO add full addr */}
             <div>
               <p className="text-md break-words">Collection Address: {currentQuote?.collectionCountry?.postalCode } </p>
             </div>
