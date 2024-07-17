@@ -108,7 +108,7 @@ function CheckoutForm() {
 
           selectedService = selectedService[0];
           console.log("Selected service", selectedService);
-          
+
           var collectionService = selectedService.CollectionOptions.filter(res => res.CollectionOptionTitle === "DHLParcel");
           if(collectionService.length == 0){
             collectionService = selectedService.CollectionOptions.filter(res => res.CollectionOptionTitle === "DHLParcelMulti");
@@ -129,7 +129,7 @@ function CheckoutForm() {
                     "Packages": currentQuote?.packages 
                 },
                 "CollectionAddress": currentQuote?.collectionAddress,
-                "DeliveryAddress":  currentQuote?.deliveryAddress
+                "DeliveryAddress":  currentQuote?.destinationAddress
             },  
             "BookDetails": {
                 "ServiceID": selectedService.ServiceID,

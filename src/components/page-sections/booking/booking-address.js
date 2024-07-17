@@ -14,8 +14,10 @@ export default function BookingAddress(props) {
     "street",
     "city",
     "state",
-    "phoneNumber"
+    "phoneNumber",
+    "email"
   ];
+
   const [formState, setFormState] = useState({
     firstName: '',
     lastName: '',
@@ -35,7 +37,7 @@ export default function BookingAddress(props) {
   
   function formIsValid(){
     for (const field of requiredFields) {
-      console.log("checking field"+field)
+      console.log("checking field "+field)
         if (!formState[field]) {
           setErrorMessage("Required field is missing.")
           return false;
@@ -43,35 +45,48 @@ export default function BookingAddress(props) {
     } 
     return true;
   }
-  const autoSubmit = (currAddr) => {
-    if(currAddr && formIsValid){  
-      
+  const autoSubmit = () => { 
       console.log("auto submit redux addresses", formState);
       var quote = JSON.parse(JSON.stringify(currentQuote));
       if(props.type === "collection"){
-        quote.collectionAddress.firstName = formState.firstName;
-        quote.collectionAddress.lastName = formState.lastName;
-        quote.collectionAddress.street = formState.street;
-        quote.collectionAddress.city = formState.city;
-        quote.collectionAddress.state = formState.state;
-        quote.collectionAddress.phoneNumber = formState.phoneNumber;
+        quote.collectionAddress = {};
+        quote.collectionAddress.Forename = formState.firstName;
+        quote.collectionAddress.Surname = formState.lastName;
+        quote.collectionAddress.AddressLineOne = formState.street;
+        quote.collectionAddress.City = formState.city;
+        quote.collectionAddress.County = formState.state;
+        quote.collectionAddress.TelephoneNumber = formState.phoneNumber;
         quote.collectionAddress.instructions = formState.instructions;
+        quote.collectionAddress.EmailAddress = formState.email;
+        quote.collectionAddress.Postcode = currentQuote?.collectionCountry?.postalCode; 
+        quote.collectionAddress.Country = {};
+        quote.collectionAddress.Country.CountryCode = currentQuote?.collectionCountry.CountryCode;  
       }
       if(props.type === "delivery"){
-        quote.destinationAddress.firstName = formState.firstName;
-        quote.destinationAddress.lastName = formState.lastName;
-        quote.destinationAddress.street = formState.street;
-        quote.destinationAddress.city = formState.city;
-        quote.destinationAddress.state = formState.state;
-        quote.destinationAddress.phoneNumber = formState.phoneNumber;
+        quote.destinationAddress = {};
+        quote.destinationAddress.Forename = formState.firstName;
+        quote.destinationAddress.Surname = formState.lastName;
+        quote.destinationAddress.AddressLineOne = formState.street;
+        quote.destinationAddress.City = formState.city;
+        quote.destinationAddress.County = formState.state;
+        quote.destinationAddress.TelephoneNumber = formState.phoneNumber;
         quote.destinationAddress.instructions = formState.instructions;
+        quote.destinationAddress.EmailAddress = formState.email;
+        quote.destinationAddress.Postcode = currentQuote?.destinationCountry?.postalCode; 
+        quote.destinationAddress.Country = {};
+        quote.destinationAddress.Country.CountryCode = currentQuote?.destinationCountry.CountryCode;  
+
+
       }
+
+      console.log("dispatch", formIsValid()); 
       dispatch(quoteAction.updateCurrentQuote(quote));    
-    } 
+    
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log("form is valid", formIsValid()); 
     if(formIsValid()){
       autoSubmit();
       props.incrementStage();  
@@ -127,6 +142,11 @@ export default function BookingAddress(props) {
       <div className='col-span-2 md:col-span-1'>
         <label className="block mb-2 text-primary text-sm">Contact Last Name:</label>
         <input className="border border-gray-300 rounded p-1 w-full text-primary" type="text" name="lastName" onChange={handleChange} value={formState.lastName} required/>
+      </div>
+
+      <div className='col-span-2'>
+        <label className="block mb-2 text-primary text-sm">Email:</label>
+        <input className="border text-primary w-full border-gray-300 rounded p-1" type="email" name="email" onChange={handleChange} value={formState.email} required />
       </div>
       
       <div className='col-span-2'>
