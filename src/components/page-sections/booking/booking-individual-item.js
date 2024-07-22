@@ -24,7 +24,6 @@ const BookingIndividualItem = (props) => {
 
   const handleAddCommodity = (commodity) => {
     // call from child component with commodity details 
-    console.log("commodity passed to parent", commodity); 
     TGE_ENDPOINTS.getCommodity( 
       { 
         "Searches": [
@@ -46,16 +45,11 @@ const BookingIndividualItem = (props) => {
     setErrorMessage(null);  
 
     if(response && response.data && response.data.Status == "SUCCESS"){
-      console.log("got inside iff statement")
-
-      console.log("Selected code check", response.data.SearchResults[0].Results[0].CommodityCode); 
-      console.log("Selected description check", response.data.SearchResults[0].Results[0].CommodityDescription); 
-
-      commodity.CommodityCode = response.data.SearchResults[0].Results[0].CommodityCode;
+      commodity.CommodityCode = response.data.SearchResults[0].Results[0].CommodityCode.padEnd(8, '0');
       commodity.CommodityDescription = response.data.SearchResults[0].Results[0].CommodityDescription; 
       commodity.CountryOfOrigin = { CountryCode: 'GB' }; 
       
-
+      console.log("commodity", commodity);
       setItem(prevItem => ({
         ...prevItem,
         commodityDetails: [...prevItem.commodityDetails, commodity]

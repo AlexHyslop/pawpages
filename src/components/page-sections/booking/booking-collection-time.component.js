@@ -106,50 +106,6 @@ export default function BookingCollectionTime(props) {
   );
 }
 
-/*
-CollectionOptions": [
-                {
-                    "CollectionOptionID": 52,
-                    "CollectionOptionTitle": "DHLParcelMulti",
-                    "CollectionCharge": 12.90,
-                    "SameDayCollectionCutOffTime": null,
-                    "ExpectedLabel": {
-                        "LabelRole": "Collection",
-                        "LabelFormat": "PDF",
-                        "LabelGenerateStatus": "LabelGenerated",
-                        "AvailableSizes": [
-                            {
-                                "Size": "A4"
-                            },
-                            {
-                                "Size": "Thermal"
-                            }
-                        ]
-                    }
-                },
 
-
-
-                "CollectionOptions": [
-                {
-                    "CollectionOptionID": 52,
-                    "CollectionOptionTitle": "DHLParcelMulti",
-                    "CollectionCharge": 12.90,
-                    "SameDayCollectionCutOffTime": null,
-                    "ExpectedLabel": {
-                        "LabelRole": "Collection",
-                        "LabelFormat": "PDF",
-                        "LabelGenerateStatus": "LabelGenerated",
-                        "AvailableSizes": [
-                            {
-                                "Size": "A4"
-                            },
-                            {
-                                "Size": "Thermal"
-                            }
-                        ]
-                    }
-                },
-*/
  
    

@@ -75,8 +75,6 @@ export default function BookingAddress(props) {
         quote.destinationAddress.Postcode = currentQuote?.destinationCountry?.postalCode; 
         quote.destinationAddress.Country = {};
         quote.destinationAddress.Country.CountryCode = currentQuote?.destinationCountry.CountryCode;  
-
-
       }
 
       console.log("dispatch", formIsValid()); 
