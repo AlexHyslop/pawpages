@@ -110,13 +110,11 @@ function CheckoutForm() {
           console.log("Selected service", selectedService);
 
           var collectionService = selectedService.CollectionOptions.filter(res => res.CollectionOptionTitle === "DHLParcel");
-          selectedService = selectedService[0];
-
           if(collectionService.length == 0){
-            collectionService = selectedService.s.filter(res => res.CollectionOptionTitle === "DHLParcelMulti");
+            collectionService = selectedService.CollectionOptions.filter(res => res.CollectionOptionTitle === "DHLParcelMulti");
           }
-          
           collectionService = collectionService[0];
+
           console.log("Collection option", collectionService);
 
           var shipmentObject = {
