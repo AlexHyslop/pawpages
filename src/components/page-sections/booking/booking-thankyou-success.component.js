@@ -21,6 +21,11 @@ export default function Success() {
             itemName: 'Name Here',
             itemWeight: 'Weight Here',
             moreDetails: '...'
+        },
+        {
+            itemName: 'Name Here',
+            itemWeight: 'Weight Here',
+            moreDetails: '...'
         }
     ];
     
@@ -55,7 +60,7 @@ export default function Success() {
                     <p className="text-xl text-gray-500">Going to:</p>
                 </div>
             </div>
-            <div className="pb-10 md:grid md:grid-cols-3 gap-x-5">
+            <div className="pb-10 md:grid md:grid-cols-3 gap-5">
                  <h2 className="text-2xl mt-10 font-bold pb-5 col-span-3 gap-x-2">Items Include:</h2>
                     {items.map((item, index) => (
                         <div key={index} className="border-y-2 border-solid border-gray-500 p-10">
