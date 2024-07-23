@@ -35,7 +35,7 @@ export default function Success() {
             <h2 className="text-2xl text-gray-500">Your order has been placed. Details of your order will be emailed to you shortly.</h2>
 
             <div className="mt-5">
-                <a className="button" href={labelDownload}>Donwload Label</a>
+                <a className="button" href={labelDownload}>Download Label</a>
             </div>
 
             <div>
@@ -49,21 +49,22 @@ export default function Success() {
             </div>
             
 
-            <div className="md:grid md:grid-cols-2 pb-5">
+            <div className="md:grid md:grid-cols-2 pb-2">
                 <div className="col-span-2 pb-5">
                     <h2 className="text-2xl mt-10 font-bold">Delivery Details</h2>
                 </div>
-                <div className="pb-5">
+                <div className="pb-2">
                     <p className="text-xl text-gray-500">Sending From:</p>
                 </div>
-                <div className="pb-5">
+                <div className="pb-2">
                     <p className="text-xl text-gray-500">Going to:</p>
                 </div>
             </div>
-            <div className="pb-10 md:grid md:grid-cols-3 gap-5">
-                 <h2 className="text-2xl mt-10 font-bold pb-5 col-span-3 gap-x-2">Items Include:</h2>
+            <h2 className="text-2xl mt-10 font-bold pb-5 col-span-1 gap-x-2">Items Include:</h2>
+            <div className="md:grid md:grid-cols-1 border-2 border-b-0 border-solid border-gray-500">
+                
                     {items.map((item, index) => (
-                        <div key={index} className="border-y-2 border-solid border-gray-500 p-10">
+                        <div key={index} className="border-b-2 border-solid border-gray-500 p-5">
                         <p className="text-base">
                             Item Name: {item.itemName}
                         </p>
