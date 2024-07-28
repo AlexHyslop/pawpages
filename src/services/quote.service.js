@@ -1,16 +1,16 @@
 import { collection, getDoc, getDocs, where, query, addDoc, setDoc, doc, updateDoc, arrayRemove, deleteDoc} from "firebase/firestore"; 
 import { db } from "../store/firebase.config";
 
-const quotesRef = collection(quotedb, "quote");
+const quotesRef = collection(db, "quote");
 
 export const QUOTE_SERVICE = {
-    createChatDoc: async function createQuoate(quote, callback){1
+    createQuote: async function createQuote(quote, callback){
         const docRef = await addDoc(quotesRef, quote) 
         const docSnap = await getDoc(docRef)
-        .then((response) => callback(response))
-        .catch((error) => callback(error));
+        .then((response) => callback(response, quote))
+        .catch((error) => callback(error, quote));
     },
-    updateChatDoc: async function updateQuote(currDoc, callback){ 
+    updateQuote: async function updateQuote(currDoc, callback){ 
         await setDoc(doc(db, "quote", currDoc.id), currDoc)
         .then((response) => callback(response, currDoc))
         .catch((error) => callback(error));

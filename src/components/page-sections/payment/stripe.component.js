@@ -5,6 +5,10 @@ import { useStripe, useElements, AddressElement } from "@stripe/react-stripe-js"
 import QuoteDisplay from "../../quotes/quote-display.component";
 import { useSelector } from "react-redux";
 import { TGE_ENDPOINTS } from "../../../api/transglobal.service";
+import { QUOTE_SERVICE } from "../../../services/quote.service";
+import { useDispatch } from "react-redux";
+import bookingAction from "../../../store/actions/booking.action";
+import { useNavigate } from "react-router-dom";
 const stripePromise = loadStripe('pk_test_51P6COu02R2DxG1YvFLAxID2SLMnzzzKJTGK0WtfAPxX0E482MZhE3KNR2yH1rWx8FU6EKUpr46H72BfBdbfrOjzh00HzyNsmzP');
  
 const cardElementOptions = {
@@ -30,7 +34,8 @@ export default function Stripe(props) {
 function CheckoutForm() {
   const currentQuote = useSelector((state) => state?.quote?.currentQuote);  
   const serviceResults = useSelector((state) => state?.quote?.serviceResults);  
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = React.useState(false);
@@ -121,7 +126,7 @@ function CheckoutForm() {
             "Shipment": {
                 "Consignment": {
                     "ItemType": "Parcel",
-                    "ItemsAreStackable": false,
+                    "ItemsAreStackable": true,
                     "ConsignmentSummary": "Stationary",
                     "ConsignmentValue": 50.45,
                     "ConsignmentCurrency":{
@@ -140,12 +145,7 @@ function CheckoutForm() {
                     "CollectionDate": currentQuote.collectionDate,
                     "ReadyFrom": "12:30",
                     "CollectionOptionID": collectionService.CollectionOptionID
-                },
-                // "BookAccessories": [
-                //     {
-                //         "Code": "SIG"
-                //     }
-                // ],
+                }, 
                 "Insurance": {
                     "CoverValue": 50,
                     "ExcessValue": 0,
@@ -155,15 +155,37 @@ function CheckoutForm() {
             }
         };
 
-        TGE_ENDPOINTS.bookShipment( shipmentObject, onBookShipment);
+        //store shipment obj in firebase: 
+        TGE_ENDPOINTS.bookShipment( shipmentObject, onBookShipment); 
         } 
       }    
   };
+ 
 
-  const onBookShipment = (response) => {
-    console.log("On bookshipment: ", response);
+  const onBookShipment = (response, shipment) => {
+    console.log("On bookshipment .data: ", response.data);
+
+    var storedQuote = {
+      shipmentRequest: shipment,
+      status: response.data.Status,
+      email: currentQuote.collectionAddress.EmailAddress
+    }
+
+    if(response.status == 200  && response.data.Status == 'SUCCESS'){
+      dispatch(bookingAction.updateBooking(response.data));
+      response.data.Documents = [];
+      response.data.Labales = []
+    }
+    storedQuote[response] = response.data;   
+    QUOTE_SERVICE.updateQuote(storedQuote, onStoreShipmentRequest);
+
+    navigate("/order-confirmation?status="+response.data.Status);
+
   }
 
+  const onStoreShipmentRequest = (resp) => {
+    console.log("On stores hipment rq", resp);
+  }
 
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-4 mx-auto pt-10 px-10 pb-20">
