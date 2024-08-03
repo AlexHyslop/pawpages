@@ -9,6 +9,7 @@ import { QUOTE_SERVICE } from "../../../services/quote.service";
 import { useDispatch } from "react-redux";
 import bookingAction from "../../../store/actions/booking.action";
 import { useNavigate } from "react-router-dom";
+import { EMAIL_SERVICE } from "../../../services/email.service";
 const stripePromise = loadStripe('pk_test_51P6COu02R2DxG1YvFLAxID2SLMnzzzKJTGK0WtfAPxX0E482MZhE3KNR2yH1rWx8FU6EKUpr46H72BfBdbfrOjzh00HzyNsmzP');
  
 const cardElementOptions = {
@@ -168,23 +169,434 @@ function CheckoutForm() {
     var storedQuote = {
       shipmentRequest: shipment,
       status: response.data.Status,
-      email: currentQuote.collectionAddress.EmailAddress
+      email: currentQuote.collectionAddress.EmailAddress,
+      builtQuote: currentQuote
     }
 
     if(response.status == 200  && response.data.Status == 'SUCCESS'){
       dispatch(bookingAction.updateBooking(response.data));
       response.data.Documents = [];
-      response.data.Labales = []
+      response.data.Lables = []
+ 
+      var successEmail = {
+        to: currentQuote.collectionAddress.EmailAddress,
+        message: {
+            subject: 'Your booking was successful: ' + response.data.OrderReference,
+            html: `
+            <!doctype html>
+                <html lang="en">
+                <head>
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                    <title>Simple Transactional Email</title>
+                    <style media="all" type="text/css"> 
+                    
+                    body {
+                    font-family: Arial, sans-serif;
+                    -webkit-font-smoothing: antialiased;
+                    font-size: 16px;
+                    line-height: 1.3;
+                    -ms-text-size-adjust: 100%;
+                    -webkit-text-size-adjust: 100%;
+                    }
+                    
+                    table {
+                    border-collapse: separate;
+                    mso-table-lspace: 0pt;
+                    mso-table-rspace: 0pt;
+                    width: 100%;
+                    }
+                    
+                    table td {
+                    font-family: Arial, sans-serif;
+                    font-size: 16px;
+                    vertical-align: top;
+                    }
+                      
+                    
+                    body {
+                    background-color: #f4f5f6;
+                    margin: 0;
+                    padding: 0;
+                    }
+                    
+                    .body {
+                    background-color: #f4f5f6;
+                    width: 100%;
+                    }
+                    
+                    .container {
+                    margin: 0 auto !important;
+                    max-width: 600px;
+                    padding: 0;
+                    padding-top: 24px;
+                    width: 600px;
+                    }
+                    
+                    .content {
+                    box-sizing: border-box;
+                    display: block;
+                    margin: 0 auto;
+                    max-width: 600px;
+                    padding: 0;
+                    } 
+                    
+                    .main {
+                    background: #c9e4dc;
+                    border: 1px solid #f7f7f7;
+                    border-radius: 16px;
+                    width: 100%;
+                    }
+                    
+                    .wrapper {
+                    box-sizing: border-box;
+                    padding: 24px;
+                    }
+                    
+                    .footer {
+                    clear: both;
+                    padding-top: 24px;
+                    text-align: center;
+                    width: 100%;
+                    }
+                    
+                    .footer td,
+                    .footer p,
+                    .footer span,
+                    .footer a {
+                    color: #e2e4e3;
+                    font-size: 16px;
+                    text-align: center;
+                    } 
+                    
+                    p {
+                    font-family: Arial, sans-serif;
+                    font-size: 16px;
+                    font-weight: normal;
+                    margin: 0;
+                    margin-bottom: 16px;
+                    }
+                    
+                    a {
+                    color: #1d1d1b;
+                    text-decoration: underline;
+                    } 
+                    
+                    .btn {
+                    box-sizing: border-box;
+                    min-width: 100% !important;
+                    width: 100%;
+                    }
+                    
+                    .btn > tbody > tr > td {
+                    padding-bottom: 16px;
+                    }
+                    
+                    .btn table {
+                    width: auto;
+                    }
+                    
+                    .btn table td {
+                    background-color: #ffffff;
+                    border-radius: 4px;
+                    text-align: center;
+                    }
+                    
+                    .btn a {
+                    background-color: #1d1d1b;
+                    border: solid 2px #1d1d1b;
+                    border-radius: 4px;
+                    box-sizing: border-box;
+                    color: #1d1d1b;
+                    cursor: pointer;
+                    display: inline-block;
+                    font-size: 16px;
+                    font-weight: bold;
+                    margin: 0;
+                    padding: 12px 24px;
+                    text-decoration: none;
+                    text-transform: capitalize;
+                    }
+                    
+                    .btn-primary table td {
+                    background-color: #1d1d1b;
+                    }
+                    
+                    .btn-primary a {
+                    background-color: #1d1d1b;
+                    border-color: #1d1d1b;
+                    color: #f7f7f7;
+                    }
+                    
+                    @media all {
+                    .btn-primary table td:hover {
+                        background-color: #f7f7f7 !important;
+                    }
+                    .btn-primary a:hover {
+                        background-color: #f7f7f7 !important;
+                        border-color: #f7f7f7 !important;
+                    }
+                    } 
+                    
+                    .last {
+                    margin-bottom: 0;
+                    }
+                    
+                    .first {
+                    margin-top: 0;
+                    }
+                    
+                    .align-center {
+                    text-align: center;
+                    }
+                    
+                    .align-right {
+                    text-align: right;
+                    }
+                    
+                    .align-left {
+                    text-align: left;
+                    }
+                    
+                    .text-link {
+                    color: #0867ec !important;
+                    text-decoration: underline !important;
+                    }
+                    
+                    .clear {
+                    clear: both;
+                    }
+                    
+                    .mt0 {
+                    margin-top: 0;
+                    }
+                    
+                    .mb0 {
+                    margin-bottom: 0;
+                    }
+                    
+                    .preheader {
+                    color: transparent;
+                    display: none;
+                    height: 0;
+                    max-height: 0;
+                    max-width: 0;
+                    opacity: 0;
+                    overflow: hidden;
+                    mso-hide: all;
+                    visibility: hidden;
+                    width: 0;
+                    }
+                    
+                    .powered-by a {
+                    text-decoration: none;
+                    }
+                      
+                    
+                    @media only screen and (max-width: 640px) {
+                    .main p,
+                    .main td,
+                    .main span {
+                        font-size: 16px !important;
+                    }
+                    .wrapper {
+                        padding: 8px !important;
+                    }
+                    .content {
+                        padding: 0 !important;
+                    }
+                    .container {
+                        padding: 0 !important;
+                        padding-top: 8px !important;
+                        width: 100% !important;
+                    }
+                    .main {
+                        border-left-width: 0 !important;
+                        border-radius: 0 !important;
+                        border-right-width: 0 !important;
+                    }
+                    .btn table {
+                        max-width: 100% !important;
+                        width: 100% !important;
+                    }
+                    .btn a {
+                        font-size: 16px !important;
+                        max-width: 100% !important;
+                        width: 100% !important;
+                    }
+                    } 
+                    
+                    @media all {
+                    .ExternalClass {
+                        width: 100%;
+                    }
+                    .ExternalClass,
+                    .ExternalClass p,
+                    .ExternalClass span,
+                    .ExternalClass font,
+                    .ExternalClass td,
+                    .ExternalClass div {
+                        line-height: 100%;
+                    }
+                    .apple-link a {
+                        color: inherit !important;
+                        font-family: inherit !important;
+                        font-size: inherit !important;
+                        font-weight: inherit !important;
+                        line-height: inherit !important;
+                        text-decoration: none !important;
+                    }
+                    #MessageViewBody a {
+                        color: inherit;
+                        text-decoration: none;
+                        font-size: inherit;
+                        font-family: inherit;
+                        font-weight: inherit;
+                        line-height: inherit;
+                    }
+                    }
+                    </style>
+                </head>
+                <body>
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td class="container">
+                        <div class="content">
+
+                            <!-- START CENTERED WHITE CONTAINER -->
+                            <span class="preheader">Your booking has gone through: </span>
+                        
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="main">
+                            <!-- START MAIN CONTENT AREA -->
+                            <tr>
+                                <td class="wrapper">
+                                    <center><img src="https://relexco.com/static/media/relexco-nobg.b577f8ecf33c5d61348f.png" alt=""/></center><br>
+
+                                <h3>Order confirmation</h3>
+                                <br>
+                                <p>Collection time: ${currentQuote.collectionDate}</p> <br>
+                                <p>Tracking url: ${response.data.TrackingURL} </p> <br>
+                                <p>Large parcels: ${currentQuote.largeBoxes}  </p> <br>
+                                <p>Small parcels: ${currentQuote.smallBoxes} </p> <br>
+                                <p>From:</p>
+                                <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="main">
+                                    <tbody>
+                                    <tr>
+                                        <td align="left">
+                                        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                            <tbody>
+                                                <tr>
+                                                <td><p>Street:</p></td>
+                                                <td><p>${currentQuote.collectionAddress.AddressLineOne} </p></td>
+                                                </tr>
+                                                <tr>
+                                                <td><p>City:</p></td>
+                                                <td><p>${currentQuote.collectionAddress.City} </p></td>
+                                                </tr>
+                                                <tr>
+                                                <td><p>County:</p></td>
+                                                <td><p>${currentQuote.collectionAddress.County} </p></td>
+                                                </tr>
+                                                <tr>
+                                                <td><p>Postal Code:</p></td>
+                                                <td><p>${currentQuote.collectionAddress.Postcode} </p></td>
+                                                </tr>
+                                                <tr>
+                                                <td><p>Country Code:</p></td>
+                                                <td><p> ${currentQuote.collectionAddress.Country.CountryCode} </p></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table><br>
+ 
+                                <p>To:</p>
+                                <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="main">
+                                    <tbody>
+                                    <tr>
+                                        <td align="left">
+                                        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                            <tbody>
+                                                <tr>
+                                                <td><p>Street:</p></td>
+                                                <td><p>${currentQuote.destinationAddress.AddressLineOne} </p></td>
+                                                </tr>
+                                                <tr>
+                                                <td><p>City:</p></td>
+                                                <td><p>${currentQuote.destinationAddress.City} </p></td>
+                                                </tr>
+                                                <tr>
+                                                <td><p>County:</p></td>
+                                                <td><p>${currentQuote.destinationAddress.County} </p></td>
+                                                </tr>
+                                                <tr>
+                                                <td><p>Postal Code:</p></td>
+                                                <td><p>${currentQuote.destinationAddress.Postcode} </p></td>
+                                                </tr>
+                                                <tr>
+                                                <td><p>Country Code:</p></td>
+                                                <td><p> ${currentQuote.destinationAddress.Country.CountryCode} </p></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table><br>    
+                              
+                                  
+                                <p>Warm regards, Relexco</p><br>
+                                <br>
+
+                                </td>
+                            </tr> 
+                            </table>
+                
+                            <div class="footer">
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                <td class="content-block">
+                                    <span class="apple-link">Relexco LTD</span>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td class="content-block powered-by">
+                                    <p>Powered by Relexco</p>
+                                </td>
+                                </tr>
+                            </table>
+                            </div> 
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    </table>
+                </body>
+                </html>
+            `,
+        },
+        };
+        EMAIL_SERVICE.sendEmail(successEmail, onSendEmail);   
+
     }
+ 
     storedQuote[response] = response.data;   
-    QUOTE_SERVICE.updateQuote(storedQuote, onStoreShipmentRequest);
+    console.log("trying to save,", storedQuote);
+    QUOTE_SERVICE.createQuote(storedQuote, onStoreShipmentRequest);
 
     navigate("/order-confirmation?status="+response.data.Status);
 
   }
+  
+  const onSendEmail = (resp) => {
+    console.log("onSendEmail", resp);
+  }
+
 
   const onStoreShipmentRequest = (resp) => {
-    console.log("On stores hipment rq", resp);
+    console.log("onStoreShipmentRequest", resp);
   }
 
   return (

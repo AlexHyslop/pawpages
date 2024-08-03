@@ -24,6 +24,7 @@ const BookingIndividualItem = (props) => {
 
   const handleAddCommodity = (commodity) => {
     // call from child component with commodity details 
+    commodity.CommodityCode = commodity.CommodityCode.padEnd(8, '0');
     TGE_ENDPOINTS.getCommodity( 
       { 
         "Searches": [
@@ -54,9 +55,10 @@ const BookingIndividualItem = (props) => {
         ...prevItem,
         commodityDetails: [...prevItem.commodityDetails, commodity]
       })); 
-      
+     
       const deepCopyQuote = { ...currentQuote };
       deepCopyQuote.packages[props.index].CommodityDetails.push(commodity);
+      console.log("logging quote before add commodity" , deepCopyQuote);
       dispatch(quoteAction.updateCurrentQuote(deepCopyQuote)); 
 
     }else{
