@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { React, useState } from 'react';
 import { Switch } from '@headlessui/react';
-import { Link } from 'react-router-dom';
-import { collection, addDoc } from 'firebase/firestore';
-import { db } from "../../../store/firebase.config";
+import { Link } from 'react-router-dom'; 
+import { EMAIL_SERVICE } from '../../../services/email.service';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function Example() {
+  const [sent, setSent] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -24,27 +24,28 @@ export default function Example() {
     setFormData({ ...formData, [name]: type === 'checkbox' ? checked : value });
   };
 
+  const onSendEmail = (response) => {
+    setSent(true);
+    console.log("send contact form email")
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      await addDoc(collection(db, 'mail'), {
-        to: 'contact@adylex.co.uk',
-        message: {
-          subject: `RelexCo - Contact form submission from ${formData.firstName} ${formData.lastName}`,
-          html: `
-            <p><strong>Name:</strong> ${formData.firstName} ${formData.lastName}</p>
-            <p><strong>Email:</strong> ${formData.email}</p>
-            <p><strong>Phone:</strong> ${formData.phone}</p>
-            <p><strong>Message:</strong> ${formData.message}</p>
-          `,
-        },
-      });
-      alert('Your message has been sent successfully!');
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      alert('Failed to send your message. Please try again.');
-    }
+    EMAIL_SERVICE.sendEmail( {
+      
+      to: formData.email,
+      message:{
+        subject: `RelexCo - Contact form submission from ${formData.firstName} ${formData.lastName}`,
+        html: `
+          <p><strong>Name:</strong> ${formData.firstName} ${formData.lastName}</p>
+          <p><strong>Email:</strong> ${formData.email}</p>
+          <p><strong>Phone:</strong> ${formData.phone}</p>
+          <p><strong>Message:</strong> ${formData.message}</p>
+        `,
+      } 
+    }, onSendEmail);   
+  
   };
 
   return (
@@ -164,6 +165,7 @@ export default function Example() {
             </Switch.Label>
           </Switch.Group>
         </div>
+        {!sent ? (
         <div className="mt-10 text-center">
           <button
             type="submit"
@@ -172,6 +174,7 @@ export default function Example() {
             Let's talk
           </button>
         </div>
+        ) : ( <h3 className="mt-10 text-center"> Thank you!</h3>)}
       </form>
     </div>
   );
