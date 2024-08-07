@@ -32,9 +32,8 @@ export default function Example() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    EMAIL_SERVICE.sendEmail( {
-      
-      to: formData.email,
+    EMAIL_SERVICE.sendEmail( { 
+      to: 'sales@relexco.com',
       message:{
         subject: `RelexCo - Contact form submission from ${formData.firstName} ${formData.lastName}`,
         html: `
