@@ -40,8 +40,9 @@ function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = React.useState(false);
-  const [errorMessage, setErrorMessage] = React.useState('');
   const [paymentSuccess, setPaymentSuccess] = React.useState(false);
+  const [bookingSuccess, setBookingSuccess] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState('');
 
 
   const createPaymentIntent = async () => {
@@ -105,7 +106,7 @@ function CheckoutForm() {
       } else {
         if (result.paymentIntent.status === 'succeeded') {
           setPaymentSuccess(true);
-          setLoading(false);
+          setPaymentSuccess(true);
           console.log('Payment successful!');
           console.log("Service reults:", serviceResults);
           var selectedService =  currentQuote.expressSelescted ? 
@@ -160,6 +161,8 @@ function CheckoutForm() {
         TGE_ENDPOINTS.bookShipment( shipmentObject, onBookShipment); 
         } 
       }    
+
+      setLoading(false);
   };
  
 
@@ -612,9 +615,13 @@ function CheckoutForm() {
             <CardCvcElement id="card-cvc" options={cardElementOptions} /> 
           </div>
         
-          <button className="button mt-8 w-full block mx-auto" type="submit" disabled={!stripe}>
-            Pay
-          </button>
+          {loading ? (
+                <i class="fa-solid fa-spinner fa-spin text-lg"></i>  
+            ) : (
+            <button className="button mt-8 w-full block mx-auto" type="submit" disabled={!stripe}>
+              Pay
+            </button>
+          )}   
         </form>
       </div>
       <div className="col-span-1">
