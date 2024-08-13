@@ -116,30 +116,30 @@ export const EXPORT_COUNTRIES =  [
     //     "CountryCode": "NO",
     //     "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/NO.svg'
     // },
-    {
-        "CountryID": 231,
-        "Title": "United Kingdom (Mainland)",
-        "CountryCode": "GB",
-        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg'
-    },
-    {
-        "CountryID": 247,
-        "Title": "United Kingdom (Northern Ireland)",
-        "CountryCode": "GB",
-        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg'
-    },
-    {
-        "CountryID": 271,
-        "Title": "United Kingdom (Scottish Highlands)",
-        "CountryCode": "GB",
-        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg'
-    },
-    {
-        "CountryID": 272,
-        "Title": "United Kingdom (Offshore Isles)",
-        "CountryCode": "GB",
-        "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg'
-    } 
+    // {
+    //     "CountryID": 231,
+    //     "Title": "United Kingdom (Mainland)",
+    //     "CountryCode": "GB",
+    //     "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg'
+    // },
+    // {
+    //     "CountryID": 247,
+    //     "Title": "United Kingdom (Northern Ireland)",
+    //     "CountryCode": "GB",
+    //     "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg'
+    // },
+    // {
+    //     "CountryID": 271,
+    //     "Title": "United Kingdom (Scottish Highlands)",
+    //     "CountryCode": "GB",
+    //     "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg'
+    // },
+    // {
+    //     "CountryID": 272,
+    //     "Title": "United Kingdom (Offshore Isles)",
+    //     "CountryCode": "GB",
+    //     "avatar": 'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg'
+    // } 
 ]; 
 
 
