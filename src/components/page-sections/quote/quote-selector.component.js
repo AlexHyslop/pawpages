@@ -139,7 +139,7 @@ export default function QuoteSelector(props) {
               <tr class="text-center"> 
                 <td>  
                   <i class="fa-brands fa-dhl text-6xl text-red-500"/>  
-                  <i class="fa-solid fa-truck-fast text-2xl text-yellow-500" /> 
+                  <p> Express <i class="fa-solid fa-truck-fast text-xl text-yellow-500" /> </p>
                 </td> 
                 <td> {currentQuote.collectionCountry.Title} to  {currentQuote.destinationCountry.Title} </td>
                 <td> Free </td> 
@@ -150,7 +150,10 @@ export default function QuoteSelector(props) {
             : null}
             {economyRate != null ? 
               <tr class="text-center"> 
-                <td> <i class="fa-brands fa-dhl text-6xl text-red-500"/> </td>
+                <td> 
+                  <i class="fa-brands fa-dhl text-6xl text-red-500"/>
+                  <p> Economy </p> 
+                 </td>
                 <td> {currentQuote.collectionCountry.Title} to  {currentQuote.destinationCountry.Title} </td>
                 <td> Free </td> 
                 <td> £50 Free </td>
