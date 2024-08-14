@@ -61,6 +61,20 @@ export default function BookingCollectionTime(props) {
     navigate("/items"); 
   };
 
+  const getMaxDate = () => {
+    let maxDate = new Date();
+    let workingDaysCount = 0;
+  
+    while (workingDaysCount < 5) {
+      maxDate = addDays(maxDate, 1);
+      if (!isSaturday(maxDate) && !isSunday(maxDate)) {
+        workingDaysCount++;
+      }
+    }
+  
+    return format(maxDate, 'yyyy-MM-dd');
+  };
+
   const getTomorrow = () => {
     let tomorrow = addDays(new Date(), 1);
     
@@ -84,6 +98,7 @@ return (
                   value={selectedDate} 
                   onChange={handleDateChange} 
                   min={getTomorrow()} 
+                  max={getMaxDate()}
                   className="mt-1 block w-full border-gray-300 rounded-md focus:border-blue-300 focus:ring focus:ring-blue-200" 
               />
           </div> 

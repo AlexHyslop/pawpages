@@ -162,7 +162,7 @@ function CheckoutForm() {
         } 
       }    
 
-      setLoading(false);
+     
   };
  
 
@@ -178,8 +178,10 @@ function CheckoutForm() {
 
     if(response.status == 200  && response.data.Status == 'SUCCESS'){
       dispatch(bookingAction.updateBooking(response.data));
-      response.data.Documents = [];
-      response.data.Lables = []
+     
+      const labelsHtml = response.data.Labels.map((label, index) => `
+        <p> ${label.DownloadURL}</p><br>
+      `).join('');
  
       var successEmail = {
         to: currentQuote.collectionAddress.EmailAddress,
@@ -480,6 +482,8 @@ function CheckoutForm() {
                                 <br>
                                 <p>Collection time: ${currentQuote.collectionDate}</p> <br>
                                 <p>Tracking url: ${response.data.TrackingURL} </p> <br>
+                                <p>Label download url: </p> <br>
+                                 ${labelsHtml} 
                                 <p>Large parcels: ${currentQuote.largeBoxes}  </p> <br>
                                 <p>Small parcels: ${currentQuote.smallBoxes} </p> <br>
                                 <p>From:</p>
@@ -585,6 +589,8 @@ function CheckoutForm() {
 
     }
  
+    response.data.Documents = [];
+    response.data.Labels = []
     storedQuote[response] = response.data;   
     console.log("trying to save,", storedQuote);
     QUOTE_SERVICE.createQuote(storedQuote, onStoreShipmentRequest);

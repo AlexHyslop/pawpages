@@ -59,7 +59,7 @@ export default function QuoteDisplay(props) {
         <div className="p-6 text-md text-gray-700 bg-gray-50" style={{display:'flex', flexDirection:'column'}}> 
             <h2 className="text-lg underline"> Order Details </h2>
             <p className="text-md"> From: {currentQuote?.collectionCountry?.Title} to {currentQuote?.destinationCountry?.Title} </p>
-            <p className="text-md"> SubTotal:  {(currentQuote?.smallBoxes * 20) + (currentQuote?.largeBoxes * 30)}</p>
+            <p className="text-md"> Total Weight (kg):  {(currentQuote?.smallBoxes * 20) + (currentQuote?.largeBoxes * 30)}</p>
             <p className="text-md"> Total Items: {currentQuote?.totalBoxes} </p>
             {currentQuote?.smallBoxes > 0 ? <p className="text-md"> Small Boxes: {currentQuote?.smallBoxes} </p> : null}
             {currentQuote?.largeBoxes > 0 ? <p className="text-md"> Small Boxes: {currentQuote?.largeBoxes} </p> : null}
@@ -68,10 +68,31 @@ export default function QuoteDisplay(props) {
             <hr className="mb-4"></hr>
             {/* TODO add full addr */}
             <div>
-              <p className="text-md break-words">Collection Address: {currentQuote?.collectionCountry?.postalCode } </p>
+              <p className="text-md break-words">Collection Address: 
+                {[ 
+                  currentQuote?.collectionAddress?.AddressLineOne?.toUpperCase(), 
+                  currentQuote?.collectionAddress?.City?.toUpperCase(), 
+                  currentQuote?.collectionAddress?.State?.toUpperCase(), 
+                  currentQuote?.collectionAddress?.County?.toUpperCase(), 
+                  currentQuote?.collectionCountry?.postalCode?.toUpperCase() 
+                ]
+                .filter(Boolean) 
+                .join(', ')}  
+                </p>
             </div>
             <div>
-              <p className="text-md break-words"> Delivery Address:{currentQuote?.destinationCountry?.postalCode } </p>
+            <p className="text-md break-words">
+              Delivery Address:
+              {[
+                currentQuote?.destinationAddress?.AddressLineOne?.toUpperCase?.(), 
+                currentQuote?.destinationAddress?.City?.toUpperCase?.(), 
+                currentQuote?.destinationAddress?.County?.toUpperCase?.(), 
+                currentQuote?.destinationAddress?.Country?.toUpperCase?.(), 
+                currentQuote?.destinationCountry?.postalCode?.toUpperCase?.()
+              ]
+              .filter(Boolean)  
+              .join(', ')}      
+            </p>
             </div>
         </div>
 

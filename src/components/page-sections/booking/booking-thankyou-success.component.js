@@ -38,10 +38,10 @@ export default function Success() {
             <div className="col-span-3"> 
                 <h2 className="text-2xl text-gray-500">Your order has been placed. Details of your order will be emailed to you shortly.</h2>
      
-                <p>Labels: </p>
+                <h3 className="text-2xl mt-10 font-bold pb-5 col-span-1 gap-x-2">Labels: </h3>
                 {order?.Labels?.map((label, index) => (
                     label.LabelFormat == "PDF" ? 
-                    <button key={index} className="button" onClick={(e) => handleDownload(label.LabelContent, "label.pdf")}>
+                    <button key={index} className="button m-3" onClick={(e) => handleDownload(label.LabelContent, "label.pdf")}>
                         Download {label.LabelRole} {label.LabelSize} {label.LabelFormat}
                     </button>
                 : null
@@ -61,7 +61,7 @@ export default function Success() {
                     <a className="text-xl inline-block" href="#">{order?.OrderReference}</a>
                 </div>
                 
-                <h2 className="text-2xl mt-10 font-bold pb-5 col-span-1 gap-x-2">Confirmation :- </h2>
+                <h3 className="text-2xl mt-10 font-bold pb-5 col-span-1 gap-x-2">Confirmation: </h3>
                 <div className="md:grid md:grid-cols-1 border-2 border-b-0 border-solid border-gray-500">
         
                     <div className="border-b-2 border-solid border-gray-500 p-5">
