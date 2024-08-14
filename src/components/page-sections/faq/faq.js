@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import FaqLady from '../../../assets/images/faq-lady.png';
 
 export default function FAQ() {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -20,7 +21,7 @@ export default function FAQ() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col justify-center items-center gap-x-16 gap-y-5 xl:gap-28 lg:flex-row lg:justify-between max-lg:max-w-2xl mx-auto max-w-full">
           <div className="hidden lg:block w-0 lg:w-1/2">
-            <img src="https://pagedone.io/asset/uploads/1696230182.png" alt="FAQ tailwind section" className="w-full" />
+            <img src={FaqLady} alt="FAQ tailwind section" className="w-full" />
           </div>
           <div className="w-full lg:w-1/2">
             <div className="lg:max-w-xl">
