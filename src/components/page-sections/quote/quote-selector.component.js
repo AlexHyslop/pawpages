@@ -35,7 +35,7 @@ export default function QuoteSelector(props) {
         totalWeight +=  (currentQuote.largeBoxes * 30); 
       }
       if(currentQuote.smallBoxes){
-        totalWeight +=  (currentQuote.smallBoxes * 30);  
+        totalWeight +=  (currentQuote.smallBoxes * 20);  
       } 
  
       var countryCode = currentQuote.destinationCountry.CountryCode;  
