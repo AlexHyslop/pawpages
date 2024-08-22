@@ -12,9 +12,9 @@ export const API_SERVICE = axios.create({
 
 //prod cred
 // const credentials = {
-//     APIKey: 'Ry2oBZo6e7',
-//     Password: '8sbNkYi9&A'
-// };
+//     APIKey: 'Cd75gWq7Jk',
+//     Password: 'G6yYd?Ddj8'
+// }; 
 
 const credentials = {
     APIKey: '9rkYJ0Qq6s',
