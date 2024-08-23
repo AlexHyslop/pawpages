@@ -10,16 +10,16 @@ export const API_SERVICE = axios.create({
   baseURL
 }); 
 
-//prod cred
-// const credentials = {
-//     APIKey: 'Cd75gWq7Jk',
-//     Password: 'G6yYd?Ddj8'
-// }; 
-
+// prod cred
 const credentials = {
-    APIKey: '9rkYJ0Qq6s',
-    Password: 'Z6jxC&dyV2'
+    APIKey: 'Cd75gWq7Jk',
+    Password: 'G6yYd?Ddj8'
 }; 
+
+// const credentials = {
+//     APIKey: '9rkYJ0Qq6s',
+//     Password: 'Z6jxC&dyV2'
+// }; 
 
 API_SERVICE.interceptors.request.use(function (config) { 
         config.headers['Content-Type'] =  'application/json';
