@@ -10,10 +10,30 @@ export default function FAQ() {
   };
 
   const accordionData = [
-    { question: "Question 1", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
-    { question: "Question 2", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
-    { question: "Question 3", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
-    { question: "Question 4", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." }
+    { 
+      question: "What services does Relexco provide?", 
+      answer: "Relexco offers a door-to-door service for up to 5 boxes of your personal belongings." 
+    },
+    { 
+      question: "Who ships my items?", 
+      answer: "Relexco does not personally ship your items. We use DHL's express or economy service to transport your items." 
+    },
+    { 
+      question: "How do I get in contact with someone at customer services?", 
+      answer: (
+        <>
+          Our Customer Service Team can be reached at <a href="mailto:sales@relexco.com">sales@relexco.com</a> to answer any queries from 9am until 5:30pm Monday to Friday.
+        </>
+      ) 
+    },
+    { 
+      question: "Can I send liquids in my shipment?", 
+      answer: (
+        <>
+          No, please refer to our prohibited items list <Link to="/prohibited-items">here</Link>.
+        </>
+      )
+    }
   ];
 
   return (
