@@ -5,13 +5,13 @@ import { getAuth, setPersistence } from "firebase/auth";
 import { getFunctions } from "firebase/functions";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyASBXlCFMpvixGpxLMRtn8d9C7dYy4Z6KM",
-  authDomain: "relexco-446af.firebaseapp.com",
-  projectId: "relexco-446af",
-  storageBucket: "relexco-446af.appspot.com",
-  messagingSenderId: "958214222713",
-  appId: "1:958214222713:web:368f35afb3ee9555b235a8",
-  measurementId: "G-X6HF9S6GC0"
+  apiKey: "AIzaSyBOisIZyLXIrQzSyDFYGUPqnpfjKTk1r9M",
+  authDomain: "pawpages-b4034.firebaseapp.com",
+  projectId: "pawpages-b4034",
+  storageBucket: "pawpages-b4034.firebasestorage.app",
+  messagingSenderId: "847420861001",
+  appId: "1:847420861001:web:ae3065028be9cbc5616d98",
+  measurementId: "G-E8WB3GK0TR"
 };
 
 const app = initializeApp(firebaseConfig); 

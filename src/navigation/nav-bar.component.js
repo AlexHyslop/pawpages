@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
-import Logo from '../assets/images/relexco-nobg.png'
+import Logo from '../assets/images/logos/pawpages-logo.png'
 import {
   Bars3Icon,
   XMarkIcon,
@@ -20,11 +20,10 @@ export default function Example() {
   }
 
   return (
-    <header className="bg-white">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 relative" aria-label="Global">
+    <header className="bg-white drop-shadow">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6  lg:px-8 relative" aria-label="Global">
         <div className="flex lg:flex-1">
           <Link to="/" className="-m-1.5 p-1.5">
-            <span className="block pl-14 font-semibold text-primary">RelexCo</span>
             <img className="w-auto absolute top-3 h-12" src={Logo} alt="" />
           </Link>
         </div>
@@ -44,9 +43,6 @@ export default function Example() {
           </Link>
           <Link to="/faq" className="text-sm font-semibold leading-6 text-gray-900" onClick={closeMobileMenu}>
             FAQ
-          </Link>
-          <Link to="/prohibited-items" className="text-sm font-semibold leading-6 text-gray-900" onClick={closeMobileMenu}>
-          Prohibited Items
           </Link>
           <Link to="/contact" className="text-sm font-semibold leading-6 text-gray-900" onClick={closeMobileMenu}>
             Contact
@@ -84,9 +80,6 @@ export default function Example() {
               <div className="space-y-2 py-6">
                 <Link to="/how-it-works" className="-mx-3 block px-3 py-2 text-sm font-semibold leading-6 text-gray-900" onClick={closeMobileMenu}>
                   How It Works
-                </Link>
-                <Link to="/prohibited-items" className="-mx-3 block px-3 py-2 text-sm font-semibold leading-6 text-gray-900" onClick={closeMobileMenu}>
-                 Prohibited Items
                 </Link>
                 <Link to="/faq" className="-mx-3 block px-3 py-2 text-sm font-semibold leading-6 text-gray-900" onClick={closeMobileMenu}>
                   FAQ

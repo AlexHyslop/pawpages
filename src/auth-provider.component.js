@@ -2,85 +2,69 @@ import { useState, useEffect } from 'react';
 import React, { createContext } from "react";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { USER_SERVICE } from './services/user.service';
-import { ITEM_SERVICE } from './services/item.service';
-import { useDispatch, useSelector } from 'react-redux' 
+import { useDispatch } from 'react-redux';
 import userAction from './store/actions/user.action';
-import stateAction from './store/actions/state.action';
- 
+
 const AuthContext = createContext();
 
 function AuthProvider(props) {
-    const [authed, setAuthed] = React.useState(false);
-    const [token, setToken] = React.useState(null);
-    const [user, setUser] = React.useState(null);
+    const [authed, setAuthed] = useState(false);
+    const [token, setToken] = useState(null);
+    const [user, setUser] = useState(null);
     const dispatch = useDispatch();
     const auth = getAuth();
-    const [authStateChangedInProgress, setAuthStateChangedInProgress] = React.useState(false);
+    const [authStateChangedInProgress, setAuthStateChangedInProgress] = useState(false);
 
     useEffect(() => {
-      const unsubscribe = onAuthStateChanged(auth, (user) => {
-          if (!authStateChangedInProgress && user) {
-            setAuthStateChangedInProgress(true);  
-            const userEmail = user.email;
-            console.log('User email:', userEmail);
-            USER_SERVICE.getUserDocByEmail(userEmail, onGetUserDoc);
-            updateUserConfig(user);
-          } 
-      });
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (!authStateChangedInProgress && user) {
+                setAuthStateChangedInProgress(true);
+                const userEmail = user.email;
+                console.log('User email:', userEmail);
+                USER_SERVICE.getUserDocByEmail(userEmail, onGetUserDoc);
+                updateUserConfig(user);
+            }
+        });
 
-      return () => unsubscribe();
-  }, [auth, authStateChangedInProgress]);
+        return () => unsubscribe();
+    }, [auth, authStateChangedInProgress]);
 
     function updateUserConfig(user) {
-        console.log('refresh config dashboard:', user);
-        var user2 = user;
-        dispatch(userAction.updateUser({ authed: true, config: user2 }));
-        USER_SERVICE.checkUserDocExistsOnUserId(user2, onCheckUserDocExists);
+        console.log('Refresh config dashboard:', user);
+        dispatch(userAction.updateUser({ authed: true, config: user }));
+        USER_SERVICE.checkUserDocExistsOnUserId(user, onCheckUserDocExists);
     }
 
     const onCheckUserDocExists = (response, user) => {
         if (response) {
-          if (response.size == 0) {
-           // USER_SERVICE.createUserDoc(user, onCreateUser);
-          } else {
-            response.forEach((doc) => {
-              var docData = doc.data();
-              console.log("dispatching user doc dashboard");
-              dispatch(userAction.updateUser({ doc: docData }));
-            })
-          }
-        }
-      }
-    
-      const onCreateUser = (response) => {
-        if (response) {
-          var docData = response.data();
-          dispatch(userAction.updateUser({ doc: docData }));
-        }
-      }
-
-      
-    const onGetUserDoc = (response) => {
-      if(response && response.docs){
-        var docData = response.docs[0].data(); 
-        console.log("userDoc dispatc dashboard, ", docData);
-        ITEM_SERVICE.getItemsByUserId(docData.id, onGetItems); 
-        dispatch(userAction.updateUser({doc:docData}));   
-      }
-    }
-
-
-    const onGetItems = (response) => {
-        if(response && response.length > 0){
-            var newItems = [];
-            for(var i=0; i< response.length; i++){
-              newItems.push(response[i].data());
+            if (response.size === 0) {
+                // Uncomment if user creation is necessary
+                // USER_SERVICE.createUserDoc(user, onCreateUser);
+            } else {
+                response.forEach((doc) => {
+                    const docData = doc.data();
+                    console.log("Dispatching user doc dashboard");
+                    dispatch(userAction.updateUser({ doc: docData }));
+                });
             }
-            console.log("refresh auth items", newItems); 
-            dispatch(stateAction.updateState({ items: newItems }));
-          
         }
-    }
+    };
+
+    const onCreateUser = (response) => {
+        if (response) {
+            const docData = response.data();
+            dispatch(userAction.updateUser({ doc: docData }));
+        }
+    };
+
+    const onGetUserDoc = (response) => {
+        if (response && response.docs) {
+            const docData = response.docs[0].data();
+            console.log("User doc dispatch dashboard, ", docData);
+            // Removed ITEM_SERVICE functionality
+            dispatch(userAction.updateUser({ doc: docData }));
+        }
+    };
 
     const login = (token, user) => {
         setAuthed(true);
@@ -89,7 +73,7 @@ function AuthProvider(props) {
     };
 
     const logout = () => {
-        console.log("logout authprovider");
+        console.log("Logout auth provider");
         setAuthed(false);
         setToken(null);
     };
@@ -101,7 +85,6 @@ function AuthProvider(props) {
         login,
         logout,
     };
-    
 
     return <AuthContext.Provider value={value} {...props} />;
 }
