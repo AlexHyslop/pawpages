@@ -1,35 +1,67 @@
-const functions = require('firebase-functions');
-const  { onRequest } = require("firebase-functions/v2/https");
-// const logger = require("firebase-functions/logger");
-const cors = require("cors")({ origin: true });
-const admin = require('firebase-admin');
-const stripe = require('stripe')('sk_test_51P6COu02R2DxG1YvYDUAhrs3kDbnwLbuqhNCBnbdj0tlvE07uQ3J6HuWX4aVW05gG9VwHDwOXDrZUHkxNB7RvyZU00ngPoXRy1');
+/**
+ * Import function triggers from their respective submodules:
+ *
+ * const {onCall} = require("firebase-functions/v2/https");
+ * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
+ *
+ * See a full list of supported triggers at https://firebase.google.com/docs/functions
+ */
+const {onRequest} = require("firebase-functions/v2/https");
+const { db } = require('./firebase.config');
+require('dotenv').config();
+const cors = require('cors');
 
-admin.initializeApp();
+const corsHandler = cors({ origin: 'https://pawpages-b4034.web.app' });
 
-//exports.createPaymentIntent = onRequest(async (req, res) => {
-exports.createPaymentIntent = onRequest({ cors: true }, async (req, res) => { 
-  try {
-    console.log("Request", req);
-    console.log("Request body", req.body);
-    const { amount, currency } = req.body;
+exports.storeFacebookPost = onRequest((req, res) => {
+  corsHandler(req, res, async () => {
+    try {
+      const post = req.body;
 
-    // Create a PaymentIntent with the specified amount and currency
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: amount,
-      currency: currency,
-    });
+      if (!post || !post.id) {
+        return res.status(400).send('Post data missing or invalid.');
+      }
 
-    console.log("Payment Intent", paymentIntent);
+      // Check if the post is shared from another post
+      const postRef = db.collection('facebookPosts').doc(post.id);
+      const existingDoc = await postRef.get();
 
-    res.status(200).send({
-      clientSecret: paymentIntent.client_secret,
-    });
-  } catch (error) {
-    res.status(500).send({
-      error: error.message,
-    });
-  }
+      // Log and return if the post already exists
+      if (existingDoc.exists) {
+        console.log(`Post ${post.id} already exists in Firestore.`);
+        return res.status(200).send('Post already exists.');
+      }
+
+      // Initialize postData
+      const postData = {
+        message: post.message || 'No message provided',
+        created_time: post.created_time || new Date().toISOString(),
+        id: post.id,
+        link: `https://www.facebook.com/${post.id}`,
+        image: null, // Default to null in case no image is found
+      };
+
+      // Check if the post is shared and handle accordingly
+      if (post.shared_from) {
+        console.log(`Post ${post.id} is shared from another post. Fetching original media...`);
+        // If shared, use the shared media from the original post
+        if (post.shared_from.attachments && post.shared_from.attachments.data) {
+          postData.image = post.shared_from.attachments.data[0]?.media?.image?.src || null;
+        }
+      } else if (post.attachments && post.attachments.data) {
+        // If not shared, use the media from this post
+        postData.image = post.attachments.data[0]?.media?.image?.src || null;
+      }
+
+      // Store the post in Firestore
+      await postRef.set(postData);
+
+      console.log(`Post ${post.id} stored successfully.`);
+      return res.status(200).send('Post stored successfully.');
+
+    } catch (error) {
+      console.error('Error storing post:', error);
+      return res.status(500).send(`Error storing post: ${error.message}`);
+    }
+  });
 });
-
- 

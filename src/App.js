@@ -2,6 +2,7 @@ import './App.scss';
 import NavBar from './navigation/nav-bar.component';
 import Footer from './navigation/footer.component.js';
 import LandingPage from './components/landing-page.component.js';
+import FacebookRedirect from './components/facebookPosts/facebook-redirect.js';
 import { Box } from '@mui/system';
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -55,6 +56,7 @@ function App() {
           {/* no auth routes */}
           <Route path="/" element={<LandingPage />} />
           <Route path="" element={<LandingPage />} />
+          <Route path="redirect" element={<FacebookRedirect />} />
         </Routes>
         <Outlet></Outlet>
       </div>

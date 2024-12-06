@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 export default function Footer(props) {
   return (
     <section className="bg-white relative">
-    <div class="absolute -top-1 left-0 right-0 h-1 bg-white shadow"></div>
+    <div className="absolute -top-1 left-0 right-0 h-1 bg-white shadow"></div>
         <div className="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
             <nav className="flex flex-wrap justify-center -mx-5 -my-2">
                 {/* <div className="px-5 py-2">
